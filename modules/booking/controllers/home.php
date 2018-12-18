@@ -31,7 +31,7 @@ class Controller extends \Gcms\Controller
      */
     public static function addCard(Request $request, $card, $login)
     {
-        \Index\Home\Controller::renderCard($card, 'icon-calendar', '{LNG_Book a meeting}', number_format(\Booking\Home\Model::getNew($login)), '{LNG_Booking today}', null);
+        \Index\Home\Controller::renderCard($card, 'icon-calendar', '{LNG_Book a meeting}', number_format(\Booking\Home\Model::getNew($login)), '{LNG_Booking today}', 'index.php?module=booking-booking');
     }
 
     /**
