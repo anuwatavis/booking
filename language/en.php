@@ -37,7 +37,6 @@ return array(
     5 => 'Fr',
     6 => 'Sa'
   ),
-  'Inventory' => 'Inventory',
   'MAIL_PROGRAMS' => array(
     0 => 'Send with PHP',
     1 => 'Send with PHPMailer (recommended).'

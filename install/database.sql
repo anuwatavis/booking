@@ -13,6 +13,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `booking`
 --
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `{prefix}_language`
+--
+
+CREATE TABLE `{prefix}_language` (
+  `id` int(11) NOT NULL,
+  `key` text COLLATE utf8_unicode_ci NOT NULL,
+  `la` text COLLATE utf8_unicode_ci,
+  `th` text COLLATE utf8_unicode_ci,
+  `en` text COLLATE utf8_unicode_ci,
+  `owner` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `type` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `js` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -44,23 +60,6 @@ INSERT INTO `{prefix}_category` (`id`, `type`, `category_id`, `topic`, `color`, 
 (41, 'accessories', 3, 'เครื่องฉายแผ่นใส', '', 0),
 (40, 'accessories', 2, 'จอโปรเจ็คเตอร์', '', 0),
 (39, 'accessories', 1, 'เครื่องคอมพิวเตอร์', '', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `{prefix}_language`
---
-
-CREATE TABLE `{prefix}_language` (
-  `id` int(11) NOT NULL,
-  `key` text COLLATE utf8_unicode_ci NOT NULL,
-  `la` text COLLATE utf8_unicode_ci,
-  `th` text COLLATE utf8_unicode_ci,
-  `en` text COLLATE utf8_unicode_ci,
-  `owner` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `type` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `js` tinyint(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -162,18 +161,18 @@ CREATE TABLE `{prefix}_user` (
   `address` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `provinceID` varchar(3) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `zipcode` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `country` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   `visited` int(11) UNSIGNED DEFAULT '0',
-  `lastvisited` int(11) DEFAULT NULL,
+  `lastvisited` int(11) DEFAULT '0',
   `session_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ip` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `social` tinyint(1) NOT NULL DEFAULT '0',
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `country` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
+  `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --

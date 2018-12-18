@@ -37,7 +37,7 @@ class View extends \Gcms\View
             $content .= '<figure class="center"><img src="'.WEB_URL.DATA_FOLDER.'booking/'.$index->id.'.jpg"></figure>';
         }
         $content .= '<table class="border data fullwidth"><tbody>';
-        $content .= '<tr><th>{LNG_Room name}</th><td>'.$index->name.'</td></tr>';
+        $content .= '<tr><th>{LNG_Room name}</th><td><span class="term" style="background-color:'.$index->color.'">'.$index->name.'</span></td></tr>';
         $content .= '<tr><th>{LNG_Detail}</th><td>'.nl2br($index->detail).'</td></tr>';
         foreach (Language::get('ROOM_CUSTOM_TEXT') as $key => $label) {
             $content .= '<tr><th>'.$label.'</th><td>'.(isset($index->{$key}) ? $index->{$key} : '').'</td></tr>';
@@ -61,7 +61,7 @@ class View extends \Gcms\View
         $content .= '<header><h1 class="cuttext">{LNG_Details of} {LNG_Booking}</h1></header>';
         $content .= '<table class="border data fullwidth"><tbody>';
         $content .= '<tr><th>{LNG_Topic}</th><td>'.$index->topic.'</td></tr>';
-        $content .= '<tr><th>{LNG_Room name}</th><td>'.$index->name.'</td></tr>';
+        $content .= '<tr><th>{LNG_Room name}</th><td><span class="term" style="background-color:'.$index->color.'">'.$index->name.'</span></td></tr>';
         foreach (Language::get('ROOM_CUSTOM_TEXT') as $key => $label) {
             $content .= '<tr><th>'.$label.'</th><td>'.(isset($index->{$key}) ? $index->{$key} : '').'</td></tr>';
         }

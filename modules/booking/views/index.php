@@ -56,7 +56,7 @@ class View extends \Gcms\View
             /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
-            'hideColumns' => array('id', 'today'),
+            'hideColumns' => array('id', 'today', 'color'),
             /* คอลัมน์ที่สามารถค้นหาได้ */
             'searchColumns' => array('name', 'topic'),
             /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
@@ -149,6 +149,7 @@ class View extends \Gcms\View
         $item['status'] = '<span class="term'.$item['status'].'">'.$this->status[$item['status']].'</span>';
         $item['begin'] = Date::format($item['begin']);
         $item['end'] = Date::format($item['end']);
+        $item['name'] = '<span class="term" style="background-color:'.$item['color'].'">'.$item['name'].'</span>';
 
         return $item;
     }

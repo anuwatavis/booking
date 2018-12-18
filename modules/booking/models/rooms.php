@@ -31,7 +31,7 @@ class Model extends \Kotchasan\Model
     public static function toDataTable()
     {
         return static::createQuery()
-            ->select('R.id', 'R.name', 'R.detail')
+            ->select('R.id', 'R.name', 'R.detail', 'R.color')
             ->from('rooms R')
             ->where(array('R.published', 1))
             ->order('R.name');

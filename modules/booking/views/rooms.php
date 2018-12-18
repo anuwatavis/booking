@@ -45,7 +45,7 @@ class View extends \Gcms\View
             /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
-            'hideColumns' => array('detail'),
+            'hideColumns' => array('detail', 'color'),
             /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
             'action' => 'index.php/booking/model/rooms/action',
             'actionCallback' => 'dataTableActionCallback',
@@ -101,7 +101,7 @@ class View extends \Gcms\View
     {
         $thumb = is_file(ROOT_PATH.DATA_FOLDER.'booking/'.$item['id'].'.jpg') ? WEB_URL.DATA_FOLDER.'booking/'.$item['id'].'.jpg' : WEB_URL.'modules/booking/img/noimage.png';
         $item['id'] = '<img src="'.$thumb.'" style="max-height:100px;max-width:100px" alt=thumbnail>';
-        $item['name'] = '<strong>'.$item['name'].'</strong><p>'.Text::cut(strip_tags($item['detail']), 150).'</p>';
+        $item['name'] = '<span class="term" style="background-color:'.$item['color'].'">'.$item['name'].'</span><p>'.Text::cut(strip_tags($item['detail']), 150).'</p>';
 
         return $item;
     }

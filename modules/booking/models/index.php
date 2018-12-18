@@ -36,7 +36,7 @@ class Model extends \Kotchasan\Model
         $sql = Sql::create('(CASE WHEN NOW() BETWEEN V.`begin` AND V.`end` THEN 1 WHEN NOW() > V.`end` THEN 2 ELSE 0 END) AS `today`');
 
         return static::createQuery()
-            ->select('V.id', 'V.topic', 'V.room_id', 'R.name', 'V.begin', 'V.end', 'V.status', $sql)
+            ->select('V.id', 'V.topic', 'V.room_id', 'R.name', 'V.begin', 'V.end', 'V.status', $sql, 'R.color')
             ->from('reservation V')
             ->join('rooms R', 'INNER', array('R.id', 'V.room_id'))
             ->where(array('V.member_id', $member_id));
@@ -97,7 +97,7 @@ class Model extends \Kotchasan\Model
             ->join('rooms R', 'INNER', array('R.id', 'V.room_id'))
             ->join('user U', 'INNER', array('U.id', 'V.member_id'))
             ->where(array('V.id', $id));
-        $select = array('V.*', 'R.name', 'U.name contact', 'U.phone');
+        $select = array('V.*', 'R.name', 'U.name contact', 'U.phone', 'R.color');
         $n = 1;
         foreach (Language::get('ROOM_CUSTOM_TEXT') as $key => $label) {
             $query->join('rooms_meta M'.$n, 'LEFT', array(array('M'.$n.'.room_id', 'R.id'), array('M'.$n.'.name', $key)));

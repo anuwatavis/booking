@@ -15,6 +15,7 @@ return array(
   'Book a meeting' => 'จองห้องประชุม',
   'Booking' => 'การจอง',
   'Booking calendar' => 'ปฏิทินการจอง',
+  'Booking today' => 'การจองวันนี้',
   'BOOKING_OPTIONS' => array(
     'accessories' => 'อุปกรณ์'
   ),
@@ -102,7 +103,6 @@ return array(
   'Image size is in pixels' => 'ขนาดของรูปภาพขนาดเป็นพิกเซล',
   'Import' => 'นำเข้า',
   'Incorrect :name' => ':name ไม่ถูกต้อง',
-  'Inventory' => 'คลังสินค้า',
   'Key' => 'คีย์',
   'Language' => 'ภาษา',
   'Last login' => 'เข้าระบบล่าสุด',
