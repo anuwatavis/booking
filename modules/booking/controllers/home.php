@@ -11,9 +11,7 @@
 namespace Booking\Home;
 
 use Gcms\Login;
-use Kotchasan\Html;
 use Kotchasan\Http\Request;
-use Kotchasan\Language;
 
 /**
  * module=booking-home.
@@ -25,40 +23,27 @@ use Kotchasan\Language;
 class Controller extends \Gcms\Controller
 {
     /**
-     * หน้าแรก ปฏิทินการจอง.
+     * ฟังก์ชั่นสร้าง card.
      *
-     * @param Request $request
-     *
-     * @return string
+     * @param Request         $request
+     * @param \Kotchasan\Html $card
+     * @param array           $login
      */
-    public function render(Request $request)
+    public static function addCard(Request $request, $card, $login)
     {
-        // ข้อความ title bar
-        $this->title = Language::get('Booking calendar');
-        // เลือกเมนู
-        $this->menu = 'booking-home';
-        // สมาชิก
-        if ($login = Login::isMember()) {
-            // แสดงผล
-            $section = Html::create('section', array(
-                'class' => 'content_bg',
-            ));
-            // breadcrumbs
-            $breadcrumbs = $section->add('div', array(
-                'class' => 'breadcrumbs',
-            ));
-            $ul = $breadcrumbs->add('ul');
-            $ul->appendChild('<li><span class="icon-calendar">{LNG_Home}</span></li>');
-            $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-event">'.$this->title.'</h2>',
-            ));
-            // แสดงตาราง
-            $section->appendChild(createClass('Booking\Home\View')->render($request, $login));
+        \Index\Home\Controller::renderCard($card, 'icon-calendar', '{LNG_Book a meeting}', number_format(\Booking\Home\Model::getNew($login)), '{LNG_Booking today}', null);
+    }
 
-            return $section->render();
-        }
-        // 404
-
-        return \Index\Error\Controller::execute($this);
+    /**
+     * ฟังก์ชั่นสร้าง block.
+     *
+     * @param Request         $request
+     * @param \Kotchasan\Html $block
+     * @param array           $login
+     */
+    public static function addBlock(Request $request, $block, $login)
+    {
+        $content = createClass('Booking\Home\View')->render($request, $login);
+        $block->set('Booking calendar', $content);
     }
 }

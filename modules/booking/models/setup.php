@@ -68,6 +68,7 @@ class Model extends \Kotchasan\Model
                     if ($action === 'delete') {
                         // ลบ
                         $this->db()->delete($table, array('id', $match[1]), 0);
+                        $this->db()->delete($this->getTableName('rooms_meta'), array('room_id', $match[1]), 0);
                         // reload
                         $ret['location'] = 'reload';
                     } elseif ($action === 'published') {

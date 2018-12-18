@@ -32,17 +32,20 @@ class View extends \Gcms\View
      */
     public function render($index, $login)
     {
-        /* คำสั่งสร้างฟอร์ม */
-        $form = Html::create('div', array(
+        $section = Html::create('section');
+        $section->add('h3', array(
+            'innerHTML' => '<span class="icon-calendar">{LNG_Booking calendar}</span>',
+        ));
+        $div = $section->add('div', array(
             'class' => 'setup_frm',
         ));
-        $form->add('div', array(
+        $div->add('div', array(
             'id' => 'booking-calendar',
             'class' => 'margin-left-right-bottom-top',
         ));
         /* Javascript */
-        $form->script('initBookingCalendar();');
+        $div->script('initBookingCalendar();');
 
-        return $form->render();
+        return $section->render();
     }
 }

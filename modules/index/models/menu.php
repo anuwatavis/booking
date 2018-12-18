@@ -29,9 +29,9 @@ class Model
     public static function getMenus($login)
     {
         $menus = array(
-            'booking-home' => array(
+            'home' => array(
                 'text' => '{LNG_Home}',
-                'url' => 'index.php?module=booking-home',
+                'url' => 'index.php?module=home',
             ),
             'module' => array(
                 'text' => '{LNG_Module}',
