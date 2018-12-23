@@ -171,7 +171,6 @@ CREATE TABLE `{prefix}_user` (
   `create_date` datetime DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `social` tinyint(1) NOT NULL DEFAULT '0',
-  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -179,9 +178,9 @@ CREATE TABLE `{prefix}_user` (
 -- Dumping data for table `{prefix}_user`
 --
 
-INSERT INTO `{prefix}_user` (`id`, `username`, `salt`, `password`, `token`, `status`, `permission`, `name`, `sex`, `id_card`, `address`, `phone`, `provinceID`, `zipcode`, `visited`, `lastvisited`, `session_id`, `ip`, `create_date`, `active`, `social`, `email`, `website`, `country`, `province`) VALUES
-(1, 'admin@localhost', '5c13b493b9141', '558b445aeb6fdf6f37cd99f68aa3679dbd8ae31f', '07de192907ec4f969827cfa9b929948cb78f7225', 1, ',can_config,can_manage_room,can_approve_room,', 'แอดมิน', 'm', '', '1 หมู่ 1 ตำบล ลาดหญ้า อำเภอ เมือง', '08080808', '102', '71190', 0, 0, '', '::1', NOW(), 1, 0, NULL, NULL, 'TH', ''),
-(2, 'demo@localhost', '5c13b4c610781', 'd61303ebed15f6448dd3ebadd7e416b5350b4d1d', 'c53cf07e732420d3ba7f69970e075eca37188198', 0, '', 'ตัวอย่าง', 'f', '', '', '0123456788', '102', '', 0, 0, '', '::1', NOW(), 1, 0, NULL, NULL, 'LA', '');
+INSERT INTO `{prefix}_user` (`id`, `username`, `salt`, `password`, `token`, `status`, `permission`, `name`, `sex`, `id_card`, `address`, `phone`, `provinceID`, `zipcode`, `visited`, `lastvisited`, `session_id`, `ip`, `create_date`, `active`, `social`, `website`, `country`, `province`) VALUES
+(1, 'admin@localhost', '5c13b493b9141', '558b445aeb6fdf6f37cd99f68aa3679dbd8ae31f', '07de192907ec4f969827cfa9b929948cb78f7225', 1, ',can_config,can_manage_room,can_approve_room,', 'แอดมิน', 'm', '', '1 หมู่ 1 ตำบล ลาดหญ้า อำเภอ เมือง', '08080808', '102', '71190', 0, 0, '', '::1', NOW(), 1, 0, NULL, 'TH', ''),
+(2, 'demo@localhost', '5c13b4c610781', 'd61303ebed15f6448dd3ebadd7e416b5350b4d1d', 'c53cf07e732420d3ba7f69970e075eca37188198', 0, '', 'ตัวอย่าง', 'f', '', '', '0123456788', '102', '', 0, 0, '', '::1', NOW(), 1, 0, NULL, 'LA', '');
 
 --
 -- Indexes for dumped tables

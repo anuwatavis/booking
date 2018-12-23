@@ -135,7 +135,7 @@ class Model extends \Kotchasan\Model
                             }
                         }
                         if ($request->post('send_mail')->toBoolean()) {
-                            // ส่งอีเมล์ไปยังผู้ที่เกี่ยวข้อง
+                            // ส่งอีเมลไปยังผู้ที่เกี่ยวข้อง
                             $ret['alert'] = \Booking\Email\Model::send($index->username, $save['topic'], $save['status']);
                         } else {
                             // คืนค่า

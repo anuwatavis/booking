@@ -92,7 +92,7 @@ class View extends \Gcms\View
                     'text' => '{LNG_Email}/{LNG_Username}',
                 ),
                 'name' => array(
-                    'text' => '{LNG_Name} {LNG_Surname}',
+                    'text' => '{LNG_Name}',
                     'sort' => 'name',
                 ),
                 'active' => array(
@@ -175,7 +175,7 @@ class View extends \Gcms\View
             $item['lastvisited'] = '-';
         }
         if ($item['social'] == 1) {
-            $item['social'] = '<a href="//'.$item['website'].'" target=_blank class="icon-facebook notext"></a>';
+            $item['social'] = '<span class="icon-facebook notext"></span>';
         } elseif ($item['social'] == 2) {
             $item['social'] = '<span class="icon-google notext"></span>';
         } else {

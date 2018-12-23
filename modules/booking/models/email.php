@@ -13,7 +13,7 @@ namespace Booking\Email;
 use Kotchasan\Language;
 
 /**
- * ส่งอีเมล์ไปยังผู้ที่เกี่ยวข้อง.
+ * ส่งอีเมลไปยังผู้ที่เกี่ยวข้อง.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -22,7 +22,7 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\KBase
 {
     /**
-     * ส่งอีเมล์แจ้งการจอง.
+     * ส่งอีเมลแจ้งการจอง.
      *
      * @param string $mailto
      * @param string $topic
@@ -30,7 +30,7 @@ class Model extends \Kotchasan\KBase
      */
     public static function send($mailto, $topic, $status)
     {
-        // สอีเมล์ของมาชิกที่สามารถอนุมัติได้ทั้งหมด
+        // อีเมลของมาชิกที่สามารถอนุมัติได้ทั้งหมด
         $query = \Kotchasan\Model::createQuery()
             ->select('username')
             ->from('user')

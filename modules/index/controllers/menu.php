@@ -54,8 +54,8 @@ class Controller
      */
     public function render($select, $login)
     {
-        // สามารถตั้งค่าระบบได้
-        if (!Login::checkPermission($login, 'can_config')) {
+        // ไม่มีเมนูตั้งค่า
+        if (empty($this->menus['settings']['submenus'])) {
             unset($this->menus['settings']);
         }
         // ไม่ใช่แอดมิน

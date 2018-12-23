@@ -184,7 +184,7 @@ class Model extends \Kotchasan\Model
                             }
                         }
                         if (empty($ret)) {
-                            // ใหม่ ส่งอีเมล์ไปยังผู้ที่เกี่ยวข้อง
+                            // ใหม่ ส่งอีเมลไปยังผู้ที่เกี่ยวข้อง
                             $ret['alert'] = \Booking\Email\Model::send($login['username'], $save['topic'], 0);
                         }
                         $ret['location'] = $request->getUri()->postBack('index.php', array('module' => 'booking'));

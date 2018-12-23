@@ -35,7 +35,7 @@ class Model extends \Kotchasan\Model
         if ($request->initSession() && $request->isSafe()) {
             // แอดมิน
             $isAdmin = Login::isAdmin();
-            // โหมดตัวอย่างไม่สามารถ register ด้วยอีเมล์ได้ หรือ แอดมิน
+            // โหมดตัวอย่างไม่สามารถ register ด้วยอีเมลได้ หรือ แอดมิน
             if (self::$cfg->demo_mode == false || $isAdmin) {
                 // รับค่าจากการ POST
                 $save = array(
