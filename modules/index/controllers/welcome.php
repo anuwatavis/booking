@@ -32,8 +32,14 @@ class Controller extends \Gcms\Controller
     {
         // action ที่เลือก
         $action = $request->get('action')->toString();
-        // ตรวจสอบ method ที่กำหนดไว่เท่านั้น
-        $action = in_array($action, array('register', 'forgot')) ? $action : 'login';
+        // ตรวจสอบ method ที่กำหนดไว้เท่านั้น
+        if ($action == 'register' && !empty(self::$cfg->user_register)) {
+            $action = 'register';
+        } elseif ($action == 'forgot' && !empty(self::$cfg->user_forgot)) {
+            $action = 'forgot';
+        } else {
+            $action = 'login';
+        }
         // ประมวลผลหน้าที่เรียก
         $page = \Index\Welcome\View::$action($request);
         // ไตเติลจากและเนื้อหาจาก View

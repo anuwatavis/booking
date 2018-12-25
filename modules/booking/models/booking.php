@@ -46,7 +46,7 @@ class Model extends \Kotchasan\Model
                     return $model->db()->createQuery()
                         ->from('rooms')
                         ->where(array('id', $room_id))
-                        ->first('0 id', 'id room_id', '0 status', '0 today', $login['id'].' member_id', $login['phone'].' phone');
+                        ->first('0 id', 'id room_id', '0 status', '0 today', (int) $login['id'].' member_id', "'$login[phone]' phone");
                 } else {
                     return (object) array(
                         'id' => 0,

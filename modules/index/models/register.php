@@ -35,8 +35,8 @@ class Model extends \Kotchasan\Model
         if ($request->initSession() && $request->isSafe()) {
             // แอดมิน
             $isAdmin = Login::isAdmin();
-            // โหมดตัวอย่างไม่สามารถ register ด้วยอีเมลได้ หรือ แอดมิน
-            if (self::$cfg->demo_mode == false || $isAdmin) {
+            // บุคคลทั่วไป สมัครสมาชิกได้ และ ไม่ใช่โหมดตัวอย่าง หรือ แอดมิน
+            if ((!empty(self::$cfg->user_register) && self::$cfg->demo_mode == false) || $isAdmin) {
                 // รับค่าจากการ POST
                 $save = array(
                     'username' => $request->post('register_username')->username(),
@@ -78,8 +78,8 @@ class Model extends \Kotchasan\Model
                         $ret['alert'] = Language::get('Saved successfully');
                         // ไปหน้าสมาชิก
                         $ret['location'] = 'index.php?module=member';
-                    } else {
-                        // ส่งอีเมล
+                    } elseif (!empty(self::$cfg->welcome_email)) {
+                        // ส่งอีเมล แจ้งลงทะเบียนสมาชิกใหม่
                         $subject = '['.self::$cfg->web_title.'] '.Language::get('Welcome new members');
                         $msg = "{LNG_Your registration information}<br>\n<br>\n";
                         $msg .= '{LNG_Username} : '.$save['username']."<br>\n";
@@ -94,6 +94,11 @@ class Model extends \Kotchasan\Model
                             // คืนค่า
                             $ret['alert'] = Language::replace('Register successfully, We have sent complete registration information to :email', array(':email' => $save['username']));
                         }
+                        // ไปหน้าเข้าระบบ
+                        $ret['location'] = 'index.php?action=login';
+                    } else {
+                        // คืนค่า
+                        $ret['alert'] = Language::get('Saved successfully');
                         // ไปหน้าเข้าระบบ
                         $ret['location'] = 'index.php?action=login';
                     }

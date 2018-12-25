@@ -44,6 +44,7 @@ class View extends \Kotchasan\View
             '/{MESSAGE}/' => Login::$login_message,
             '/{CLASS}/' => empty(Login::$login_message) ? 'hidden' : (empty(Login::$login_input) ? 'message' : 'error'),
             '/{URL}/' => $request->getUri()->withoutParams('action'),
+            '/{LOGINMENU}/' => self::menus('login'),
         ));
 
         return (object) array(
@@ -68,6 +69,7 @@ class View extends \Kotchasan\View
             '/{EMAIL}/' => Login::$login_params['username'],
             '/{MESSAGE}/' => Login::$login_message,
             '/{CLASS}/' => empty(Login::$login_message) ? 'hidden' : (empty(Login::$login_input) ? 'message' : 'error'),
+            '/{LOGINMENU}/' => self::menus('forgot'),
         ));
 
         return (object) array(
@@ -91,11 +93,35 @@ class View extends \Kotchasan\View
             '/{Terms of Use}/' => '<a href="{WEBURL}index.php?module=terms">{LNG_Terms of Use}</a>',
             '/{Privacy Policy}/' => '<a href="{WEBURL}index.php?module=policy">{LNG_Privacy Policy}</a>',
             '/{TOKEN}/' => $request->createToken(),
+            '/{LOGINMENU}/' => self::menus('register'),
         ));
 
         return (object) array(
             'detail' => $template->render(),
             'title' => Language::get('Register'),
         );
+    }
+
+    /**
+     * เมนูหน้าเข้าระบบ.
+     *
+     * @param  $from
+     *
+     * @return string
+     */
+    public static function menus($from)
+    {
+        $menus = array();
+        if (in_array($from, array('register', 'forgot'))) {
+            $menus[] = '<a href="index.php?action=login">{LNG_Sign in}</a>';
+        }
+        if (in_array($from, array('forgot', 'login')) && !empty(self::$cfg->user_register)) {
+            $menus[] = '<a href="index.php?action=register">{LNG_Register}</a>';
+        }
+        if (in_array($from, array('register', 'login')) && !empty(self::$cfg->user_forgot)) {
+            $menus[] = '<a href="index.php?action=forgot">{LNG_Forgot}</a>';
+        }
+
+        return empty($menus) ? '' : implode('&nbsp;/&nbsp;', $menus);
     }
 }

@@ -66,6 +66,10 @@ class Controller
         if (empty($this->menus['module']['submenus'])) {
             unset($this->menus['module']);
         }
+        // ไม่มีเมนู report
+        if (empty($this->menus['report']['submenus'])) {
+            unset($this->menus['report']);
+        }
 
         return \Kotchasan\Menu::render($this->menus, $select);
     }

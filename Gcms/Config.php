@@ -102,4 +102,23 @@ class Config extends \Kotchasan\Config
      * @var string
      */
     public $skin = 'skin/default';
+
+    /**
+     * สามารถขอรหัสผ่านในหน้าเข้าระบบได้.
+     *
+     * @var bool
+     */
+    public $user_forgot = 0;
+    /**
+     * บุคคลทั่วไป สามารถสมัครสมาชิกได้.
+     *
+     * @var bool
+     */
+    public $user_register = 0;
+    /**
+     * ส่งอีเมลต้อนรับ เมื่อบุคคลทั่วไปสมัครสมาชิก
+     *
+     * @var bool
+     */
+    public $welcome_email = 0;
 }

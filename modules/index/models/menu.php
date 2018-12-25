@@ -70,6 +70,10 @@ class Model
                     ),
                 ),
             ),
+            'report' => array(
+                'text' => '{LNG_Report}',
+                'submenus' => array(),
+            ),
             'settings' => array(
                 'text' => '{LNG_Settings}',
                 'submenus' => $settings,
