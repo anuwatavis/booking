@@ -19,7 +19,7 @@ Calendar.prototype = {
     this.calendar = $G(document.createElement("div"));
     this.calendar.className = "event-calendar";
     this.showToday = false;
-    this.first_day = null;
+    this.first_day_of_calendar = null;
     for (var property in o) {
       if (property == "month") {
         this.cdate.setMonth(floatval(o[property]) - 1);
@@ -49,6 +49,7 @@ Calendar.prototype = {
     header.className = "header";
     this.calendar.innerHTML = "";
     this.calendar.appendChild(header);
+    this.first_day_of_calendar = null;
     var a = document.createElement("a"),
       span = document.createElement("span");
     a.className = "prev";
@@ -151,8 +152,8 @@ Calendar.prototype = {
       cell.appendChild(span);
       div = document.createElement("div");
       d = new Date(tmp_year, tmp_month - 1, pointer, 0, 0, 0, 0);
-      if (self.first_day === null) {
-        self.first_day = d;
+      if (self.first_day_of_calendar === null) {
+        self.first_day_of_calendar = d;
       }
       div.id = this.id + "-" + d.format("y-m-d");
       cell.appendChild(div);
@@ -212,23 +213,29 @@ Calendar.prototype = {
   _drawEvents: function() {
     var a,
       diff,
+      diff_start,
       elems,
       top,
       start,
       d,
       self = this;
     forEach(this.events, function() {
+      console.log(this);
       if (this.start) {
         a = new Date(this.start);
-        diff = a.compare(self.first_day);
-        if (diff.days < 0) {
-          a = self._addLabel(self.first_day, this, true);
-          this.start = self.first_day.format("y-m-d H:i:s");
+        diff_start = a.compare(self.first_day_of_calendar);
+        if (diff_start.days < 0) {
+          a = self._addLabel(self.first_day_of_calendar, this, true);
+          this.start = self.first_day_of_calendar.format("y-m-d H:i:s");
         } else {
           a = self._addLabel(a, this, true);
         }
         if (a && this.end) {
           diff = new Date(this.end).compare(new Date(this.start));
+          if (diff_start.days < 0) {
+            diff.days--;
+          }
+          console.log(this.start, this.end, diff, diff_start);
           if (diff.days > 0) {
             elems = [a];
             top = a.offsetTop;
