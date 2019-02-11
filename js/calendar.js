@@ -220,7 +220,6 @@ Calendar.prototype = {
       d,
       self = this;
     forEach(this.events, function() {
-      console.log(this);
       if (this.start) {
         a = new Date(this.start);
         diff_start = a.compare(self.first_day_of_calendar);
@@ -235,7 +234,6 @@ Calendar.prototype = {
           if (diff_start.days < 0) {
             diff.days--;
           }
-          console.log(this.start, this.end, diff, diff_start);
           if (diff.days > 0) {
             elems = [a];
             top = a.offsetTop;
