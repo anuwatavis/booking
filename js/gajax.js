@@ -15,9 +15,7 @@ window.$K = (function() {
       return true;
     },
     isMobile: function() {
-      return navigator.userAgent.match(
-        /(iPhone|iPod|iPad|Android|webOS|BlackBerry|Windows Phone)/i
-      );
+      return navigator.userAgent.match(/(iPhone|iPod|iPad|Android|webOS|BlackBerry|Windows Phone)/i);
     },
     init: function(element) {
       forEach(element.querySelectorAll("input,textarea"), function(elem) {
@@ -61,20 +59,9 @@ window.$K = (function() {
               var _docheck = function() {
                 if (this.value == "" && obj.required !== null) {
                   this.addClass("required");
-                  this.invalid(
-                    obj.title !== "" ?
-                    obj.title :
-                    trans("Please fill in") +
-                    (this.placeholder == "" ? "" : " " + this.placeholder)
-                  );
-                } else if (
-                  this.value != "" &&
-                  obj.pattern &&
-                  !obj.pattern.test(this.value)
-                ) {
-                  this.invalid(
-                    obj.title !== "" ? obj.title : trans("Invalid data")
-                  );
+                  this.invalid(obj.title !== "" ? obj.title : trans("Please fill in") + (this.placeholder == "" ? "" : " " + this.placeholder));
+                } else if (this.value != "" && obj.pattern && !obj.pattern.test(this.value)) {
+                  this.invalid(obj.title !== "" ? obj.title : trans("Invalid data"));
                 } else if (obj.required !== null || obj.pattern) {
                   this.reset();
                 }
@@ -172,9 +159,7 @@ window.$K = (function() {
                   }
                 }
                 if (obj.dataset["keyboard"]) {
-                  obj.pattern = new RegExp(
-                    "^(?:[" + obj.dataset["keyboard"].preg_quote() + "]+)$"
-                  );
+                  obj.pattern = new RegExp("^(?:[" + obj.dataset["keyboard"].preg_quote() + "]+)$");
                   if (obj.type == "currency") {
                     new GInput(text, obj.dataset["keyboard"], function() {
                       var val = floatval(this.value);
@@ -305,13 +290,7 @@ window.$K = (function() {
   window.round = function(val, digit) {
     var value = Math.round(val * Math.pow(10, digit)) / Math.pow(10, digit);
     if (val - value > 0) {
-      return (
-        value +
-        Math.floor(
-          (2 * Math.round((val - value) * Math.pow(10, digit + 1))) / 10
-        ) /
-        Math.pow(10, digit)
-      );
+      return value + Math.floor((2 * Math.round((val - value) * Math.pow(10, digit + 1))) / 10) / Math.pow(10, digit);
     } else {
       return value;
     }
@@ -339,13 +318,7 @@ window.$K = (function() {
   window.trans = function(val) {
     try {
       var patt = /^[_]+|[_]+$/g;
-      return eval(
-        val
-        .replace(/[\s]/g, "_")
-        .replace("?", "")
-        .replace(patt, "")
-        .toUpperCase()
-      );
+      return eval(val.replace(/[\s]/g, "_").replace("?", "").replace(patt, "").toUpperCase());
     } catch (e) {
       return val;
     }
@@ -357,8 +330,7 @@ window.$K = (function() {
       div = document.createElement("div");
       div.id = "gdebug";
       document.body.appendChild(div);
-      div.style.cssText =
-        "left:0;bottom:0;width:100%;height:100px;color:#F00;background-color:#FFF;position:fixed;line-height:1;padding:10px;overflow:auto;";
+      div.style.cssText = "left:0;bottom:0;width:100%;height:100px;color:#F00;background-color:#FFF;position:fixed;line-height:1;padding:10px;overflow:auto;";
     }
     p.style.cssText = "margin:0;";
     p.innerText = val;
@@ -384,9 +356,7 @@ window.$K = (function() {
   Date.prototype.formatter = function(c) {
     switch (c) {
       case "d":
-        return this.getDate()
-          .toString()
-          .leftPad(2, "0");
+        return this.getDate().toString().leftPad(2, "0");
       case "D":
         return Date.dayNames[this.getDay()];
       case "y":
@@ -400,9 +370,7 @@ window.$K = (function() {
       case "F":
         return Date.longMonthNames[this.getMonth()];
       case "H":
-        return this.getHours()
-          .toString()
-          .leftPad(2, "0");
+        return this.getHours().toString().leftPad(2, "0");
       case "h":
         return this.getHours();
       case "A":
@@ -410,15 +378,11 @@ window.$K = (function() {
       case "a":
         return this.getHours() < 12 ? "am" : "pm";
       case "I":
-        return this.getMinutes()
-          .toString()
-          .leftPad(2, "0");
+        return this.getMinutes().toString().leftPad(2, "0");
       case "i":
         return this.getMinutes();
       case "S":
-        return this.getSeconds()
-          .toString()
-          .leftPad(2, "0");
+        return this.getSeconds().toString().leftPad(2, "0");
       case "s":
         return this.getSeconds();
       default:
@@ -453,14 +417,7 @@ window.$K = (function() {
     var a = parseInt((14 - this.getMonth()) / 12);
     var y = this.getFullYear() - a;
     var m = this.getMonth() + 12 * a - 2;
-    var d =
-      (this.getDate() +
-        y +
-        parseInt(y / 4) -
-        parseInt(y / 100) +
-        parseInt(y / 400) +
-        parseInt((31 * m) / 12)) %
-      7;
+    var d = (this.getDate() + y + parseInt(y / 4) - parseInt(y / 100) + parseInt(y / 400) + parseInt((31 * m) / 12)) % 7;
     return d;
   };
   Date.prototype.compare = function(d) {
@@ -613,9 +570,7 @@ window.$K = (function() {
   };
   String.prototype.evalScript = function() {
     var regex = /<script.*?>(.*?)<\/script>/g;
-    var t = this.replace(/[\r\n]/g, "")
-      .replace(/\/\/<\!\[CDATA\[/g, "")
-      .replace(/\/\/\]\]>/g, "");
+    var t = this.replace(/[\r\n]/g, "").replace(/\/\/<\!\[CDATA\[/g, "").replace(/\/\/\]\]>/g, "");
     var m = regex.exec(t);
     while (m) {
       try {
@@ -642,9 +597,7 @@ window.$K = (function() {
     return this.replace(/(\s|&nbsp;)+$/, "");
   };
   String.prototype.strip_tags = function(allowed) {
-    allowed = (
-      ((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []
-    ).join("");
+    allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join("");
     var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
     var php = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
     return this.replace(php, "").replace(tags, function($0, $1) {
@@ -808,17 +761,7 @@ window.$K = (function() {
       s = n < 0 ? "-" : "",
       i = String(parseInt((n = Math.abs(Number(n) || 0).toFixed(decimals)))),
       j = (j = i.length) > 3 ? j % 3 : 0;
-    return (
-      s +
-      (j ? i.substr(0, j) + thousands_sep : "") +
-      i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands_sep) +
-      (decimals ?
-        dec_point +
-        Math.abs(n - i)
-        .toFixed(decimals)
-        .slice(2) :
-        "")
-    );
+    return (s + (j ? i.substr(0, j) + thousands_sep : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands_sep) + (decimals ? dec_point + Math.abs(n - i).toFixed(decimals).slice(2) : ""));
   };
   document.viewport = {
     getWidth: function() {
@@ -1107,11 +1050,7 @@ window.$K = (function() {
       s = s == "float" && this.currentStyle ? "styleFloat" : s;
       s = s == "borderColor" ? "borderBottomColor" : s;
       var v = this.currentStyle ? this.currentStyle[s] : null;
-      v = !v && window.getComputedStyle ?
-        document.defaultView
-        .getComputedStyle(this, null)
-        .getPropertyValue(s.replace(/([A-Z])/g, "-$1").toLowerCase()) :
-        v;
+      v = !v && window.getComputedStyle ? document.defaultView.getComputedStyle(this, null).getPropertyValue(s.replace(/([A-Z])/g, "-$1").toLowerCase()) : v;
       if (s == "opacity") {
         return Object.isNull(v) ? 100 : floatval(v) * 100;
       } else {

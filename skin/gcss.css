@@ -2056,7 +2056,7 @@ html[dir="rtl"] a.menu-arrow:after,
   -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  z-index: 2;
+  z-index: 3;
   overflow: visible;
   visibility: hidden;
   height: 0;
