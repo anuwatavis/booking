@@ -56,7 +56,6 @@ class Model extends \Kotchasan\Model
                 ), 'OR')
                 ->order('V.begin')
                 ->cacheOn();
-            //echo $query->text();
             $events = array();
             foreach ($query->execute() as $item) {
                 $events[] = array(

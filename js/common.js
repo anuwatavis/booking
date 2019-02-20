@@ -128,6 +128,8 @@ function defaultSubmit(ds) {
           } else {
             if (typeof el.placeholder != "undefined") {
               t = el.placeholder.strip_tags();
+            } else {
+              t = "";
             }
             if (t == "") {
               t = el.title.strip_tags();
@@ -141,6 +143,8 @@ function defaultSubmit(ds) {
         } else if (val == "this") {
           if (typeof el.placeholder != "undefined") {
             t = el.placeholder.strip_tags();
+          } else {
+            t = "";
           }
           if (t == "") {
             t = el.title.strip_tags();

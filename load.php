@@ -1,5 +1,4 @@
 <?php
-
 /**
  * load.php.
  *
