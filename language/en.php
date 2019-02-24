@@ -16,7 +16,7 @@ return array(
   ),
   'BOOLEANS' => array(
     0 => 'Disable',
-    1 => 'Enamle'
+    1 => 'Enabled'
   ),
   'DATE_FORMAT' => 'd M Y, H:i',
   'DATE_LONG' => array(

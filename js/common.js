@@ -676,10 +676,7 @@ function initWeb(module) {
     });
   }
   var fontSize = floatval(Cookie.get(module + "fontSize"));
-  document.body.set(
-    "data-fontSize",
-    floatval(document.body.getStyle("fontSize"))
-  );
+  document.body.set("data-fontSize", floatval(document.body.getStyle("fontSize")));
   if (fontSize > 5) {
     document.body.setStyle("fontSize", fontSize + "px");
   }
