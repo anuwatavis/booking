@@ -104,7 +104,7 @@ class View extends \Gcms\View
             'id' => 'register_id_card',
             'labelClass' => 'g-input icon-profile',
             'itemClass' => 'width50',
-            'label' => '{LNG_Identification number}',
+            'label' => '{LNG_Identification No.}',
             'pattern' => '[0-9]+',
             'maxlength' => 13,
             'value' => $user['id_card'],

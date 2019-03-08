@@ -1,4 +1,5 @@
 <?php
+
 /* language/la.php */
 return array(
   'Add New' => 'ເພີ່ມ',
@@ -17,21 +18,21 @@ return array(
   'Booking calendar' => 'ປະຕິທິນການຈອງ',
   'Booking today' => 'ຈອງໃນມື້ນີ້',
   'BOOKING_OPTIONS' => array(
-    'accessories' => 'ອຸປະກອນ'
+    'accessories' => 'ອຸປະກອນ',
   ),
   'BOOKING_SELECT' => array(
     'use' => 'ໃຊ້ສໍາລັບ',
-    'department' => 'ພະແນກຮ້ອງຂໍ'
+    'department' => 'ພະແນກຮ້ອງຂໍ',
   ),
   'BOOKING_STATUS' => array(
     0 => 'ລໍຖ້າສໍາລັບການກວດກາ',
     1 => 'ອະນຸມັດ',
     2 => 'ບໍ່ອະນຸຍາດ',
-    3 => 'ຍົກເລີກ'
+    3 => 'ຍົກເລີກ',
   ),
   'BOOLEANS' => array(
     0 => 'ປິດໃຊ້ວຽກ',
-    1 => 'ເປີດໃຊ້ວຽກ'
+    1 => 'ເປີດໃຊ້ວຽກ',
   ),
   'Browse file' => 'ເລືອກໄຟລ໌',
   'Browse image uploaded, type :type' => 'ເລືອກຮູບພາບອັບໂຫຼດຊະນິດ :type',
@@ -59,7 +60,7 @@ return array(
     3 => 'ພຸດ',
     4 => 'ພະຫັດ',
     5 => 'ສຸກ',
-    6 => 'ເສົາ'
+    6 => 'ເສົາ',
   ),
   'DATE_SHORT' => array(
     0 => 'ທ.',
@@ -68,7 +69,7 @@ return array(
     3 => 'ພ.',
     4 => 'ພ.',
     5 => 'ສ.',
-    6 => 'ສ.'
+    6 => 'ສ.',
   ),
   'days' => 'ມື້',
   'Delete' => 'ລືບ',
@@ -100,7 +101,7 @@ return array(
   'go to page' => 'ໄປທີ່ໜ້າ',
   'Home' => 'ໜ້າຫຼັກ',
   'How to define user authentication for mail servers. If you enable it, you must configure below correctly.' => 'ກຳນົດວິທີການກວດສອບຜູ້ໃຊ້ສຳລັບເມນເຊິບເວີຫາກທ່ານເປີດໃຊ້ການທ່ານຕ້ອງກຳນົດຄ່າຕ່າງໆດ້ານລຸ່ມຖືກຕ້ອງ',
-  'Identification number' => 'ເລກບັດປະຊາຊົນ',
+  'Identification No.' => 'ເລກບັດປະຊາຊົນ',
   'Image' => 'ຮູບພາບ',
   'Image size is in pixels' => 'ຂະໜາດຂອງຮູບພາບເປັນພິກເຊວ',
   'Import' => 'ນຳເຂົ້າ',
@@ -121,7 +122,7 @@ return array(
   'Mail server settings' => 'ຄ່າກຳນົດຂອງເມວເຊີບເວີ',
   'MAIL_PROGRAMS' => array(
     0 => 'ສົ່ງຈົດໝາຍດ້ວຍ PHP',
-    1 => 'ສົ່ງຈົດໝາຍດ້ວຍ PHPMailer (ແນະນຳ)'
+    1 => 'ສົ່ງຈົດໝາຍດ້ວຍ PHPMailer (ແນະນຳ)',
   ),
   'Manage languages' => 'ຈັດການພາສາ',
   'Meeting room are not available at select time' => 'ຫ້ອງປະຊຸມບໍ່ມີເວລາທີ່ເລືອກ.',
@@ -142,7 +143,7 @@ return array(
     9 => 'ກັນຍາ',
     10 => 'ຕຸລາ',
     11 => 'ພະຈິກ',
-    12 => 'ທັນວາ'
+    12 => 'ທັນວາ',
   ),
   'MONTH_SHORT' => array(
     1 => 'ມ.ກ.',
@@ -156,7 +157,7 @@ return array(
     9 => 'ກ.ຍ.',
     10 => 'ຕ.ລ.',
     11 => 'ພ.ຈ.',
-    12 => 'ທ.ວ.'
+    12 => 'ທ.ວ.',
   ),
   'My Booking' => 'ການຈອງຂອງຂ້ອຍ',
   'Name' => 'ຊື່ ນາມສະກຸນ',
@@ -168,7 +169,7 @@ return array(
   'Passwords must be at least four characters' => 'ລະຫັດຜ່ານຕ້ອງບໍ່ຕ່ຳກວ່າ 4 ຕົວອັກສອນ',
   'Permission' => 'ສິດໃນການໃຊ້ວຽກ',
   'PERMISSIONS' => array(
-    'can_config' => 'ສາມາດຕັ້ງຄ່າລະບົບໄດ້'
+    'can_config' => 'ສາມາດຕັ້ງຄ່າລະບົບໄດ້',
   ),
   'Phone' => 'ໂທລະສັບ',
   'Please fill in' => 'ກະລຸນາຕື່ມຂໍ້ມູນໃສ່',
@@ -188,7 +189,7 @@ return array(
   'ROOM_CUSTOM_TEXT' => array(
     'building' => 'ອາຄານ/ສະຖານທີ່',
     'number' => 'ຫ້ອງ',
-    'seats' => 'ຈໍານວນບ່ອນນັ່ງ'
+    'seats' => 'ຈໍານວນບ່ອນນັ່ງ',
   ),
   'Save' => 'ບັນທຶກ',
   'Save and email completed' => 'ບັນທຶກແລະສົ່ງອີເມວສົບຜົນສໍາເລັດ',
@@ -204,7 +205,7 @@ return array(
   'Sex' => 'ເພດ',
   'SEXES' => array(
     'f' => 'ຍິງ',
-    'm' => 'ຊາຍ'
+    'm' => 'ຊາຍ',
   ),
   'Short description about your website' => 'ຂໍ້ຄວາມສັ້ນໆ ອະທິບາຍວ່າເປັນເວັບໄຊກ່ຽວກັບຫຍັງ',
   'Show' => 'ສະແດງ',
@@ -216,7 +217,7 @@ return array(
   'skip to content' => 'ຂ້າມໄປຍັງເນື້ອຫາ',
   'SMTPSECURIES' => array(
     '' => 'ການເຊື່ອມຕໍ່ແບບປົກກະຕິ',
-    'ssl' => 'ການເຊື່ອມຕໍ່ທີ່ປອດໄຟ (SSL)'
+    'ssl' => 'ການເຊື່ອມຕໍ່ທີ່ປອດໄຟ (SSL)',
   ),
   'Sorry' => 'ຂໍໂທດ',
   'Sorry, Item not found It&#39;s may be deleted' => 'ຂໍໂທດ ບໍ່ພົບລາຍການທີ່ເລືອກ ລາຍການນີ້ອາດຖືກລຶບໄປແລ້ວ',
@@ -251,5 +252,5 @@ return array(
   'You want to' => 'ທ່ານຕ້ອງການ',
   'Your message was sent successfully' => 'ສົ່ງຂໍ້ຄວາມໄປຫາບຸກຄົນທີ່ກ່ຽວຂ້ອງ.',
   'Your new password is' => 'ລະຫັດຜ່ານໃໝ່ຂອງທ່ານຄື',
-  'Zipcode' => 'ລະຫັດໄປສະນີ'
+  'Zipcode' => 'ລະຫັດໄປສະນີ',
 );
