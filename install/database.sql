@@ -1,20 +1,19 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb1+deb.cihar.com~xenial.2
+-- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 14, 2018 at 08:55 PM
--- Server version: 5.7.24-0ubuntu0.16.04.1
--- PHP Version: 5.6.39-1+ubuntu16.04.1+deb.sury.org+1
+-- Generation Time: Mar 13, 2019 at 09:36 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.0.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
---
--- Database: `booking`
---
--- --------------------------------------------------------
 
+
+
+-- --------------------------------------------------------
 --
 -- Table structure for table `{prefix}_language`
 --
@@ -22,12 +21,11 @@ SET time_zone = "+00:00";
 CREATE TABLE `{prefix}_language` (
   `id` int(11) NOT NULL,
   `key` text COLLATE utf8_unicode_ci NOT NULL,
-  `la` text COLLATE utf8_unicode_ci,
-  `th` text COLLATE utf8_unicode_ci,
-  `en` text COLLATE utf8_unicode_ci,
-  `owner` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `type` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `js` tinyint(1) NOT NULL
+  `owner` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `js` tinyint(1) NOT NULL,
+  `th` text COLLATE utf8_unicode_ci,
+  `en` text COLLATE utf8_unicode_ci
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -41,8 +39,8 @@ CREATE TABLE `{prefix}_category` (
   `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(11) NOT NULL,
   `topic` varchar(128) CHARACTER SET utf8 NOT NULL,
-  `color` varchar(16) CHARACTER SET utf8 NOT NULL,
-  `published` tinyint(1) NOT NULL
+  `color` varchar(16) CHARACTER SET utf8 DEFAULT NULL,
+  `published` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -88,8 +86,8 @@ CREATE TABLE `{prefix}_reservation` (
 
 CREATE TABLE `{prefix}_reservation_data` (
   `reservation_id` int(11) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `value` varchar(150) NOT NULL
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `value` varchar(150) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -153,7 +151,7 @@ CREATE TABLE `{prefix}_user` (
   `salt` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) DEFAULT 0,
   `permission` text COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `sex` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -165,13 +163,12 @@ CREATE TABLE `{prefix}_user` (
   `zipcode` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `country` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   `visited` int(11) UNSIGNED DEFAULT '0',
-  `lastvisited` int(11) DEFAULT '0',
+  `lastvisited` int(11) DEFAULT 0,
   `session_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ip` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  `social` tinyint(1) NOT NULL DEFAULT '0',
-  `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `social` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -193,15 +190,15 @@ ALTER TABLE `{prefix}_category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `{prefix}_language`
---
-ALTER TABLE `{prefix}_language`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `{prefix}_reservation`
 --
 ALTER TABLE `{prefix}_reservation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `{prefix}_language`
+--
+ALTER TABLE `{prefix}_language`
   ADD PRIMARY KEY (`id`);
 
 --

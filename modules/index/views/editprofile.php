@@ -12,6 +12,7 @@ namespace Index\Editprofile;
 
 use Gcms\Login;
 use Kotchasan\Html;
+use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
@@ -26,12 +27,13 @@ class View extends \Gcms\View
     /**
      * ฟอร์มแก้ไขสมาชิก
      *
-     * @param array $user
-     * @param array $login
+     * @param Request $request
+     * @param array   $user
+     * @param array   $login
      *
      * @return string
      */
-    public function render($user, $login)
+    public function render(Request $request, $user, $login)
     {
         // แอดมิน
         $login_admin = Login::isAdmin();
