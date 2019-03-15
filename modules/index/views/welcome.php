@@ -33,6 +33,7 @@ class View extends \Kotchasan\View
      */
     public static function login(Request $request)
     {
+        $login_action = $request->request('ret')->url();
         // template
         $template = Template::create('', '', 'login');
         $template->add(array(
@@ -45,6 +46,7 @@ class View extends \Kotchasan\View
             '/{CLASS}/' => empty(Login::$login_message) ? 'hidden' : (empty(Login::$login_input) ? 'message' : 'error'),
             '/{URL}/' => $request->getUri()->withoutParams('action'),
             '/{LOGINMENU}/' => self::menus('login'),
+            '/{LOGIN_ACTION}/' => $login_action == '' ? WEB_URL.'index.php' : $login_action,
         ));
 
         return (object) array(
@@ -113,13 +115,13 @@ class View extends \Kotchasan\View
     {
         $menus = array();
         if (in_array($from, array('register', 'forgot'))) {
-            $menus[] = '<a href="index.php?action=login">{LNG_Sign in}</a>';
+            $menus[] = '<a href="index.php?module=welcome&amp;action=login">{LNG_Sign in}</a>';
         }
         if (in_array($from, array('forgot', 'login')) && !empty(self::$cfg->user_register)) {
-            $menus[] = '<a href="index.php?action=register">{LNG_Register}</a>';
+            $menus[] = '<a href="index.php?module=welcome&amp;action=register">{LNG_Register}</a>';
         }
         if (in_array($from, array('register', 'login')) && !empty(self::$cfg->user_forgot)) {
-            $menus[] = '<a href="index.php?action=forgot">{LNG_Forgot}</a>';
+            $menus[] = '<a href="index.php?module=welcome&amp;action=forgot">{LNG_Forgot}</a>';
         }
 
         return empty($menus) ? '' : implode('&nbsp;/&nbsp;', $menus);

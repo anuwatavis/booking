@@ -188,6 +188,15 @@ class View extends \Gcms\View
             'options' => Language::get('BOOKING_STATUS'),
             'value' => $index->status,
         ));
+        // reason
+        $fieldset->add('text', array(
+            'id' => 'reason',
+            'labelClass' => 'g-input icon-question',
+            'itemClass' => 'item',
+            'label' => '{LNG_Reason}',
+            'maxlength' => 20,
+            'value' => $index->reason,
+        ));
         $fieldset = $form->add('fieldset', array(
             'class' => 'submit',
         ));
@@ -196,11 +205,13 @@ class View extends \Gcms\View
             'class' => 'button ok large icon-save',
             'value' => '{LNG_Save}',
         ));
-        $fieldset->add('checkbox', array(
-            'id' => 'send_mail',
-            'label' => '&nbsp;{LNG_Email the relevant person}',
-            'value' => 1,
-        ));
+        if (self::$cfg->noreply_email != '') {
+            $fieldset->add('checkbox', array(
+                'id' => 'send_mail',
+                'label' => '&nbsp;{LNG_Email the relevant person}',
+                'value' => 1,
+            ));
+        }
         // id
         $fieldset->add('hidden', array(
             'id' => 'id',

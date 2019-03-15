@@ -113,6 +113,9 @@ class View extends \Gcms\View
                     'class' => 'center',
                     'sort' => 'create_date',
                 ),
+                'reason' => array(
+                    'text' => '{LNG_Reason}',
+                ),
             ),
             /* รูปแบบการแสดงผลของคอลัมน์ (tbody) */
             'cols' => array(

@@ -30,32 +30,37 @@ class Model extends \Kotchasan\KBase
      */
     public static function send($mailto, $topic, $status)
     {
-        // อีเมลของมาชิกที่สามารถอนุมัติได้ทั้งหมด
-        $query = \Kotchasan\Model::createQuery()
-            ->select('username')
-            ->from('user')
-            ->where(array('social', 0))
-            ->andWhere(array(
-                array('status', 1),
-                array('permission', 'LIKE', '%,can_approve_room,%'),
-            ), 'OR')
-            ->cacheOn();
-        $emails = array($mailto => $mailto);
-        foreach ($query->execute() as $item) {
-            $emails[$item->username] = $item->username;
-        }
-        // ส่งอีเมล
-        $subject = '['.self::$cfg->web_title.'] '.Language::get('Book a meeting');
-        $msg = Language::get('Book a meeting').' '.$topic;
-        $msg .= "<br>\n".Language::get('Status').' : '.Language::find('BOOKING_STATUS', null, $status);
-        $msg .= "<br>\n".WEB_URL;
-        $err = \Kotchasan\Email::send(implode(',', $emails), self::$cfg->noreply_email, $subject, $msg);
-        if ($err->error()) {
-            // คืนค่า error
-            return $err->getErrorMessage();
+        if (self::$cfg->noreply_email != '') {
+            // อีเมลของมาชิกที่สามารถอนุมัติได้ทั้งหมด
+            $query = \Kotchasan\Model::createQuery()
+                ->select('username')
+                ->from('user')
+                ->where(array('social', 0))
+                ->andWhere(array(
+                    array('status', 1),
+                    array('permission', 'LIKE', '%,can_approve_room,%'),
+                ), 'OR')
+                ->cacheOn();
+            $emails = array($mailto => $mailto);
+            foreach ($query->execute() as $item) {
+                $emails[$item->username] = $item->username;
+            }
+            // ส่งอีเมล
+            $subject = '['.self::$cfg->web_title.'] '.Language::get('Book a meeting');
+            $msg = Language::get('Book a meeting').' '.$topic;
+            $msg .= "<br>\n".Language::get('Status').' : '.Language::find('BOOKING_STATUS', null, $status);
+            $msg .= "<br>\n".WEB_URL;
+            $err = \Kotchasan\Email::send(implode(',', $emails), self::$cfg->noreply_email, $subject, $msg);
+            if ($err->error()) {
+                // คืนค่า error
+                return $err->getErrorMessage();
+            } else {
+                // คืนค่า
+                return Language::get('Your message was sent successfully');
+            }
         } else {
-            // คืนค่า
-            return Language::get('Your message was sent successfully');
+            // ไม่สามารถส่งอีเมล์ได้
+            return Language::get('Saved successfully');
         }
     }
 }

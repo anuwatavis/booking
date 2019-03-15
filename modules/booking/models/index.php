@@ -36,7 +36,7 @@ class Model extends \Kotchasan\Model
         $sql = Sql::create('(CASE WHEN NOW() BETWEEN V.`begin` AND V.`end` THEN 1 WHEN NOW() > V.`end` THEN 2 ELSE 0 END) AS `today`');
 
         return static::createQuery()
-            ->select('V.id', 'V.topic', 'V.room_id', 'R.name', 'V.begin', 'V.end', 'V.status', $sql, 'R.color')
+            ->select('V.id', 'V.topic', 'V.room_id', 'R.name', 'V.begin', 'V.end', 'V.status', 'V.reason', $sql, 'R.color')
             ->from('reservation V')
             ->join('rooms R', 'INNER', array('R.id', 'V.room_id'))
             ->where(array('V.member_id', $member_id));
@@ -52,26 +52,24 @@ class Model extends \Kotchasan\Model
         $ret = array();
         // session, referer, สมาชิก
         if ($request->initSession() && $request->isReferer()) {
-            if ($login = Login::isMember()) {
-                $action = $request->post('action')->toString();
-                if ($action === 'cancel') {
-                    // ยกเลิกการจอง
-                    $reservation_table = $this->getTableName('reservation');
-                    $search = $this->db()->first($reservation_table, $request->post('id')->toInt());
-                    if ($search && $search->status == 0) {
-                        // ลบ
-                        $this->db()->delete($reservation_table, $search->id);
-                        $this->db()->delete($this->getTableName('reservation_data'), array('reservation_id', $search->id), 0);
-                        // คืนค่า
-                        $ret['alert'] = Language::get('Canceled successfully');
-                        $ret['remove'] = 'datatable_'.$search->id;
-                    }
-                } elseif ($action === 'detail') {
-                    // แสดงรายละเอียดการจอง
-                    $search = $this->bookDetail($request->post('id')->toInt());
-                    if ($search) {
-                        $ret['modal'] = createClass('Booking\Detail\View')->booking($search);
-                    }
+            $action = $request->post('action')->toString();
+            if ($action === 'cancel' && Login::isMember()) {
+                // ยกเลิกการจอง
+                $reservation_table = $this->getTableName('reservation');
+                $search = $this->db()->first($reservation_table, $request->post('id')->toInt());
+                if ($search && $search->status == 0) {
+                    // ลบ
+                    $this->db()->delete($reservation_table, $search->id);
+                    $this->db()->delete($this->getTableName('reservation_data'), array('reservation_id', $search->id), 0);
+                    // คืนค่า
+                    $ret['alert'] = Language::get('Canceled successfully');
+                    $ret['remove'] = 'datatable_'.$search->id;
+                }
+            } elseif ($action === 'detail') {
+                // แสดงรายละเอียดการจอง
+                $search = $this->bookDetail($request->post('id')->toInt());
+                if ($search) {
+                    $ret['modal'] = createClass('Booking\Detail\View')->booking($search);
                 }
             }
         }
@@ -94,8 +92,8 @@ class Model extends \Kotchasan\Model
     {
         $query = $this->db()->createQuery()
             ->from('reservation V')
-            ->join('rooms R', 'INNER', array('R.id', 'V.room_id'))
-            ->join('user U', 'INNER', array('U.id', 'V.member_id'))
+            ->join('rooms R', 'LEFT', array('R.id', 'V.room_id'))
+            ->join('user U', 'LEFT', array('U.id', 'V.member_id'))
             ->where(array('V.id', $id));
         $select = array('V.*', 'R.name', 'U.name contact', 'U.phone', 'R.color');
         $n = 1;
