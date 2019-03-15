@@ -76,7 +76,7 @@ CREATE TABLE `{prefix}_reservation` (
   `begin` datetime DEFAULT NULL,
   `end` datetime DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
-  `reason` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `reason` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -102,7 +102,7 @@ CREATE TABLE `{prefix}_rooms` (
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `detail` text COLLATE utf8_unicode_ci NOT NULL,
   `color` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `published` int(1) NOT NULL
+  `published` int(1) NOT NULL DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -163,7 +163,7 @@ CREATE TABLE `{prefix}_user` (
   `province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `zipcode` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `country` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `visited` int(11) UNSIGNED DEFAULT '0',
+  `visited` int(11) UNSIGNED DEFAULT 0,
   `lastvisited` int(11) DEFAULT 0,
   `session_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ip` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
