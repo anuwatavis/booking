@@ -50,7 +50,7 @@ if (defined('ROOT_PATH')) {
             // ตาราง reservation
             $table = $db_config['prefix'].'_reservation';
             if (!fieldExists($conn, $table, 'reason')) {
-                $conn->query('ALTER TABLE `$table` ADD `reason` VARCHAR(20) NULL AFTER `status`');
+                $conn->query("ALTER TABLE `$table` ADD `reason` VARCHAR(20) NULL AFTER `status`");
                 $content[] = '<li class="correct">ปรับปรุงตาราง `'.$table.'` สำเร็จ</li>';
             }
             // บันทึก settings/config.php

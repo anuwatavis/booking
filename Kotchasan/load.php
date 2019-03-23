@@ -175,7 +175,7 @@ if (!defined('TOKEN_AGE')) {
  * @param string $className ชื่อคลาส
  * @param mixed  $param
  *
- * @return \static
+ * @return object
  */
 function createClass($className, $param = null)
 {
