@@ -44,8 +44,7 @@ class Model extends \Kotchasan\KBase
                 $request->removeToken();
             } else {
                 $ret = array(
-                    'alert' => Login::$login_message,
-                    'input' => Login::$login_input,
+                    'ret_'.Login::$login_input => Login::$login_message,
                 );
             }
             // คืนค่า JSON
