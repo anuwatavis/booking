@@ -53,7 +53,7 @@ class Model extends \Kotchasan\KBase
             $err = \Kotchasan\Email::send(implode(',', $emails), self::$cfg->noreply_email, $subject, $msg);
             if ($err->error()) {
                 // คืนค่า error
-                return $err->getErrorMessage();
+                return strip_tags($err->getErrorMessage());
             } else {
                 // คืนค่า
                 return Language::get('Your message was sent successfully');

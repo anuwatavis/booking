@@ -27,12 +27,18 @@ class Model extends \Kotchasan\Model
     /**
      * Query ข้อมูลสำหรับส่งให้กับ DataTable.
      *
-     * @param int $status
+     * @param array $index
      *
      * @return \Kotchasan\Database\QueryBuilder
      */
-    public static function toDataTable($status)
+    public static function toDataTable($index)
     {
+        $where = array(
+            array('V.status', $index['status']),
+        );
+        if ($index['room_id'] > 0) {
+            $where[] = array('V.room_id', $index['room_id']);
+        }
         $sql = Sql::create('(CASE WHEN NOW() BETWEEN V.`begin` AND V.`end` THEN 1 WHEN NOW() > V.`end` THEN 2 ELSE 0 END) AS `today`');
 
         return static::createQuery()
@@ -40,7 +46,7 @@ class Model extends \Kotchasan\Model
             ->from('reservation V')
             ->join('rooms R', 'INNER', array('R.id', 'V.room_id'))
             ->join('user U', 'INNER', array('U.id', 'V.member_id'))
-            ->where(array('V.status', $status));
+            ->where($where);
     }
 
     /**
@@ -59,9 +65,22 @@ class Model extends \Kotchasan\Model
                 // id ที่ส่งมา
                 if (preg_match_all('/,?([0-9]+),?/', $request->post('id')->toString(), $match)) {
                     if ($action === 'delete') {
-                        // ลบ
-                        $this->db()->delete($this->getTableName('reservation'), array('id', $match[1]), 0);
-                        $this->db()->delete($this->getTableName('reservation_data'), array('reservation_id', $match[1]), 0);
+                        $query = static::createQuery()
+                            ->select('id')
+                            ->from('reservation')
+                            ->where(array(
+                                array('id', $match[1]),
+                                Sql::create('NOW() < `begin`'),
+                            ));
+                        $ids = array();
+                        foreach ($query->execute() as $item) {
+                            $ids[] = $item->id;
+                        }
+                        if (!empty($ids)) {
+                            // ลบ
+                            $this->db()->delete($this->getTableName('reservation'), array('id', $ids), 0);
+                            $this->db()->delete($this->getTableName('reservation_data'), array('reservation_id', $ids), 0);
+                        }
                         // reload
                         $ret['location'] = 'reload';
                     }
@@ -73,36 +92,5 @@ class Model extends \Kotchasan\Model
         }
         // คืนค่า JSON
         echo json_encode($ret);
-    }
-
-    /**
-     * อ่านข้อมูลรายการที่เลือก
-     * คืนค่าข้อมูล object ไม่พบคืนค่า null.
-     *
-     * @param int $id
-     *
-     * @return object|null
-     */
-    public function bookDetail($id)
-    {
-        $query = $this->db()->createQuery()
-            ->from('reservation V')
-            ->join('rooms R', 'INNER', array('R.id', 'V.room_id'))
-            ->join('user U', 'INNER', array('U.id', 'V.member_id'))
-            ->where(array('V.id', $id));
-        $select = array('V.*', 'R.name', 'U.name contact', 'U.phone');
-        $n = 1;
-        foreach (Language::get('ROOM_CUSTOM_TEXT') as $key => $label) {
-            $query->join('rooms_meta M'.$n, 'LEFT', array(array('M'.$n.'.room_id', 'R.id'), array('M'.$n.'.name', $key)));
-            $select[] = 'M'.$n.'.value '.$key;
-            ++$n;
-        }
-        foreach (Language::get('BOOKING_SELECT') + Language::get('BOOKING_OPTIONS') as $key => $label) {
-            $query->join('reservation_data M'.$n, 'LEFT', array(array('M'.$n.'.reservation_id', 'V.id'), array('M'.$n.'.name', $key)));
-            $select[] = 'M'.$n.'.value '.$key;
-            ++$n;
-        }
-
-        return $query->first($select);
     }
 }

@@ -241,7 +241,7 @@ ALTER TABLE `{prefix}_language`
 ALTER TABLE `{prefix}_reservation`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `{prefix}_reservation_data`
+-- Indexes for table `{prefix}_reservation_data`
 --
 ALTER TABLE `{prefix}_reservation_data`
   ADD KEY `reservation_id` (`reservation_id`) USING BTREE;

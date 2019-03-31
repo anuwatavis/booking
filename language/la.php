@@ -51,7 +51,7 @@ return array(
   'Create' => 'ສ້າງ',
   'Create new account' => 'ສ້າງບັນຊີໃໝ່',
   'Created' => 'ສ້າງເມື່ອ',
-  'date' => 'ວັນທີ',
+  'Date' => 'ວັນທີ',
   'DATE_FORMAT' => 'd M Y ເວລາ H:i ນ.',
   'DATE_LONG' => array(
     0 => 'ອາທິດ',

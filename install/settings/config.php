@@ -20,5 +20,5 @@ return array(
     'user_forgot' => 0,
     'user_register' => 0,
     'welcome_email' => 0,
-    'booking_w' => 500,
+    'booking_w' => 600,
 );

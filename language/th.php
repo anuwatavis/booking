@@ -51,7 +51,7 @@ return array(
   'Create' => 'สร้าง',
   'Create new account' => 'สร้างบัญชีใหม่',
   'Created' => 'สร้างเมื่อ',
-  'date' => 'วันที่',
+  'Date' => 'วันที่',
   'DATE_FORMAT' => 'd M Y เวลา H:i น.',
   'DATE_LONG' => array(
     0 => 'อาทิตย์',
