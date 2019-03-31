@@ -181,6 +181,16 @@ function createClass($className, $param = null)
 {
     return new $className($param);
 }
+
+/**
+ * แสดงข้อมูลตัวแปรออกทาง Console ของบราวเวอร์ (debug).
+ *
+ * @param mixed $expression
+ */
+function debug($expression)
+{
+    echo '<script>console.log("'.htmlspecialchars(stripslashes(str_replace(array("\r", "\n"), '', var_export($expression, true)))).'")</script>';
+}
 /*
  * custom error handler
  * ถ้าอยู่ใน mode debug จะแสดง error ถ้าไม่จะเขียนลง log อย่างเดียว
