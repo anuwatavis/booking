@@ -35,7 +35,7 @@ CREATE TABLE `{prefix}_language` (
 --
 
 CREATE TABLE `{prefix}_category` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int(11) NOT NULL,
   `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(11) NOT NULL,
   `topic` varchar(128) CHARACTER SET utf8 NOT NULL,
@@ -48,16 +48,16 @@ CREATE TABLE `{prefix}_category` (
 --
 
 INSERT INTO `{prefix}_category` (`id`, `type`, `category_id`, `topic`, `color`, `published`) VALUES
-(46, 'department', 1, 'บริหาร', '', 0),
-(47, 'department', 2, 'จัดซื้อจัดจ้าง', '', 0),
-(48, 'department', 3, 'บุคคล', '', 0),
-(53, 'use', 1, 'ประชุม', '', 0),
-(54, 'use', 2, 'สัมนา', '', 0),
-(55, 'use', 3, 'จัดเลี้ยง', '', 0),
-(42, 'accessories', 4, 'ของว่าง', '', 0),
-(41, 'accessories', 3, 'เครื่องฉายแผ่นใส', '', 0),
-(40, 'accessories', 2, 'จอโปรเจ็คเตอร์', '', 0),
-(39, 'accessories', 1, 'เครื่องคอมพิวเตอร์', '', 0);
+(46, 'department', 1, 'บริหาร', '', 1),
+(47, 'department', 2, 'จัดซื้อจัดจ้าง', '', 1),
+(48, 'department', 3, 'บุคคล', '', 1),
+(53, 'use', 1, 'ประชุม', '', 1),
+(54, 'use', 2, 'สัมนา', '', 1),
+(55, 'use', 3, 'จัดเลี้ยง', '', 1),
+(42, 'accessories', 4, 'ของว่าง', '', 1),
+(41, 'accessories', 3, 'เครื่องฉายแผ่นใส', '', 1),
+(40, 'accessories', 2, 'จอโปรเจ็คเตอร์', '', 1),
+(39, 'accessories', 1, 'เครื่องคอมพิวเตอร์', '', 1);
 
 -- --------------------------------------------------------
 
@@ -98,7 +98,7 @@ CREATE TABLE `{prefix}_reservation_data` (
 --
 
 CREATE TABLE `{prefix}_rooms` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `detail` text COLLATE utf8_unicode_ci NOT NULL,
   `color` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -147,7 +147,7 @@ INSERT INTO `{prefix}_rooms_meta` (`room_id`, `name`, `value`) VALUES
 --
 
 CREATE TABLE `{prefix}_user` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `salt` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -219,7 +219,7 @@ ALTER TABLE `{prefix}_rooms_meta`
 --
 ALTER TABLE `{prefix}_user`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `username` (`username`);
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -229,7 +229,7 @@ ALTER TABLE `{prefix}_user`
 -- AUTO_INCREMENT for table `{prefix}_category`
 --
 ALTER TABLE `{prefix}_category`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `{prefix}_language`
 --
@@ -239,7 +239,7 @@ ALTER TABLE `{prefix}_language`
 -- AUTO_INCREMENT for table `{prefix}_reservation`
 --
 ALTER TABLE `{prefix}_reservation`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Indexes for table `{prefix}_reservation_data`
 --
@@ -250,9 +250,9 @@ ALTER TABLE `{prefix}_reservation_data`
 -- AUTO_INCREMENT for table `{prefix}_rooms`
 --
 ALTER TABLE `{prefix}_rooms`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `{prefix}_user`
 --
 ALTER TABLE `{prefix}_user`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
