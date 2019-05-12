@@ -3,15 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 13, 2019 at 09:36 AM
--- Server version: 10.1.37-MariaDB
+-- Generation Time: Mar 31, 2019 at 03:13 PM
+-- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.0.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-
 
 -- --------------------------------------------------------
 --
@@ -29,7 +26,6 @@ CREATE TABLE `{prefix}_language` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `{prefix}_category`
 --
@@ -38,8 +34,8 @@ CREATE TABLE `{prefix}_category` (
   `id` int(11) NOT NULL,
   `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(11) NOT NULL,
-  `topic` varchar(128) CHARACTER SET utf8 NOT NULL,
-  `color` varchar(16) CHARACTER SET utf8 DEFAULT NULL,
+  `topic` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `color` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
   `published` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -76,7 +72,7 @@ CREATE TABLE `{prefix}_reservation` (
   `begin` datetime DEFAULT NULL,
   `end` datetime DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
-  `reason` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL
+  `reason` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -188,7 +184,9 @@ INSERT INTO `{prefix}_user` (`id`, `username`, `salt`, `password`, `token`, `sta
 -- Indexes for table `{prefix}_category`
 --
 ALTER TABLE `{prefix}_category`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `type` (`type`),
+  ADD KEY `category_id` (`category_id`);
 
 --
 -- Indexes for table `{prefix}_reservation`
@@ -203,6 +201,13 @@ ALTER TABLE `{prefix}_language`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `{prefix}_user`
+--
+ALTER TABLE `{prefix}_user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`);
+
+--
 -- Indexes for table `{prefix}_rooms`
 --
 ALTER TABLE `{prefix}_rooms`
@@ -214,12 +219,6 @@ ALTER TABLE `{prefix}_rooms`
 ALTER TABLE `{prefix}_rooms_meta`
   ADD KEY `room_id` (`room_id`) USING BTREE;
 
---
--- Indexes for table `{prefix}_user`
---
-ALTER TABLE `{prefix}_user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -230,11 +229,19 @@ ALTER TABLE `{prefix}_user`
 --
 ALTER TABLE `{prefix}_category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `{prefix}_language`
 --
 ALTER TABLE `{prefix}_language`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `{prefix}_user`
+--
+ALTER TABLE `{prefix}_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `{prefix}_reservation`
 --
@@ -250,9 +257,4 @@ ALTER TABLE `{prefix}_reservation_data`
 -- AUTO_INCREMENT for table `{prefix}_rooms`
 --
 ALTER TABLE `{prefix}_rooms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `{prefix}_user`
---
-ALTER TABLE `{prefix}_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;

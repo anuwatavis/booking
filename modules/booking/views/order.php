@@ -194,7 +194,7 @@ class View extends \Gcms\View
             'labelClass' => 'g-input icon-question',
             'itemClass' => 'item',
             'label' => '{LNG_Reason}',
-            'maxlength' => 20,
+            'maxlength' => 128,
             'value' => $index->reason,
         ));
         $fieldset = $form->add('fieldset', array(
