@@ -82,7 +82,7 @@ class Controller extends \Gcms\Controller
         if (is_file(ROOT_PATH.DATA_FOLDER.'logo.png')) {
             $logo = '<img src="'.WEB_URL.DATA_FOLDER.'logo.png" alt="{WEBTITLE}">&nbsp;{WEBTITLE}';
         } else {
-            $logo = '<span class="icon-calendar">{WEBTITLE}</span>';
+            $logo = '<span class="'.self::$cfg->default_icon.'">{WEBTITLE}</span>';
         }
         if ($login) {
             $loginname = '{LNG_Welcome} <a href="index.php?module=editprofile" title="{LNG_Editing your account}">'.(empty($login['name']) ? $login['username'] : $login['name']).'</a>';

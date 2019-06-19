@@ -52,9 +52,9 @@ class View extends \Gcms\View
             /* Model */
             'model' => \Booking\Report\Model::toDataTable($params),
             /* รายการต่อหน้า */
-            'perPage' => $request->cookie('report_perPage', 30)->toInt(),
+            'perPage' => $request->cookie('booking_report_perPage', 30)->toInt(),
             /* เรียงลำดับ */
-            'sort' => $request->cookie('report_sort', 'create_date')->toString(),
+            'sort' => $request->cookie('booking_report_sort', 'create_date')->toString(),
             /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
@@ -80,7 +80,7 @@ class View extends \Gcms\View
                     'name' => 'room_id',
                     'default' => 0,
                     'text' => '{LNG_Room}',
-                    'options' => array(0 => '{LNG_all items}') + \Booking\Rooms\Model::toSelect(),
+                    'options' => array(0 => '{LNG_all items}')+\Booking\Rooms\Model::toSelect(),
                     'value' => $params['room_id'],
                 ),
             ),
@@ -148,8 +148,8 @@ class View extends \Gcms\View
             ),
         ));
         // save cookie
-        setcookie('report_perPage', $table->perPage, time() + 3600 * 24 * 365, '/');
-        setcookie('report_sort', $table->sort, time() + 2592000, '/', HOST, HTTPS, true);
+        setcookie('booking_report_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
+        setcookie('booking_report_sort', $table->sort, time() + 2592000, '/', HOST, HTTPS, true);
 
         return $table->render();
     }

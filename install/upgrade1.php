@@ -55,6 +55,9 @@ if (defined('ROOT_PATH')) {
             }
             // บันทึก settings/config.php
             $config['version'] = $new_config['version'];
+            if (isset($new_config['default_icon'])) {
+                $config['default_icon'] = $new_config['default_icon'];
+            }
             $f = save($config, ROOT_PATH.'settings/config.php');
             $content[] = '<li class="'.($f ? 'correct' : 'incorrect').'">บันทึก <b>config.php</b> ...</li>';
         } catch (\PDOException $e) {
