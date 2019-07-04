@@ -72,7 +72,6 @@ class View extends \Gcms\View
             'buttons' => array(
                 'booking' => array(
                     'class' => 'icon-valid button blue',
-                    //'href' => 'index.php?module=booking-booking&amp;room_id=:id',
                     'id' => ':id',
                     'text' => '{LNG_Book a meeting}',
                 ),
@@ -84,7 +83,7 @@ class View extends \Gcms\View
             ),
         ));
         // save cookie
-        setcookie('booking_perPage', $table->perPage, time() + 3600 * 24 * 365, '/');
+        setcookie('booking_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
 
         return $table->render();
     }

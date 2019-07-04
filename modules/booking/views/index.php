@@ -127,7 +127,7 @@ class View extends \Gcms\View
             ),
         ));
         // save cookie
-        setcookie('booking_perPage', $table->perPage, time() + 3600 * 24 * 365, '/');
+        setcookie('booking_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
 
         return $table->render();
     }

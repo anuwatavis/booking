@@ -94,6 +94,7 @@ class View extends \Gcms\View
             'comment' => '{LNG_Browse image uploaded, type :type} ({LNG_resized automatically})',
             'dataPreview' => 'imgPicture',
             'previewSrc' => $img,
+            'accept' => array('jpg', 'jpeg', 'png'),
         ));
         $fieldset = $form->add('fieldset', array(
             'class' => 'submit',
