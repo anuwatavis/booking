@@ -84,7 +84,7 @@ class Controller extends \Kotchasan\KBase
                     'url' => 'index.php?module=booking-report&amp;status='.$type,
                 );
             }
-            $menu->addTopLvlMenu('report', '{LNG_Report}', null, $submenus, 'signout');
+            $menu->add('report', '{LNG_Booking}', null, $submenus);
         }
     }
 
@@ -98,7 +98,7 @@ class Controller extends \Kotchasan\KBase
     public static function updatePermissions($permissions)
     {
         $permissions['can_manage_room'] = '{LNG_Can manage room}';
-        $permissions['can_approve_room'] = '{LNG_Can be approve}';
+        $permissions['can_approve_room'] = '{LNG_Can be approve} ({LNG_Room})';
 
         return $permissions;
     }

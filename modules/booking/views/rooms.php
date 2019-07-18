@@ -41,7 +41,7 @@ class View extends \Gcms\View
             /* Model */
             'model' => \Booking\Rooms\Model::toDataTable(),
             /* รายการต่อหน้า */
-            'perPage' => $request->cookie('booking_perPage', 30)->toInt(),
+            'perPage' => $request->cookie('bookingRooms_perPage', 30)->toInt(),
             /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
@@ -83,7 +83,8 @@ class View extends \Gcms\View
             ),
         ));
         // save cookie
-        setcookie('booking_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
+        setcookie('bookingRooms_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
+        // คืนค่า HTML
 
         return $table->render();
     }

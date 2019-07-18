@@ -45,18 +45,16 @@ class Model extends \Kotchasan\Model
                     'active' => 1,
                 );
                 $permission = $isAdmin ? $request->post('register_permission', array())->topic() : array();
+                // table
+                $table_user = $this->getTableName('user');
                 if (empty($save['username'])) {
                     $ret['ret_register_username'] = 'Please fill in';
                 } else {
                     // ตรวจสอบ username ซ้ำ
-                    $search = $this->db()->first($this->getTableName('user'), array('username', $save['username']));
+                    $search = $this->db()->first($table_user, array('username', $save['username']));
                     if ($search) {
                         $ret['ret_register_username'] = Language::replace('This :name already exist', array(':name' => Language::get('Email')));
                     }
-                }
-                // name
-                if (empty($save['name'])) {
-                    $ret['ret_register_name'] = 'Please fill in';
                 }
                 // password
                 $password = $request->post('register_password')->password();
@@ -69,6 +67,10 @@ class Model extends \Kotchasan\Model
                     $ret['ret_register_repassword'] = 'this';
                 } else {
                     $save['password'] = $password;
+                }
+                // name
+                if (empty($save['name'])) {
+                    $ret['ret_register_name'] = 'Please fill in';
                 }
                 if (empty($ret)) {
                     // ลงทะเบียนสมาชิกใหม่
@@ -89,7 +91,7 @@ class Model extends \Kotchasan\Model
                         $err = \Kotchasan\Email::send($save['username'], self::$cfg->noreply_email, $subject, $msg);
                         if ($err->error()) {
                             // คืนค่า error
-                            $ret['alert'] = $err->getErrorMessage();
+                            $ret['alert'] = strip_tags($err->getErrorMessage());
                         } else {
                             // คืนค่า
                             $ret['alert'] = Language::replace('Register successfully, We have sent complete registration information to :email', array(':email' => $save['username']));

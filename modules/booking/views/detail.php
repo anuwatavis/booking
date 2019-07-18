@@ -44,6 +44,7 @@ class View extends \Gcms\View
         }
         $content .= '</tbody></article>';
         $content .= '</article>';
+        // คืนค่า HTML
 
         return Language::trans($content);
     }
@@ -68,7 +69,7 @@ class View extends \Gcms\View
         $content .= '<tr><th>{LNG_Attendees number}</th><td>'.$index->attendees.'</td></tr>';
         $content .= '<tr><th>{LNG_Contact name}</th><td>'.$index->contact.'</td></tr>';
         $content .= '<tr><th>{LNG_Phone}</th><td><a href="tel:'.$index->phone.'">'.$index->phone.'</a></td></tr>';
-        $content .= '<tr><th>{LNG_date}</th><td>'.Date::format($index->begin).' - '.Date::format($index->end).'</td></tr>';
+        $content .= '<tr><th>{LNG_Date}</th><td>'.Date::format($index->begin).' - '.Date::format($index->end).'</td></tr>';
         foreach (Language::get('BOOKING_SELECT') as $key => $label) {
             if (!empty($index->{$key})) {
                 $content .= '<tr><th>'.$label.'</th><td>'.\Booking\Category\Model::init($key)->get($index->{$key}).'</td></tr>';
@@ -92,6 +93,7 @@ class View extends \Gcms\View
         }
         $content .= '</tbody></article>';
         $content .= '</article>';
+        // คืนค่า HTML
 
         return Language::trans($content);
     }

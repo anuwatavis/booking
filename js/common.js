@@ -111,7 +111,7 @@ function defaultSubmit(ds) {
       if (val == "") {
         el.valid();
       } else {
-        if (val == "Please fill in" || val == "Please select" || val == "Please browse file" || val == "already exist" || "Please select at least one item") {
+        if (val == "Please fill in" || val == "Please select" || val == "Please browse file" || val == "already exist" || val == "Please select at least one item") {
           var label = el.findLabel();
           if (label) {
             t = label.innerHTML.strip_tags();
@@ -497,8 +497,8 @@ function initEditInplace(id, model, addbtn) {
   }
 
   function _initOrder() {
-    new GSortTable(id, {
-      tag: "li",
+    new GDragDrop(id, {
+      dragClass: "icon-move",
       endDrag: function() {
         var trs = new Array();
         forEach($G(id).elems("li"), function() {
@@ -737,4 +737,17 @@ function initWeb(module) {
 }
 if (navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
   document.addEventListener("touchstart", function() {}, false);
+}
+
+function barcodeEnabled(inputs) {
+  $G(window).Ready(function() {
+    forEach(inputs, function(item) {
+      $G(item).addEvent('keydown', function(e) {
+        if (GEvent.keyCode(e) == 13) {
+          GEvent.stop(e);
+          return false;
+        }
+      });
+    });
+  });
 }

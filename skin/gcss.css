@@ -665,7 +665,10 @@ input[type=checkbox].checkboxbutton {
 }
 input[type=radio].radiobutton+label,
 input[type=checkbox].checkboxbutton+label {
-  padding: 0.3em 1em 0.3em 1em;
+  padding: 0 1em;
+  cursor: pointer;
+  height: 2.161em;
+  line-height: 2.161em;
 }
 input[type=radio].radiobutton:checked+label,
 input[type=checkbox].checkboxbutton:checked+label {
@@ -4019,16 +4022,14 @@ td.buttons .button:last-child {
   margin: 0 10px;
 }
 .tb_upload .icon-delete,
-.tb_upload .icon-thumbnail,
 .tb_upload .icon-uncheck,
 .tb_upload .icon-check {
   position: absolute;
   top: 5px;
-  width: 2em;
-  height: 2em;
-  line-height: 2em;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
   text-align: center;
-  color: rgba(255, 255, 255, 0.2);
   z-index: 1;
 }
 .tb_upload .icon-delete,
@@ -4036,66 +4037,56 @@ td.buttons .button:last-child {
 .tb_upload .icon-check {
   right: 5px;
 }
-.tb_upload .icon-check+a>img {
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-}
-.tb_upload .icon-thumbnail {
+.tb_upload .icon-drag:before {
   left: 5px;
+  bottom: 5px;
+  position: absolute;
 }
+.tb_upload .icon-drag:before,
 .tb_upload .icon-delete:before,
-.tb_upload .icon-thumbnail:before,
 .tb_upload .icon-uncheck:before,
 .tb_upload .icon-check:before {
   color: inherit;
   margin: 0;
-  font-size: 22px;
+  line-height: 1.5em;
+  font-size: 1.3em;
 }
 .tb_upload .icon-check {
   right: 4px;
 }
-.tb_upload .icon-check,
-.tb_upload figure:hover a {
-  color: #fff;
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+.tb_upload a:hover,
+.tb_upload a {
+  color: inherit;
 }
 .tb_upload a {
   display: inline-block;
-}
-.tb_upload img {
-  width: 100%;
-}
-.tb_upload .item,
-.tb_upload img,
-.tb_upload a {
-  -webkit-transition: all 0.3s ease-out;
-  -moz-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  -ms-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
+  -webkit-transition: color 0.3s ease-out;
+  -moz-transition: color 0.3s ease-out;
+  -o-transition: color 0.3s ease-out;
+  -ms-transition: color 0.3s ease-out;
+  transition: color 0.3s ease-out;
 }
 .tb_upload .item {
-  margin: 0 0 10px 0.7%;
-  width: 19.44%;
+  margin: 0 0 10px 0.7% !important;
   float: left;
-  text-align: center;
-  padding: 0;
+  height: 150px;
+  padding: 0 !important;
   background-size: cover;
   background-position: center;
-}
-.tb_upload .item:nth-child(5n+1) {
-  margin-left: 0;
-}
-.tb_upload figure {
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   position: relative;
   border-width: 3px;
   border-style: solid;
   border-color: #ddd;
+  -webkit-transition: border-color 0.3s ease-out;
+  -moz-transition: border-color 0.3s ease-out;
+  -o-transition: border-color 0.3s ease-out;
+  -ms-transition: border-color 0.3s ease-out;
+  transition: border-color 0.3s ease-out;
 }
-.tb_upload figure:hover {
+.tb_upload .item:hover {
+  color: #fff;
   border-color: #dd4b39;
 }
 #fsUploadProgress {
@@ -4484,6 +4475,14 @@ td.buttons .button:last-child {
     border-right-color: transparent;
   }
 }
+@media only screen and (min-width: 769px) {
+  .tb_upload .item {
+    width: 19.44%;
+  }
+  .tb_upload .item:nth-child(5n+1) {
+    margin-left: 0 !important;
+  }
+}
 
 /* tablet only */
 
@@ -4765,10 +4764,10 @@ td.buttons .button:last-child {
     vertical-align: top;
   }
   body.responsive .tb_upload .item {
-    width: 49.65%;
+    width: 24.4%;
   }
-  body.responsive .tb_upload .item:nth-child(2n+1) {
-    margin-left: 0;
+  body.responsive .tb_upload .item:nth-child(4n+1) {
+    margin-left: 0 !important;
   }
 }
 
@@ -4847,10 +4846,10 @@ td.buttons .button:last-child {
     font-size: 1em;
   }
   body.responsive .tb_upload .item {
-    width: 100%;
-    margin: 10px 0 0 0;
-    float: none;
-    padding: 0;
+    width: 49.65%;
+  }
+  body.responsive .tb_upload .item:nth-child(2n+1) {
+    margin-left: 0 !important;
   }
   body.responsive .button_w_text:before {
     margin-right: 0;

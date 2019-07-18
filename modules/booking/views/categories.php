@@ -15,7 +15,7 @@ use Kotchasan\Form;
 use Kotchasan\Html;
 
 /**
- * module=booking-categories.
+ * module=booking-categories
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -32,7 +32,6 @@ class View extends \Gcms\View
      */
     public function render($index)
     {
-        // form
         $form = Html::create('form', array(
             'id' => 'setup_frm',
             'class' => 'setup_frm',
@@ -85,7 +84,7 @@ class View extends \Gcms\View
             'id' => 'type',
             'value' => $index->type,
         ));
-        // คืนค่าฟอร์ม
+        // คืนค่า HTML
 
         return $form->render();
     }

@@ -57,6 +57,7 @@ class Controller extends \Gcms\Controller
             ));
             // แสดงตาราง
             $section->appendChild(createClass('Booking\Setup\View')->render($request, $login));
+            // คืนค่า HTML
 
             return $section->render();
         }

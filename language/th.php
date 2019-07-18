@@ -38,7 +38,6 @@ return array(
   'Browse image uploaded, type :type' => 'เลือกรูปภาพอัปโหลดชนิด :type',
   'Browse image uploaded, type :type size :width*:height pixel' => 'เลือกรูปภาพอัปโหลด ชนิด :type ขนาด :width*:height พิกเซล',
   'Can be approve' => 'สามารถอนุมัติได้',
-  'Can login' => 'สามารถเข้าระบบได้',
   'Can manage room' => 'สามารถเพิ่ม/แก้ไข ห้องประชุมได้',
   'Can not be performed this request. Because they do not find the information you need or you are not allowed' => 'ไม่สามารถดำเนินการตามที่ร้องขอได้ เนื่องจากไม่พบข้อมูลที่ต้องการ หรือ คุณไม่มีสิทธิ์',
   'Cancel' => 'ยกเลิก',
@@ -51,6 +50,7 @@ return array(
   'Create' => 'สร้าง',
   'Create new account' => 'สร้างบัญชีใหม่',
   'Created' => 'สร้างเมื่อ',
+  'Current staff' => 'พนักงานปัจจุบัน',
   'Date' => 'วันที่',
   'DATE_FORMAT' => 'd M Y เวลา H:i น.',
   'DATE_LONG' => array(
@@ -101,7 +101,7 @@ return array(
   'go to page' => 'ไปหน้าที่',
   'Home' => 'หน้าหลัก',
   'How to define user authentication for mail servers. If you enable it, you must configure below correctly.' => 'กำหนดวิธีการตรวจสอบผู้ใช้สำหรับเมล์เซิร์ฟเวอร์ หากคุณเปิดใช้งานคุณต้องกำหนดค่าต่างๆด้านล่างถูกต้อง',
-  'Identification number' => 'เลขประชาชน',
+  'Identification No.' => 'เลขประชาชน',
   'Image' => 'รูปภาพ',
   'Image size is in pixels' => 'ขนาดของรูปภาพเป็นพิกเซล',
   'Import' => 'นำเข้า',
@@ -167,6 +167,7 @@ return array(
   'Password' => 'รหัสผ่าน',
   'Password of the mail server. (To change the fill.)' => 'รหัสผ่านของเมล์เซิร์ฟเวอร์ (ต้องการเปลี่ยน ให้กรอก)',
   'Passwords must be at least four characters' => 'รหัสผ่านต้องไม่น้อยกว่า 4 ตัวอักษร',
+  'Past employees' => 'พนักงานในอดีต',
   'Permission' => 'สิทธิ์การใช้งาน',
   'PERMISSIONS' => array(
     'can_config' => 'สามารถตั้งค่าระบบได้'
@@ -237,7 +238,6 @@ return array(
   'Topic' => 'หัวข้อ',
   'Type' => 'ชนิด',
   'Unable to complete the transaction' => 'ไม่สามารถทำรายการนี้ได้',
-  'Unable to login' => 'ไม่สามารถเข้าระบบได้',
   'Upload' => 'อัปโหลด',
   'Upload :type files no larger than :size' => 'อัปโหลดไฟล์ :type ขนาดไม่เกิน :size',
   'User' => 'สมาชิก',

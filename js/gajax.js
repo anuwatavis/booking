@@ -15,7 +15,7 @@ window.$K = (function() {
       return true;
     },
     isMobile: function() {
-      return navigator.userAgent.match(/(iPhone|iPod|iPad|Android|webOS|BlackBerry|Windows Phone)/i);
+      return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
     },
     init: function(element) {
       forEach(element.querySelectorAll("input,textarea"), function(elem) {
@@ -139,7 +139,7 @@ window.$K = (function() {
                 }
                 if (obj.dataset["keyboard"]) {
                   obj.pattern = new RegExp("^(?:[" + obj.dataset["keyboard"].preg_quote() + "]+)$");
-                  if (obj.type == "integer" || obj.type == "currency" || obj.type == "number") {
+                  if (obj.type == "integer" || obj.type == "currency") {
                     new GInput(text, obj.dataset["keyboard"], function() {
                       var val = floatval(this.value);
                       if (obj.min) {
@@ -2543,17 +2543,18 @@ window.$K = (function() {
         self.options.endDrag.call(self.src);
       }
 
-      function _mousedown(e) {
-        var delay;
-        var temp = this;
+      function _mousedown(event) {
+        var delay,
+          src = GEvent.element(event),
+          temp = this;
 
-        function _cancelClick(e) {
+        function _cancelClick(event) {
           window.clearTimeout(delay);
           this.removeEvent("mouseup", _cancelClick);
         }
-        if (GEvent.isLeftClick(e)) {
-          GEvent.stop(e);
-          self.mousePos = GEvent.pointer(e);
+        if (src == self.src && GEvent.isLeftClick(event)) {
+          GEvent.stop(event);
+          self.mousePos = GEvent.pointer(event);
           if (this.setCapture) {
             this.setCapture();
           }
@@ -2565,6 +2566,8 @@ window.$K = (function() {
             self.options.beginDrag.call(self);
           }, 100);
           temp.addEvent("mouseup", _cancelClick);
+        } else if ($K.isMobile()) {
+          src.callEvent('click');
         }
       }
       this.src.addEvent("mousedown", _mousedown);

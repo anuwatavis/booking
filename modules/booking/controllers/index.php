@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * module=booking-index.
+ * module=booking-index
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -55,6 +55,7 @@ class Controller extends \Gcms\Controller
             ));
             // แสดงตาราง
             $section->appendChild(createClass('Booking\Index\View')->render($request, $login));
+            // คืนค่า HTML
 
             return $section->render();
         }

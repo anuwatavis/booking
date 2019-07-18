@@ -25,7 +25,7 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\KBase
 {
     /**
-     * รับค่าจาก settings.php.
+     * รับค่าจาก settings.php
      *
      * @param Request $request
      */

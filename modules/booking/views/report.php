@@ -15,7 +15,7 @@ use Kotchasan\Date;
 use Kotchasan\Http\Request;
 
 /**
- * module=booking-report.
+ * module=booking-report
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -29,7 +29,7 @@ class View extends \Gcms\View
     private $status;
 
     /**
-     * ตารางรายชื่อสมาชิก
+     * ตารางรายการจอง
      *
      * @param Request $request
      * @param object  $index
@@ -52,9 +52,9 @@ class View extends \Gcms\View
             /* Model */
             'model' => \Booking\Report\Model::toDataTable($params),
             /* รายการต่อหน้า */
-            'perPage' => $request->cookie('booking_report_perPage', 30)->toInt(),
+            'perPage' => $request->cookie('bookingReport_perPage', 30)->toInt(),
             /* เรียงลำดับ */
-            'sort' => $request->cookie('booking_report_sort', 'create_date')->toString(),
+            'sort' => $request->cookie('bookingReport_sort', 'create_date')->toString(),
             /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
@@ -148,8 +148,9 @@ class View extends \Gcms\View
             ),
         ));
         // save cookie
-        setcookie('booking_report_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
-        setcookie('booking_report_sort', $table->sort, time() + 2592000, '/', HOST, HTTPS, true);
+        setcookie('bookingReport_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
+        setcookie('bookingReport_sort', $table->sort, time() + 2592000, '/', HOST, HTTPS, true);
+        // คืนค่า HTML
 
         return $table->render();
     }

@@ -14,7 +14,7 @@ use Kotchasan\Html;
 use Kotchasan\Language;
 
 /**
- * module=booking-write.
+ * module=booking-write
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -32,7 +32,6 @@ class View extends \Gcms\View
      */
     public function render($index, $login)
     {
-        // form
         $form = Html::create('form', array(
             'id' => 'setup_frm',
             'class' => 'setup_frm',
@@ -112,6 +111,7 @@ class View extends \Gcms\View
         \Gcms\Controller::$view->setContentsAfter(array(
             '/:type/' => 'jpg, jpeg, png',
         ));
+        // คืนค่า HTML
 
         return $form->render();
     }

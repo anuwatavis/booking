@@ -42,7 +42,6 @@ class Model extends \Kotchasan\Model
             } else {
                 $next = $year.'-'.($month + 1).'-1';
             }
-            $next_month = $month < 12 ? $month + 1 : 1;
             // Query เดือนที่เลือก
             $query = \Kotchasan\Model::createQuery()
                 ->select('V.id', 'V.topic', 'V.begin', 'V.end', 'R.color')

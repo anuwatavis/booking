@@ -25,7 +25,7 @@ use Kotchasan\Language;
 class Controller extends \Gcms\Controller
 {
     /**
-     * เพิ่ม-แก้ไข Booking.
+     * จองห้องประชุม
      *
      * @param Request $request
      *
@@ -41,8 +41,8 @@ class Controller extends \Gcms\Controller
         $login = Login::isMember();
         // ตรวจสอบรายการที่เลือก
         $index = \Booking\Booking\Model::get($request->request('id')->toInt(), $request->request('room_id')->toInt(), $login);
-        // เจ้าของ ยังไม่ได้อนุมัติ และ ไม่ใช่วันนี้
-        if ($index && ($login['id'] == $index->member_id && $index->status == 0 && $index->today == 0)) {
+        // ใหม่, เจ้าของ ยังไม่ได้อนุมัติ และ ไม่ใช่วันนี้
+        if ($index && ($index->id == 0 || ($login['id'] == $index->member_id && $index->status == 0 && $index->today == 0))) {
             // ข้อความ title bar
             $title = Language::get($index->id == 0 ? 'Add New' : 'Edit');
             $this->title = $title.' '.$this->title;
@@ -63,6 +63,7 @@ class Controller extends \Gcms\Controller
             ));
             // แสดงฟอร์ม
             $section->appendChild(createClass('Booking\Booking\View')->render($index, $login));
+            // คืนค่า HTML
 
             return $section->render();
         }

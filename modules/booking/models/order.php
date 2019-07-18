@@ -15,7 +15,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * เพิ่ม/แก้ไข ข้อมูล Booking.
+ * module=booking-order
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -35,7 +35,7 @@ class Model extends \Kotchasan\Model
     {
         $query = static::createQuery()
             ->from('reservation V')
-            ->join('user U', 'INNER', array('U.id', 'V.member_id'))
+            ->join('user U', 'LEFT', array('U.id', 'V.member_id'))
             ->where(array('V.id', $id));
         $select = array('V.*', 'U.name', 'U.phone', 'U.username');
         $n = 1;
@@ -49,14 +49,14 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * บันทึกข้อมูลที่ส่งมาจากฟอร์ม order.php.
+     * บันทึกข้อมูลที่ส่งมาจากฟอร์ม (order.php)
      *
      * @param Request $request
      */
     public function submit(Request $request)
     {
         $ret = array();
-        // session, token, สามารถอนุมัติห้องประชุมได้
+        // session, token, สามารถอนุมัติได้
         if ($request->initSession() && $request->isSafe() && $login = Login::isMember()) {
             if (Login::checkPermission($login, 'can_approve_room')) {
                 // ค่าที่ส่งมา
@@ -137,7 +137,7 @@ class Model extends \Kotchasan\Model
                         }
                         if ($request->post('send_mail')->toBoolean()) {
                             // ส่งอีเมลไปยังผู้ที่เกี่ยวข้อง
-                            $ret['alert'] = \Booking\Email\Model::send($index->username, $save['topic'], $save['status']);
+                            $ret['alert'] = \Booking\Email\Model::send($index->username, $index->name, $save);
                         } else {
                             // คืนค่า
                             $ret['alert'] = Language::get('Saved successfully');

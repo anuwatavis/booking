@@ -44,7 +44,8 @@ class View extends \Gcms\View
             'class' => 'margin-left-right-bottom-top',
         ));
         /* Javascript */
-        $div->script('initBookingCalendar();');
+        $section->script('initBookingCalendar();');
+        // คืนค่า HTML
 
         return $section->render();
     }

@@ -11,7 +11,7 @@
 namespace Booking\Category;
 
 /**
- * หมวดหมู่.
+ * คลาสสำหรับอ่านข้อมูลหมวดหมู่.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -26,11 +26,11 @@ class Model extends \Kotchasan\Model
 
     /**
      * อ่านรายชื่อหมวดหมู่จากฐานข้อมูลตามภาษาปัจจุบัน
-     * สำหรับการแสดงผล.
+     * สำหรับการแสดงผล
      *
      * @param string $type
      *
-     * @return \static
+     * @return static
      */
     public static function init($type)
     {

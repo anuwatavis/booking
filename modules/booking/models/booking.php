@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * เพิ่ม/แก้ไข ข้อมูล Booking.
+ * จองห้องประชุม
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -38,31 +38,25 @@ class Model extends \Kotchasan\Model
     public static function get($id, $room_id, $login)
     {
         if ($login) {
-            // Model
-            $model = new static();
             if (empty($id)) {
                 // ใหม่
-                if ($room_id > 0) {
-                    return $model->db()->createQuery()
-                        ->from('rooms')
-                        ->where(array('id', $room_id))
-                        ->first('0 id', 'id room_id', '0 status', '0 today', (int) $login['id'].' member_id', "'$login[phone]' phone");
-                } else {
-                    return (object) array(
-                        'id' => 0,
-                        'room_id' => 0,
-                        'status' => 0,
-                        'today' => 0,
-                        'member_id' => $login['id'],
-                        'phone' => $login['phone'],
-                    );
-                }
+                return (object) array(
+                    'id' => 0,
+                    'room_id' => $room_id,
+                    'status' => 0,
+                    'today' => 0,
+                    'name' => $login['name'],
+                    'member_id' => $login['id'],
+                    'phone' => $login['phone'],
+                );
             } else {
+                // Model
+                $model = new static();
                 // แก้ไข อ่านรายการที่เลือก
                 $sql = Sql::create('(CASE WHEN NOW() BETWEEN V.`begin` AND V.`end` THEN 1 WHEN NOW() > V.`end` THEN 2 ELSE 0 END) AS `today`');
                 $query = $model->db()->createQuery()
                     ->from('reservation V')
-                    ->join('user U', 'INNER', array('U.id', 'V.member_id'))
+                    ->join('user U', 'LEFT', array('U.id', 'V.member_id'))
                     ->where(array('V.id', $id));
                 $select = array('V.*', 'U.name', 'U.phone', $sql);
                 $n = 1;
@@ -185,7 +179,7 @@ class Model extends \Kotchasan\Model
                         }
                         if (empty($ret)) {
                             // ใหม่ ส่งอีเมลไปยังผู้ที่เกี่ยวข้อง
-                            $ret['alert'] = \Booking\Email\Model::send($login['username'], $save['topic'], 0);
+                            $ret['alert'] = \Booking\Email\Model::send($login['username'], $login['name'], $save);
                         }
                         $ret['location'] = $request->getUri()->postBack('index.php', array('module' => 'booking'));
                         // เคลียร์

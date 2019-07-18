@@ -10,6 +10,7 @@
 
 namespace Booking\Email;
 
+use Kotchasan\Date;
 use Kotchasan\Language;
 
 /**
@@ -22,35 +23,46 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\KBase
 {
     /**
-     * ส่งอีเมลแจ้งการจอง.
+     * ส่งอีเมลแจ้งการทำรายการ
      *
-     * @param string $mailto
-     * @param string $topic
-     * @param int    $status
+     * @param string $mailto อีเมล
+     * @param string $name   ชื่อ
+     * @param array  $order ข้อมูล
      */
-    public static function send($mailto, $topic, $status)
+    public static function send($mailto, $name, $order)
     {
         if (self::$cfg->noreply_email != '') {
+            // ข้อความ
+            $msg = array(
+                '{LNG_Book a meeting}',
+                '{LNG_Contact name}: '.$name,
+                '{LNG_Topic}: '.$order['topic'],
+                '{LNG_Date}: '.Date::format($order['begin']).' - '.Date::format($order['end']),
+                '{LNG_Status}: '.Language::find('BOOKING_STATUS', '', $order['status']),
+                'URL: '.WEB_URL,
+            );
+            $msg = Language::trans(implode("\n", $msg));
+            // ส่งอีเมลไปยังผู้ทำรายการเสมอ
+            $emails = array($mailto => $mailto.'<'.$name.'>');
             // อีเมลของมาชิกที่สามารถอนุมัติได้ทั้งหมด
             $query = \Kotchasan\Model::createQuery()
-                ->select('username')
+                ->select('username', 'name')
                 ->from('user')
-                ->where(array('social', 0))
+                ->where(array(
+                    array('social', 0),
+                    array('active', 1),
+                ))
                 ->andWhere(array(
                     array('status', 1),
                     array('permission', 'LIKE', '%,can_approve_room,%'),
                 ), 'OR')
                 ->cacheOn();
-            $emails = array($mailto => $mailto);
             foreach ($query->execute() as $item) {
-                $emails[$item->username] = $item->username;
+                $emails[$item->username] = $item->username.'<'.$item->name.'>';
             }
             // ส่งอีเมล
             $subject = '['.self::$cfg->web_title.'] '.Language::get('Book a meeting');
-            $msg = Language::get('Book a meeting').' '.$topic;
-            $msg .= "<br>\n".Language::get('Status').' : '.Language::find('BOOKING_STATUS', null, $status);
-            $msg .= "<br>\n".WEB_URL;
-            $err = \Kotchasan\Email::send(implode(',', $emails), self::$cfg->noreply_email, $subject, $msg);
+            $err = \Kotchasan\Email::send(implode(',', $emails), self::$cfg->noreply_email, $subject, nl2br($msg));
             if ($err->error()) {
                 // คืนค่า error
                 return strip_tags($err->getErrorMessage());

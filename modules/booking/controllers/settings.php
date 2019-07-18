@@ -55,6 +55,7 @@ class Controller extends \Gcms\Controller
             ));
             // แสดงฟอร์ม
             $section->appendChild(createClass('Booking\Settings\View')->render());
+            // คืนค่า HTML
 
             return $section->render();
         }

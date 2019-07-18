@@ -38,7 +38,6 @@ return array(
   'Browse image uploaded, type :type' => 'ເລືອກຮູບພາບອັບໂຫຼດຊະນິດ :type',
   'Browse image uploaded, type :type size :width*:height pixel' => 'ເລືອກຮູບພາບອັບໂຫຼດຊະນິດ :type ຂະໜາດ :width*:height ຟິດເຊວล',
   'Can be approve' => 'ສາມາດອະນຸມັດ',
-  'Can login' => 'ສາມາດເຂົ້າລະບົບໄດ້',
   'Can manage room' => 'ສາມາດເພີ່ມ/ແກ້ໄຂ ຫ້ອງປະຊຸມ',
   'Can not be performed this request. Because they do not find the information you need or you are not allowed' => 'ບໍ່ສາມາດດຳເນີນການຕາມທີ່ຮ້ອງຂໍໄດ້ເນື່ອງຈາກບໍ່ພົບຂໍ້ມູນທີ່ຕ້ອງການ ຫຼື ທ່ານບໍ່ມີສິດ',
   'Cancel' => 'ຍົກເລີກ',
@@ -51,6 +50,7 @@ return array(
   'Create' => 'ສ້າງ',
   'Create new account' => 'ສ້າງບັນຊີໃໝ່',
   'Created' => 'ສ້າງເມື່ອ',
+  'Current staff' => 'ພະນັກງານໃນປະຈຸບັນ',
   'Date' => 'ວັນທີ',
   'DATE_FORMAT' => 'd M Y ເວລາ H:i ນ.',
   'DATE_LONG' => array(
@@ -101,7 +101,7 @@ return array(
   'go to page' => 'ໄປທີ່ໜ້າ',
   'Home' => 'ໜ້າຫຼັກ',
   'How to define user authentication for mail servers. If you enable it, you must configure below correctly.' => 'ກຳນົດວິທີການກວດສອບຜູ້ໃຊ້ສຳລັບເມນເຊິບເວີຫາກທ່ານເປີດໃຊ້ການທ່ານຕ້ອງກຳນົດຄ່າຕ່າງໆດ້ານລຸ່ມຖືກຕ້ອງ',
-  'Identification number' => 'ເລກບັດປະຊາຊົນ',
+  'Identification No.' => 'ເລກບັດປະຊາຊົນ',
   'Image' => 'ຮູບພາບ',
   'Image size is in pixels' => 'ຂະໜາດຂອງຮູບພາບເປັນພິກເຊວ',
   'Import' => 'ນຳເຂົ້າ',
@@ -167,6 +167,7 @@ return array(
   'Password' => 'ລະຫັດຜ່ານ',
   'Password of the mail server. (To change the fill.)' => 'ລະຫັດຜ່ານຂອງເມວເຊີບເວີ (ຕ້ອງການປ່ຽນ ໃຫ້ເພີ່ມ)',
   'Passwords must be at least four characters' => 'ລະຫັດຜ່ານຕ້ອງບໍ່ຕ່ຳກວ່າ 4 ຕົວອັກສອນ',
+  'Past employees' => 'ພະນັກງານທີ່ຜ່ານມາ',
   'Permission' => 'ສິດໃນການໃຊ້ວຽກ',
   'PERMISSIONS' => array(
     'can_config' => 'ສາມາດຕັ້ງຄ່າລະບົບໄດ້'
@@ -237,7 +238,6 @@ return array(
   'Topic' => 'ຫົວຂໍ້',
   'Type' => 'ປະເພດ',
   'Unable to complete the transaction' => 'ບໍ່ສາມາດເຮັດລາຍການນີ້ໄດ້',
-  'Unable to login' => 'ບໍ່ສາມາດເຂົ້າລະບົບໄດ້',
   'Upload' => 'ອັບໂຫຼດ',
   'Upload :type files no larger than :size' => 'ອັບໂຫຼດແຟ້ມຂໍ້ມູນ :type ຂະໜາດບໍ່ເກີນ :size',
   'User' => 'ສະມາຊິກ',

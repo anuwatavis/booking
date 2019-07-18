@@ -33,7 +33,6 @@ class View extends \Gcms\View
      */
     public function render($index, $login)
     {
-        // form
         $form = Html::create('form', array(
             'id' => 'setup_frm',
             'class' => 'setup_frm',
@@ -81,7 +80,12 @@ class View extends \Gcms\View
             'itemClass' => 'width50',
             'label' => '{LNG_Contact name}',
             'disabled' => true,
-            'value' => $index->id == 0 ? $login['name'] : $index->name,
+            'value' => $index->name,
+        ));
+        // member_id
+        $fieldset->add('hidden', array(
+            'id' => 'member_id',
+            'value' => $index->member_id,
         ));
         // phone
         $groups->add('text', array(
@@ -90,7 +94,7 @@ class View extends \Gcms\View
             'itemClass' => 'width50',
             'label' => '{LNG_Phone}',
             'maxlength' => 32,
-            'value' => $index->id == 0 ? $login['phone'] : $index->phone,
+            'value' => $index->phone,
         ));
         // ตัวเลือก select
         foreach (Language::get('BOOKING_SELECT') as $key => $label) {
@@ -194,13 +198,9 @@ class View extends \Gcms\View
             'id' => 'id',
             'value' => $index->id,
         ));
-        // member_id
-        $fieldset->add('hidden', array(
-            'id' => 'member_id',
-            'value' => $index->id == 0 ? $login['id'] : $index->member_id,
-        ));
         // Javascript
         $form->script('initCalendarRange("begin", "end");');
+        // คืนค่า HTML
 
         return $form->render();
     }

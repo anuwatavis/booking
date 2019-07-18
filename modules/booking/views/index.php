@@ -17,7 +17,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * module=booking-index.
+ * module=booking-index
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -50,7 +50,7 @@ class View extends \Gcms\View
             /* Model */
             'model' => \Booking\Index\Model::toDataTable($login['id']),
             /* รายการต่อหน้า */
-            'perPage' => $request->cookie('booking_perPage', 30)->toInt(),
+            'perPage' => $request->cookie('bookingIndex_perPage', 30)->toInt(),
             /* เรียงลำดับ */
             'sort' => 'begin DESC',
             /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
@@ -127,7 +127,8 @@ class View extends \Gcms\View
             ),
         ));
         // save cookie
-        setcookie('booking_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
+        setcookie('bookingIndex_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
+        // คืนค่า HTML
 
         return $table->render();
     }

@@ -45,7 +45,7 @@ class Model extends \Kotchasan\Model
             ->select('V.id', 'V.topic', 'V.room_id', 'R.name', 'U.name contact', 'U.phone', 'V.begin', 'V.end', 'V.create_date', 'V.reason', $sql)
             ->from('reservation V')
             ->join('rooms R', 'INNER', array('R.id', 'V.room_id'))
-            ->join('user U', 'INNER', array('U.id', 'V.member_id'))
+            ->join('user U', 'LEFT', array('U.id', 'V.member_id'))
             ->where($where);
     }
 
@@ -57,7 +57,7 @@ class Model extends \Kotchasan\Model
     public function action(Request $request)
     {
         $ret = array();
-        // session, referer, สามารถอนุมัติห้องประชุมได้
+        // session, referer, สามารถอนุมัติได้
         if ($request->initSession() && $request->isReferer() && $login = Login::isMember()) {
             if (Login::notDemoMode($login) && Login::checkPermission($login, 'can_approve_room')) {
                 // รับค่าจากการ POST

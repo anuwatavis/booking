@@ -14,7 +14,7 @@ use Kotchasan\Html;
 use Kotchasan\Language;
 
 /**
- * module=booking-order.
+ * module=booking-order
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -23,7 +23,7 @@ use Kotchasan\Language;
 class View extends \Gcms\View
 {
     /**
-     * ฟอร์มแก้ไข การจอง.
+     * ฟอร์มแก้ไข การจอง
      *
      * @param object $index
      *
@@ -31,7 +31,6 @@ class View extends \Gcms\View
      */
     public function render($index)
     {
-        // form
         $form = Html::create('form', array(
             'id' => 'setup_frm',
             'class' => 'setup_frm',
@@ -219,6 +218,7 @@ class View extends \Gcms\View
         ));
         // Javascript
         $form->script('initCalendarRange("begin", "end");');
+        // คืนค่า HTML
 
         return $form->render();
     }

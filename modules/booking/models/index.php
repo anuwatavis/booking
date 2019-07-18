@@ -50,14 +50,14 @@ class Model extends \Kotchasan\Model
     public function action(Request $request)
     {
         $ret = array();
-        // session, referer, สมาชิก
+        // session, referer
         if ($request->initSession() && $request->isReferer()) {
             $action = $request->post('action')->toString();
-            if ($action === 'cancel' && Login::isMember()) {
+            if ($action === 'cancel' && $login = Login::isMember()) {
                 // ยกเลิกการจอง
                 $reservation_table = $this->getTableName('reservation');
                 $search = $this->db()->first($reservation_table, $request->post('id')->toInt());
-                if ($search && $search->status == 0) {
+                if ($search && $search->status == 0 && $login['id'] == $search->member_id) {
                     // ลบ
                     $this->db()->delete($reservation_table, $search->id);
                     $this->db()->delete($this->getTableName('reservation_data'), array('reservation_id', $search->id), 0);

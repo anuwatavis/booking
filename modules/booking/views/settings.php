@@ -13,7 +13,7 @@ namespace Booking\Settings;
 use Kotchasan\Html;
 
 /**
- * module=booking-settings.
+ * module=booking-settings
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -58,6 +58,7 @@ class View extends \Gcms\View
             'class' => 'button save large icon-save',
             'value' => '{LNG_Save}',
         ));
+        // คืนค่า HTML
 
         return $form->render();
     }
