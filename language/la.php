@@ -10,6 +10,7 @@ return array(
   'All meeting rooms' => 'ຫ້ອງປະຊຸມທັງຫມົດ',
   'Attendees number' => 'ຈໍານວນຜູ້ເຂົ້າຮ່ວມ',
   'Authentication require' => 'ການກວດກາຄວາມຖືກຕ້ອງ',
+  'Background color' => 'ສີພື້ນຫລັງ',
   'Background image' => 'ພາບພື້ນຫລັງ',
   'Begin date' => 'ວັນເລີ່ມຕົ້ນ',
   'Begin time' => 'ເລີ່ມເວລາ',
@@ -38,6 +39,7 @@ return array(
   'Browse image uploaded, type :type' => 'ເລືອກຮູບພາບອັບໂຫຼດຊະນິດ :type',
   'Browse image uploaded, type :type size :width*:height pixel' => 'ເລືອກຮູບພາບອັບໂຫຼດຊະນິດ :type ຂະໜາດ :width*:height ຟິດເຊວล',
   'Can be approve' => 'ສາມາດອະນຸມັດ',
+  'Can login' => 'ສາມາດເຂົ້າລະບົບໄດ້',
   'Can manage room' => 'ສາມາດເພີ່ມ/ແກ້ໄຂ ຫ້ອງປະຊຸມ',
   'Can not be performed this request. Because they do not find the information you need or you are not allowed' => 'ບໍ່ສາມາດດຳເນີນການຕາມທີ່ຮ້ອງຂໍໄດ້ເນື່ອງຈາກບໍ່ພົບຂໍ້ມູນທີ່ຕ້ອງການ ຫຼື ທ່ານບໍ່ມີສິດ',
   'Cancel' => 'ຍົກເລີກ',
@@ -50,8 +52,7 @@ return array(
   'Create' => 'ສ້າງ',
   'Create new account' => 'ສ້າງບັນຊີໃໝ່',
   'Created' => 'ສ້າງເມື່ອ',
-  'Current staff' => 'ພະນັກງານໃນປະຈຸບັນ',
-  'Date' => 'ວັນທີ',
+  'date' => 'ວັນທີ',
   'DATE_FORMAT' => 'd M Y ເວລາ H:i ນ.',
   'DATE_LONG' => array(
     0 => 'ອາທິດ',
@@ -101,7 +102,7 @@ return array(
   'go to page' => 'ໄປທີ່ໜ້າ',
   'Home' => 'ໜ້າຫຼັກ',
   'How to define user authentication for mail servers. If you enable it, you must configure below correctly.' => 'ກຳນົດວິທີການກວດສອບຜູ້ໃຊ້ສຳລັບເມນເຊິບເວີຫາກທ່ານເປີດໃຊ້ການທ່ານຕ້ອງກຳນົດຄ່າຕ່າງໆດ້ານລຸ່ມຖືກຕ້ອງ',
-  'Identification No.' => 'ເລກບັດປະຊາຊົນ',
+  'Identification number' => 'ເລກບັດປະຊາຊົນ',
   'Image' => 'ຮູບພາບ',
   'Image size is in pixels' => 'ຂະໜາດຂອງຮູບພາບເປັນພິກເຊວ',
   'Import' => 'ນຳເຂົ້າ',
@@ -167,7 +168,6 @@ return array(
   'Password' => 'ລະຫັດຜ່ານ',
   'Password of the mail server. (To change the fill.)' => 'ລະຫັດຜ່ານຂອງເມວເຊີບເວີ (ຕ້ອງການປ່ຽນ ໃຫ້ເພີ່ມ)',
   'Passwords must be at least four characters' => 'ລະຫັດຜ່ານຕ້ອງບໍ່ຕ່ຳກວ່າ 4 ຕົວອັກສອນ',
-  'Past employees' => 'ພະນັກງານທີ່ຜ່ານມາ',
   'Permission' => 'ສິດໃນການໃຊ້ວຽກ',
   'PERMISSIONS' => array(
     'can_config' => 'ສາມາດຕັ້ງຄ່າລະບົບໄດ້'
@@ -175,6 +175,7 @@ return array(
   'Phone' => 'ໂທລະສັບ',
   'Please fill in' => 'ກະລຸນາຕື່ມຂໍ້ມູນໃສ່',
   'Please log in. To continue' => 'ກະລຸນາເຂົ້າສູ່ລະບົບ ເພື່ອສືບຕໍ່',
+  'Please log in. To continue.' => 'ກະລຸນາເຂົ້າສູ່ລະບົບ ກ່ອນທີ່ຈະດໍາເນີນການ',
   'Please select :name at least one item' => 'ກະລຸນາເລືອກ :name ຢ່າງໜ້ອຍ 1 ລາຍການ',
   'Port' => 'ພອດ',
   'Profile' => 'ຂໍ້ມູນສ່ວນຕົວ',
@@ -238,6 +239,7 @@ return array(
   'Topic' => 'ຫົວຂໍ້',
   'Type' => 'ປະເພດ',
   'Unable to complete the transaction' => 'ບໍ່ສາມາດເຮັດລາຍການນີ້ໄດ້',
+  'Unable to login' => 'ບໍ່ສາມາດເຂົ້າລະບົບໄດ້',
   'Upload' => 'ອັບໂຫຼດ',
   'Upload :type files no larger than :size' => 'ອັບໂຫຼດແຟ້ມຂໍ້ມູນ :type ຂະໜາດບໍ່ເກີນ :size',
   'User' => 'ສະມາຊິກ',
@@ -252,7 +254,7 @@ return array(
   'year' => 'ປີ',
   'YEAR_OFFSET' => 543,
   'You want to' => 'ທ່ານຕ້ອງການ',
-  'Your message was sent successfully' => 'ສົ່ງຂໍ້ຄວາມໄປຫາບຸກຄົນທີ່ກ່ຽວຂ້ອງ.',
+  'Your message was sent successfully' => 'ຂໍ້ຄວາມຖືກສົ່ງໄປແລ້ວ',
   'Your new password is' => 'ລະຫັດຜ່ານໃໝ່ຂອງທ່ານຄື',
   'Zipcode' => 'ລະຫັດໄປສະນີ'
 );

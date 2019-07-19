@@ -140,6 +140,22 @@ class View extends \Gcms\View
         $fieldset = $form->add('fieldset', array(
             'title' => '{LNG_Style}',
         ));
+        // bg_color
+        $fieldset->add('color', array(
+            'id' => 'bg_color',
+            'labelClass' => 'g-input icon-color',
+            'itemClass' => 'item',
+            'label' => '{LNG_Background color}',
+            'value' => self::$cfg->bg_color,
+        ));
+        // color
+        $fieldset->add('color', array(
+            'id' => 'color',
+            'labelClass' => 'g-input icon-color',
+            'itemClass' => 'item',
+            'label' => '{LNG_Color}',
+            'value' => self::$cfg->color,
+        ));
         // bg_image
         if (is_file(ROOT_PATH.DATA_FOLDER.'bg_image.png')) {
             $img = WEB_URL.DATA_FOLDER.'bg_image.png?'.time();

@@ -51,6 +51,8 @@ class Model extends \Kotchasan\KBase
                 $config->timezone = $request->post('timezone')->text();
                 $config->facebook_appId = $request->post('facebook_appId')->text();
                 $config->google_client_id = $request->post('google_client_id')->text();
+                $config->bg_color = $request->post('bg_color')->filter('#ABCDEF0-9');
+                $config->color = $request->post('color')->filter('#ABCDEF0-9');
                 if (empty($ret)) {
                     // อัปโหลดไฟล์
                     foreach ($request->getUploadedFiles() as $item => $file) {
