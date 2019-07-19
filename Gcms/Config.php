@@ -105,13 +105,13 @@ class Config extends \Kotchasan\Config
      *
      * @var string
      */
-    public $bg_color = '#3498db';
+    public $bg_color = '#3498DB';
     /**
      * สีของเมนูบนสุด+footer
      *
      * @var string
      */
-    public $color = '#fff';
+    public $color = '#FFFFFF';
     /**
      * สามารถขอรหัสผ่านในหน้าเข้าระบบได้.
      *

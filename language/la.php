@@ -102,7 +102,7 @@ return array(
   'go to page' => 'ໄປທີ່ໜ້າ',
   'Home' => 'ໜ້າຫຼັກ',
   'How to define user authentication for mail servers. If you enable it, you must configure below correctly.' => 'ກຳນົດວິທີການກວດສອບຜູ້ໃຊ້ສຳລັບເມນເຊິບເວີຫາກທ່ານເປີດໃຊ້ການທ່ານຕ້ອງກຳນົດຄ່າຕ່າງໆດ້ານລຸ່ມຖືກຕ້ອງ',
-  'Identification number' => 'ເລກບັດປະຊາຊົນ',
+  'Identification No.' => 'ເລກບັດປະຊາຊົນ',
   'Image' => 'ຮູບພາບ',
   'Image size is in pixels' => 'ຂະໜາດຂອງຮູບພາບເປັນພິກເຊວ',
   'Import' => 'ນຳເຂົ້າ',

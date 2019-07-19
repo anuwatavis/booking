@@ -102,7 +102,7 @@ return array(
   'go to page' => 'ไปหน้าที่',
   'Home' => 'หน้าหลัก',
   'How to define user authentication for mail servers. If you enable it, you must configure below correctly.' => 'กำหนดวิธีการตรวจสอบผู้ใช้สำหรับเมล์เซิร์ฟเวอร์ หากคุณเปิดใช้งานคุณต้องกำหนดค่าต่างๆด้านล่างถูกต้อง',
-  'Identification number' => 'เลขประชาชน',
+  'Identification No.' => 'เลขประชาชน',
   'Image' => 'รูปภาพ',
   'Image size is in pixels' => 'ขนาดของรูปภาพเป็นพิกเซล',
   'Import' => 'นำเข้า',
