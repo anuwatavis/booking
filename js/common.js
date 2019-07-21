@@ -95,6 +95,10 @@ function defaultSubmit(ds) {
       }, 1);
     } else if (prop == "tab") {
       initWriteTab("accordient_menu", val);
+    } else if (prop == "valid") {
+      if ($E(val)) {
+        $G(val).valid();
+      }
     } else if (remove.test(prop)) {
       if ($E(val)) {
         $G(val).fadeOut(function() {
