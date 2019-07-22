@@ -1273,29 +1273,28 @@ window.$K = (function() {
           c = !c ? false : c;
           input.addEventListener(e, f, c);
         } else if (input.attachEvent) {
-          tmp = input;
-          tmp["e" + e + f] = f;
-          tmp[e + f] = function() {
-            tmp["e" + e + f](window.event);
+          input["e" + e + f] = f;
+          input[e + f] = function() {
+            input["e" + e + f](window.event);
           };
-          tmp.attachEvent("on" + e, tmp[e + f]);
+          input.attachEvent("on" + e, input[e + f]);
         }
       });
       return this;
     },
-    removeEvent: function(t, f) {
-      if (this.removeEventListener) {
-        this.removeEventListener(
-          t == "mousewheel" && window.gecko ? "DOMMouseScroll" : t,
-          f,
-          false
-        );
-      } else if (this.detachEvent) {
-        var tmp = this;
-        tmp.detachEvent("on" + t, tmp[t + f]);
-        tmp["e" + t + f] = null;
-        tmp[t + f] = null;
-      }
+    removeEvent: function(t, f, c) {
+      var ts = t.split(" "),
+        input = this;
+      forEach(ts, function(e) {
+        if (input.removeEventListener) {
+          c = !c ? false : c;
+          input.removeEventListener(e == "mousewheel" && window.gecko ? "DOMMouseScroll" : e, f, c);
+        } else if (input.detachEvent) {
+          input.detachEvent("on" + e, input[e + f]);
+          input["e" + e + f] = null;
+          input[e + f] = null;
+        }
+      });
       return this;
     },
     highlight: function(o) {

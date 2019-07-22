@@ -157,8 +157,8 @@ class View extends \Gcms\View
             'value' => self::$cfg->color,
         ));
         // bg_image
-        if (is_file(ROOT_PATH.DATA_FOLDER.'bg_image.png')) {
-            $img = WEB_URL.DATA_FOLDER.'bg_image.png?'.time();
+        if (is_file(ROOT_PATH.DATA_FOLDER.'images/bg_image.png')) {
+            $img = WEB_URL.DATA_FOLDER.'images/bg_image.png?'.time();
         } else {
             $img = WEB_URL.'skin/img/blank.gif';
         }
@@ -181,8 +181,8 @@ class View extends \Gcms\View
             'value' => 1,
         ));
         // logo
-        if (is_file(ROOT_PATH.DATA_FOLDER.'logo.png')) {
-            $img = WEB_URL.DATA_FOLDER.'logo.png?'.time();
+        if (is_file(ROOT_PATH.DATA_FOLDER.'images/logo.png')) {
+            $img = WEB_URL.DATA_FOLDER.'images/logo.png?'.time();
         } else {
             $img = WEB_URL.'skin/img/blank.gif';
         }
