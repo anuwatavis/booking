@@ -117,7 +117,7 @@ class View extends \Gcms\View
             $begin_time = date('H:i', $time);
         }
         $groups = $fieldset->add('groups', array(
-            'for' => 'begin',
+            'for' => 'begin_date',
             'label' => '{LNG_Begin date}/{LNG_Begin time}',
         ));
         // begin date
@@ -126,6 +126,7 @@ class View extends \Gcms\View
             'labelClass' => 'g-input icon-calendar',
             'itemClass' => 'width50',
             'title' => '{LNG_Begin date}',
+            'min' => date('Y-m-d'),
             'value' => $begin_date,
         ));
         // begin time
@@ -155,6 +156,7 @@ class View extends \Gcms\View
             'labelClass' => 'g-input icon-calendar',
             'itemClass' => 'width50',
             'title' => '{LNG_End date}',
+            'min' => date('Y-m-d'),
             'value' => $end_date,
         ));
         // end time

@@ -10,7 +10,6 @@
 
 namespace Booking\Home;
 
-use Gcms\Login;
 use Kotchasan\Http\Request;
 
 /**
@@ -31,7 +30,11 @@ class Controller extends \Gcms\Controller
      */
     public static function addCard(Request $request, $card, $login)
     {
-        \Index\Home\Controller::renderCard($card, 'icon-calendar', '{LNG_Book a meeting}', number_format(\Booking\Home\Model::getNew()), '{LNG_Booking today}', 'index.php?module=booking-booking');
+        $url = 'index.php?module=booking-booking';
+        if (!$login) {
+            $url = 'index.php?module=welcome&amp;action=login&amp;ret='.urlencode($url);
+        }
+        \Index\Home\Controller::renderCard($card, 'icon-calendar', '{LNG_Book a meeting}', number_format(\Booking\Home\Model::getNew()), '{LNG_Booking today}', $url);
         \Index\Home\Controller::renderCard($card, 'icon-office', '{LNG_Room}', number_format(\Booking\Home\Model::rooms()), '{LNG_All meeting rooms}', 'index.php?module=booking-rooms');
     }
 

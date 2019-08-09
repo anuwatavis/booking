@@ -111,8 +111,8 @@ class Model extends \Kotchasan\Model
                 }
                 // ตรวจสอบรายการที่เลือก
                 $index = self::get($request->post('id')->toInt(), 0, $login);
-                // เจ้าของ ยังไม่ได้อนุมัติ และ ไม่ใช่วันนี้
-                if ($index && ($login['id'] == $index->member_id && $index->status == 0 && $index->today == 0)) {
+                // ใหม่, เจ้าของ ยังไม่ได้อนุมัติ และ ไม่ใช่วันนี้
+                if ($index && ($index->id == 0 || ($login['id'] == $index->member_id && $index->status == 0 && $index->today == 0))) {
                     if ($save['attendees'] == 0) {
                         // ไม่ได้กรอก attendees
                         $ret['ret_attendees'] = 'Please fill in';

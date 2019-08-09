@@ -65,22 +65,9 @@ class Model extends \Kotchasan\Model
                 // id ที่ส่งมา
                 if (preg_match_all('/,?([0-9]+),?/', $request->post('id')->toString(), $match)) {
                     if ($action === 'delete') {
-                        $query = static::createQuery()
-                            ->select('id')
-                            ->from('reservation')
-                            ->where(array(
-                                array('id', $match[1]),
-                                Sql::create('NOW() < `begin`'),
-                            ));
-                        $ids = array();
-                        foreach ($query->execute() as $item) {
-                            $ids[] = $item->id;
-                        }
-                        if (!empty($ids)) {
-                            // ลบ
-                            $this->db()->delete($this->getTableName('reservation'), array('id', $ids), 0);
-                            $this->db()->delete($this->getTableName('reservation_data'), array('reservation_id', $ids), 0);
-                        }
+                        // ลบ
+                        $this->db()->delete($this->getTableName('reservation'), array('id', $match[1]), 0);
+                        $this->db()->delete($this->getTableName('reservation_data'), array('reservation_id', $match[1]), 0);
                         // reload
                         $ret['location'] = 'reload';
                     }
