@@ -164,12 +164,12 @@ class View extends \Gcms\View
      *
      * @return array
      */
-    public function onCreateButton($btn, $attributes, $items)
+    public function onCreateButton($btn, $attributes, $item)
     {
         if ($btn == 'edit') {
-            return $items['status'] == 0 && $items['today'] == 0 ? $attributes : false;
+            return $item['status'] == 0 && $item['today'] == 0 ? $attributes : false;
         } elseif ($btn == 'cancel') {
-            return $items['status'] == 0 ? $attributes : false;
+            return $item['status'] == 0 ? $attributes : false;
         } else {
             return $attributes;
         }
