@@ -69,8 +69,13 @@ return array(
     11 => 'Nov',
     12 => 'Dec'
   ),
+  'Name' => 'Name Surname',
   'PERMISSIONS' => array(
     'can_config' => 'Can configure the system'
+  ),
+  'PUBLISHEDS' => array(
+    0 => 'Unpublished',
+    1 => 'Published'
   ),
   'ROOM_CUSTOM_TEXT' => array(
     'building' => 'Building',

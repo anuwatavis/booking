@@ -39,7 +39,6 @@ return array(
   'Browse image uploaded, type :type' => 'เลือกรูปภาพอัปโหลดชนิด :type',
   'Browse image uploaded, type :type size :width*:height pixel' => 'เลือกรูปภาพอัปโหลด ชนิด :type ขนาด :width*:height พิกเซล',
   'Can be approve' => 'สามารถอนุมัติได้',
-  'Can login' => 'สามารถเข้าระบบได้',
   'Can manage room' => 'สามารถเพิ่ม/แก้ไข ห้องประชุมได้',
   'Can not be performed this request. Because they do not find the information you need or you are not allowed' => 'ไม่สามารถดำเนินการตามที่ร้องขอได้ เนื่องจากไม่พบข้อมูลที่ต้องการ หรือ คุณไม่มีสิทธิ์',
   'Cancel' => 'ยกเลิก',
@@ -52,7 +51,9 @@ return array(
   'Create' => 'สร้าง',
   'Create new account' => 'สร้างบัญชีใหม่',
   'Created' => 'สร้างเมื่อ',
-  'date' => 'วันที่',
+  'Currency unit' => 'สกุลเงิน',
+  'Current staff' => 'พนักงานปัจจุบัน',
+  'Date' => 'วันที่',
   'DATE_FORMAT' => 'd M Y เวลา H:i น.',
   'DATE_LONG' => array(
     0 => 'อาทิตย์',
@@ -168,6 +169,7 @@ return array(
   'Password' => 'รหัสผ่าน',
   'Password of the mail server. (To change the fill.)' => 'รหัสผ่านของเมล์เซิร์ฟเวอร์ (ต้องการเปลี่ยน ให้กรอก)',
   'Passwords must be at least four characters' => 'รหัสผ่านต้องไม่น้อยกว่า 4 ตัวอักษร',
+  'Past employees' => 'พนักงานในอดีต',
   'Permission' => 'สิทธิ์การใช้งาน',
   'PERMISSIONS' => array(
     'can_config' => 'สามารถตั้งค่าระบบได้'
@@ -175,11 +177,14 @@ return array(
   'Phone' => 'โทรศัพท์',
   'Please fill in' => 'กรุณากรอก',
   'Please log in. To continue' => 'กรุณาเข้าระบบ เพื่อดำเนินการต่อ',
-  'Please log in. To continue.' => 'กรุณาเข้าระบบ ก่อนดำเนินการต่อ',
   'Please select :name at least one item' => 'กรุณาเลือก :name อย่างน้อย 1 รายการ',
   'Port' => 'พอร์ต',
   'Profile' => 'ข้อมูลส่วนตัว',
   'Province' => 'จังหวัด',
+  'PUBLISHEDS' => array(
+    0 => 'ระงับการเผยแพร่',
+    1 => 'เผยแพร่'
+  ),
   'Reason' => 'เหตุผล',
   'Register' => 'สมัครสมาชิก',
   'Remember me' => 'จำการเข้าระบบ',
@@ -239,7 +244,6 @@ return array(
   'Topic' => 'หัวข้อ',
   'Type' => 'ชนิด',
   'Unable to complete the transaction' => 'ไม่สามารถทำรายการนี้ได้',
-  'Unable to login' => 'ไม่สามารถเข้าระบบได้',
   'Upload' => 'อัปโหลด',
   'Upload :type files no larger than :size' => 'อัปโหลดไฟล์ :type ขนาดไม่เกิน :size',
   'User' => 'สมาชิก',
@@ -254,7 +258,7 @@ return array(
   'year' => 'ปี',
   'YEAR_OFFSET' => 543,
   'You want to' => 'คุณต้องการ',
-  'Your message was sent successfully' => 'ส่งข้อความเรียบร้อยแล้ว',
+  'Your message was sent successfully' => 'ส่งข้อความไปยังผู้ที่เกี่ยวข้องเรียบร้อยแล้ว',
   'Your new password is' => 'รหัสผ่านใหม่ของคุณคือ',
   'Zipcode' => 'รหัสไปรษณีย์'
 );

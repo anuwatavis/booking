@@ -82,7 +82,7 @@ class Model extends \Kotchasan\Model
                     $ret['location'] = $url;
                 } else {
                     // login
-                    $ret['alert'] = Language::get('Please log in. To continue.');
+                    $ret['alert'] = Language::get('Please log in. To continue');
                     $ret['location'] = WEB_URL.'index.php?module=welcome&action=login&ret='.urlencode($url);
                 }
             }

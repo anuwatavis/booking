@@ -39,7 +39,6 @@ return array(
   'Browse image uploaded, type :type' => 'ເລືອກຮູບພາບອັບໂຫຼດຊະນິດ :type',
   'Browse image uploaded, type :type size :width*:height pixel' => 'ເລືອກຮູບພາບອັບໂຫຼດຊະນິດ :type ຂະໜາດ :width*:height ຟິດເຊວล',
   'Can be approve' => 'ສາມາດອະນຸມັດ',
-  'Can login' => 'ສາມາດເຂົ້າລະບົບໄດ້',
   'Can manage room' => 'ສາມາດເພີ່ມ/ແກ້ໄຂ ຫ້ອງປະຊຸມ',
   'Can not be performed this request. Because they do not find the information you need or you are not allowed' => 'ບໍ່ສາມາດດຳເນີນການຕາມທີ່ຮ້ອງຂໍໄດ້ເນື່ອງຈາກບໍ່ພົບຂໍ້ມູນທີ່ຕ້ອງການ ຫຼື ທ່ານບໍ່ມີສິດ',
   'Cancel' => 'ຍົກເລີກ',
@@ -52,7 +51,9 @@ return array(
   'Create' => 'ສ້າງ',
   'Create new account' => 'ສ້າງບັນຊີໃໝ່',
   'Created' => 'ສ້າງເມື່ອ',
-  'date' => 'ວັນທີ',
+  'Currency unit' => 'ສະກຸນເງິນ',
+  'Current staff' => 'ພະນັກງານໃນປະຈຸບັນ',
+  'Date' => 'ວັນທີ',
   'DATE_FORMAT' => 'd M Y ເວລາ H:i ນ.',
   'DATE_LONG' => array(
     0 => 'ອາທິດ',
@@ -168,6 +169,7 @@ return array(
   'Password' => 'ລະຫັດຜ່ານ',
   'Password of the mail server. (To change the fill.)' => 'ລະຫັດຜ່ານຂອງເມວເຊີບເວີ (ຕ້ອງການປ່ຽນ ໃຫ້ເພີ່ມ)',
   'Passwords must be at least four characters' => 'ລະຫັດຜ່ານຕ້ອງບໍ່ຕ່ຳກວ່າ 4 ຕົວອັກສອນ',
+  'Past employees' => 'ພະນັກງານທີ່ຜ່ານມາ',
   'Permission' => 'ສິດໃນການໃຊ້ວຽກ',
   'PERMISSIONS' => array(
     'can_config' => 'ສາມາດຕັ້ງຄ່າລະບົບໄດ້'
@@ -175,11 +177,14 @@ return array(
   'Phone' => 'ໂທລະສັບ',
   'Please fill in' => 'ກະລຸນາຕື່ມຂໍ້ມູນໃສ່',
   'Please log in. To continue' => 'ກະລຸນາເຂົ້າສູ່ລະບົບ ເພື່ອສືບຕໍ່',
-  'Please log in. To continue.' => 'ກະລຸນາເຂົ້າສູ່ລະບົບ ກ່ອນທີ່ຈະດໍາເນີນການ',
   'Please select :name at least one item' => 'ກະລຸນາເລືອກ :name ຢ່າງໜ້ອຍ 1 ລາຍການ',
   'Port' => 'ພອດ',
   'Profile' => 'ຂໍ້ມູນສ່ວນຕົວ',
   'Province' => 'ແຂວງ',
+  'PUBLISHEDS' => array(
+    0 => 'ໂຈະການພິມເຜີຍແຜ່',
+    1 => 'ເຜີຍແຜ່'
+  ),
   'Reason' => 'ເຫດ​ຜົນ',
   'Register' => 'ສະໝັກສະມາຊິກ',
   'Remember me' => 'ຈົດຈຳການເຂົ້າລະບົບ',
@@ -196,7 +201,7 @@ return array(
     'seats' => 'ຈໍານວນບ່ອນນັ່ງ'
   ),
   'Save' => 'ບັນທຶກ',
-  'Save and email completed' => 'ບັນທຶກແລະສົ່ງອີເມວສົບຜົນສໍາເລັດ',
+  'Save and email completed' => 'ບັນທຶກແລະສົ່ງອີເມວຮຽນຮ້ອຍ',
   'Saved successfully' => 'ບັນທຶກຮຽບຮ້ອຍ',
   'scroll to top' => 'ເລື່ອນຂື້ນດ້ານເທິງ',
   'Search' => 'ຄົ້ນຫາ',
@@ -239,7 +244,6 @@ return array(
   'Topic' => 'ຫົວຂໍ້',
   'Type' => 'ປະເພດ',
   'Unable to complete the transaction' => 'ບໍ່ສາມາດເຮັດລາຍການນີ້ໄດ້',
-  'Unable to login' => 'ບໍ່ສາມາດເຂົ້າລະບົບໄດ້',
   'Upload' => 'ອັບໂຫຼດ',
   'Upload :type files no larger than :size' => 'ອັບໂຫຼດແຟ້ມຂໍ້ມູນ :type ຂະໜາດບໍ່ເກີນ :size',
   'User' => 'ສະມາຊິກ',
@@ -254,7 +258,7 @@ return array(
   'year' => 'ປີ',
   'YEAR_OFFSET' => 543,
   'You want to' => 'ທ່ານຕ້ອງການ',
-  'Your message was sent successfully' => 'ຂໍ້ຄວາມຖືກສົ່ງໄປແລ້ວ',
+  'Your message was sent successfully' => 'ສົ່ງຂໍ້ຄວາມໄປຍັງຜູ້ຮັບຮຽບຮ້ອຍແລ້ວ',
   'Your new password is' => 'ລະຫັດຜ່ານໃໝ່ຂອງທ່ານຄື',
   'Zipcode' => 'ລະຫັດໄປສະນີ'
 );
