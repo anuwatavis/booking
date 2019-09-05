@@ -85,12 +85,12 @@ class Model
         );
         if ($login) {
             $menus['signout'] = array(
-                'text' => '{LNG_Sign out}',
+                'text' => '{LNG_Logout}',
                 'url' => 'index.php?action=logout',
             );
         } else {
             $menus['signin'] = array(
-                'text' => '{LNG_Sign in}',
+                'text' => '{LNG_Login}',
                 'url' => 'index.php?module=welcome&amp;action=login',
             );
         }
