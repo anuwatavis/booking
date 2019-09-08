@@ -178,7 +178,7 @@ return array(
   ),
   'Phone' => 'โทรศัพท์',
   'Please fill in' => 'กรุณากรอก',
-  'Please log in. To continue' => 'กรุณาเข้าระบบ เพื่อดำเนินการต่อ',
+  'Please log in. To continue.' => 'กรุณาเข้าระบบ ก่อนดำเนินการต่อ',
   'Please select :name at least one item' => 'กรุณาเลือก :name อย่างน้อย 1 รายการ',
   'Port' => 'พอร์ต',
   'Profile' => 'ข้อมูลส่วนตัว',
