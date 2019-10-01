@@ -123,7 +123,7 @@ class Model extends \Kotchasan\Model
                     if (empty($ret)) {
                         // save
                         $this->db()->update($this->getTableName('reservation'), $index->id, $save);
-                        // อัปเดท datas
+                        // อัปเดต datas
                         $reservation_data = $this->getTableName('reservation_data');
                         $this->db()->delete($reservation_data, array('reservation_id', $index->id), 0);
                         foreach ($datas as $key => $value) {

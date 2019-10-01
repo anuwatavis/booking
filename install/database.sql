@@ -216,6 +216,12 @@ ALTER TABLE `{prefix}_rooms_meta`
   ADD KEY `room_id` (`room_id`) USING BTREE;
 
 --
+-- Indexes for table `{prefix}_reservation_data`
+--
+ALTER TABLE `{prefix}_reservation_data`
+  ADD KEY `reservation_id` (`reservation_id`) USING BTREE;
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -242,12 +248,6 @@ ALTER TABLE `{prefix}_user`
 --
 ALTER TABLE `{prefix}_reservation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Indexes for table `{prefix}_reservation_data`
---
-ALTER TABLE `{prefix}_reservation_data`
-  ADD KEY `reservation_id` (`reservation_id`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for table `{prefix}_rooms`

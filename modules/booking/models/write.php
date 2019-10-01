@@ -130,7 +130,7 @@ class Model extends \Kotchasan\Model
                             // แก้ไข
                             $this->db()->update($this->getTableName('rooms'), $save['id'], $save);
                         }
-                        // อัปเดท meta
+                        // อัปเดต meta
                         $rooms_meta = $this->getTableName('rooms_meta');
                         $this->db()->delete($rooms_meta, array('room_id', $save['id']), 0);
                         foreach ($metas as $key => $value) {

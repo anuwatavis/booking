@@ -50,11 +50,9 @@ class Model extends \Kotchasan\Model
                     'phone' => $login['phone'],
                 );
             } else {
-                // Model
-                $model = new static();
                 // แก้ไข อ่านรายการที่เลือก
                 $sql = Sql::create('(CASE WHEN NOW() BETWEEN V.`begin` AND V.`end` THEN 1 WHEN NOW() > V.`end` THEN 2 ELSE 0 END) AS `today`');
-                $query = $model->db()->createQuery()
+                $query = static::createQuery()
                     ->from('reservation V')
                     ->join('user U', 'LEFT', array('U.id', 'V.member_id'))
                     ->where(array('V.id', $id));
@@ -162,7 +160,7 @@ class Model extends \Kotchasan\Model
                             $ret['alert'] = Language::get('Saved successfully');
                         }
                         if ($index->phone != $user['phone']) {
-                            // อัปเดทเบอร์โทรสมาชิก
+                            // อัปเดตเบอร์โทรสมาชิก
                             $this->db()->update($this->getTableName('user'), $login['id'], $user);
                         }
                         // รายละเอียดการจอง

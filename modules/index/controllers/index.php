@@ -105,6 +105,8 @@ class Controller extends \Gcms\Controller
             '/{MENUS}/' => self::$menus->render($page->menu(), $login),
             // แสดงชื่อคน Login
             '/{LOGINNAME}/' => $loginname,
+            // เวอร์ชั่น
+            '/{VERSION}/' => self::$cfg->version,
         ));
         // ส่งออก เป็น HTML
         $response = new Response();

@@ -109,6 +109,10 @@ class View extends \Gcms\View
                     'class' => 'center',
                     'sort' => 'begin',
                 ),
+                'end' => array(
+                    'text' => '{LNG_End date}',
+                    'class' => 'center',
+                ),
                 'create_date' => array(
                     'text' => '{LNG_Created}',
                     'class' => 'center',
