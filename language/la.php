@@ -234,7 +234,6 @@ return array(
   'Status' => 'ສະຖານະ',
   'Status for general members' => 'ສະຖານະສຳລັບສະມາຊິກທົ່ວໄປ',
   'Style' => 'ຮູບແບບ',
-  'successfully copied to clipboard' => 'ສຳເນົາໄປຍັງຄິບບອດຮຽບຮ້ອຍແລ້ວ',
   'The members status of the site' => 'ສະຖານະຂອງສະມາຂິກຂອງເວັບໄຊ',
   'The name of the mail server as localhost or smtp.gmail.com (To change the settings of your email is the default. To remove this box entirely.)' => 'ຊື່ຂອງເມວເຊີບເວີເຊັ່ນ localhost หรือ chitdpt@gmail.com (ຕ້ອງປ່ຽນຄ່າກຳນົດຂອງອີເມວທັງໝົດເປັນຄ່າເລີ່ມຕົ້ນ ໃຫ້ລຶບຂໍ້ຄວາມໃນຊ່ອງນີ້ອອກທັງໝົດ)',
   'This :name already exist' => 'ມີ :name ນີ້ຢູ່ກ່ອນແລ້ວ',
