@@ -62,13 +62,13 @@ class Controller extends \Kotchasan\KBase
                     'url' => 'index.php?module=booking-write',
                 ),
             );
-            foreach (Language::get('BOOKING_OPTIONS') as $type => $text) {
+            foreach (Language::get('BOOKING_OPTIONS', array()) as $type => $text) {
                 $submenus[] = array(
                     'text' => $text,
                     'url' => 'index.php?module=booking-categories&amp;type='.$type,
                 );
             }
-            foreach (Language::get('BOOKING_SELECT') as $type => $text) {
+            foreach (Language::get('BOOKING_SELECT', array()) as $type => $text) {
                 $submenus[] = array(
                     'text' => $text,
                     'url' => 'index.php?module=booking-categories&amp;type='.$type,

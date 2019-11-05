@@ -58,7 +58,7 @@ class Model extends \Kotchasan\Model
                     ->where(array('V.id', $id));
                 $select = array('V.*', 'U.name', 'U.phone', $sql);
                 $n = 1;
-                foreach (Language::get('BOOKING_SELECT') + Language::get('BOOKING_OPTIONS') as $key => $label) {
+                foreach (Language::get('BOOKING_SELECT', array()) + Language::get('BOOKING_OPTIONS', array()) as $key => $label) {
                     $query->join('reservation_data M'.$n, 'LEFT', array(array('M'.$n.'.reservation_id', 'V.id'), array('M'.$n.'.name', $key)));
                     $select[] = 'M'.$n.'.value '.$key;
                     ++$n;
@@ -98,10 +98,19 @@ class Model extends \Kotchasan\Model
                     'phone' => $request->post('phone')->topic(),
                 );
                 $datas = array();
-                foreach (Language::get('BOOKING_SELECT') as $key => $label) {
-                    $datas[$key] = $request->post($key)->toInt();
+                foreach (Language::get('BOOKING_SELECT', array()) as $key => $label) {
+                    $value = $request->post($key)->toInt();
+                    if ($value > 0) {
+                        $datas[$key] = $value;
+                    }
                 }
-                foreach (Language::get('BOOKING_OPTIONS') as $key => $label) {
+                foreach (Language::get('BOOKING_TEXT', array()) as $key => $label) {
+                    $value = $request->post($key)->topic();
+                    if ($value != '') {
+                        $datas[$key] = $value;
+                    }
+                }
+                foreach (Language::get('BOOKING_OPTIONS', array()) as $key => $label) {
                     $values = $request->post($key, array())->toInt();
                     if (!empty($values)) {
                         $datas[$key] = implode(',', $values);

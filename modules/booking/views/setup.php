@@ -55,14 +55,13 @@ class View extends \Gcms\View
                 'class' => 'center',
             ),
         );
-        foreach (Language::get('ROOM_CUSTOM_TEXT') as $type => $text) {
+        foreach (Language::get('ROOM_CUSTOM_TEXT', array()) as $type => $text) {
             $headers[$type] = array(
                 'text' => $text,
             );
         }
         $headers['published'] = array('text' => '');
         $cols['published'] = array('class' => 'center');
-
         // URL สำหรับส่งให้ตาราง
         $uri = $request->createUriWithGlobals(WEB_URL.'index.php');
         // ตาราง

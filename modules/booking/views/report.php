@@ -13,6 +13,7 @@ namespace Booking\Report;
 use Kotchasan\DataTable;
 use Kotchasan\Date;
 use Kotchasan\Http\Request;
+use Kotchasan\Language;
 
 /**
  * module=booking-report
@@ -27,9 +28,13 @@ class View extends \Gcms\View
      * @var array
      */
     private $status;
+    /**
+     * @var object
+     */
+    private $category;
 
     /**
-     * ตารางรายการจอง
+     * รายงานการจอง
      *
      * @param Request $request
      * @param object  $index
@@ -38,10 +43,37 @@ class View extends \Gcms\View
      */
     public function render(Request $request, $index)
     {
+        $this->category = \Booking\Category\Model::init();
+        $this->status = $index->booking_status;
         // ค่าที่ส่งมา
         $params = array(
             'room_id' => $request->request('room_id')->toInt(),
             'status' => $index->status,
+        );
+        // filter
+        $filters = array(
+            array(
+                'name' => 'room_id',
+                'default' => 0,
+                'text' => '{LNG_Room}',
+                'options' => array(0 => '{LNG_all items}')+\Booking\Rooms\Model::toSelect(),
+                'value' => $params['room_id'],
+            ),
+        );
+        foreach (Language::get('BOOKING_SELECT', array()) as $key => $label) {
+            $params[$key] = $request->request($key)->toInt();
+            $filters[] = array(
+                'name' => $key,
+                'text' => $label,
+                'options' => array(0 => '{LNG_all items}') + $this->category->toSelect($key),
+                'value' => $params[$key],
+            );
+        }
+        $filters[] = array(
+            'name' => 'status',
+            'text' => '{LNG_Status}',
+            'options' => $this->status,
+            'value' => $params['status'],
         );
         // URL สำหรับส่งให้ตาราง
         $uri = $request->createUriWithGlobals(WEB_URL.'index.php');
@@ -75,15 +107,7 @@ class View extends \Gcms\View
                 ),
             ),
             /* ตัวเลือกด้านบนของตาราง ใช้จำกัดผลลัพท์การ query */
-            'filters' => array(
-                array(
-                    'name' => 'room_id',
-                    'default' => 0,
-                    'text' => '{LNG_Room}',
-                    'options' => array(0 => '{LNG_all items}')+\Booking\Rooms\Model::toSelect(),
-                    'value' => $params['room_id'],
-                ),
-            ),
+            'filters' => $filters,
             /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
             'headers' => array(
                 'topic' => array(
@@ -121,6 +145,10 @@ class View extends \Gcms\View
                 'reason' => array(
                     'text' => '{LNG_Reason}',
                 ),
+                'status' => array(
+                    'text' => '{LNG_Status}',
+                    'class' => 'center',
+                ),
             ),
             /* รูปแบบการแสดงผลของคอลัมน์ (tbody) */
             'cols' => array(
@@ -137,6 +165,9 @@ class View extends \Gcms\View
                     'class' => 'center',
                 ),
                 'create_date' => array(
+                    'class' => 'center',
+                ),
+                'status' => array(
                     'class' => 'center',
                 ),
             ),
@@ -178,6 +209,12 @@ class View extends \Gcms\View
         $item['phone'] = '<a href="tel:'.$item['phone'].'">'.$item['phone'].'</a>';
         $item['begin'] = Date::format($item['begin']).' - '.Date::format($item['end']);
         $item['create_date'] = Date::format($item['create_date']);
+        foreach ($this->category->items() as $k => $v) {
+            if (isset($item[$v])) {
+                $item[$v] = $this->category->get($k, $item[$v]);
+            }
+        }
+        $item['status'] = '<span class="term'.$item['status'].'">'.$this->status[$item['status']].'</span>';
 
         return $item;
     }
@@ -189,9 +226,9 @@ class View extends \Gcms\View
      *
      * @return array
      */
-    public function onCreateButton($btn, $attributes, $items)
+    public function onCreateButton($btn, $attributes, $item)
     {
-        if ($btn == 'edit' && in_array($items['today'], array(1, 2))) {
+        if ($btn == 'edit' && in_array($item['today'], array(1, 2))) {
             return false;
         } else {
             return $attributes;

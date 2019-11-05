@@ -10,7 +10,6 @@
 
 namespace Booking\Index;
 
-use Gcms\Login;
 use Kotchasan\DataTable;
 use Kotchasan\Date;
 use Kotchasan\Http\Request;
@@ -29,9 +28,13 @@ class View extends \Gcms\View
      * @var array
      */
     private $status;
+    /**
+     * @var object
+     */
+    private $category;
 
     /**
-     * ตารางรายชื่อสมาชิก
+     * รายการจอง (ผู้จอง)
      *
      * @param Request $request
      * @param array   $login
@@ -40,7 +43,30 @@ class View extends \Gcms\View
      */
     public function render(Request $request, $login)
     {
+        $this->category = \Booking\Category\Model::init();
         $this->status = Language::get('BOOKING_STATUS');
+        // ค่าที่ส่งมา
+        $params = array(
+            'member_id' => $login['id'],
+            'status' => $request->request('status', -1)->toInt(),
+        );
+        // filter
+        $filters = array();
+        foreach (Language::get('BOOKING_SELECT', array()) as $key => $label) {
+            $params[$key] = $request->request($key)->toInt();
+            $filters[] = array(
+                'name' => $key,
+                'text' => $label,
+                'options' => array(0 => '{LNG_all items}') + $this->category->toSelect($key),
+                'value' => $params[$key],
+            );
+        }
+        $filters[] = array(
+            'name' => 'status',
+            'text' => '{LNG_Status}',
+            'options' => $this->status,
+            'value' => $params['status'],
+        );
         // URL สำหรับส่งให้ตาราง
         $uri = $request->createUriWithGlobals(WEB_URL.'index.php');
         // ตาราง
@@ -48,7 +74,7 @@ class View extends \Gcms\View
             /* Uri */
             'uri' => $uri,
             /* Model */
-            'model' => \Booking\Index\Model::toDataTable($login['id']),
+            'model' => \Booking\Index\Model::toDataTable($params),
             /* รายการต่อหน้า */
             'perPage' => $request->cookie('bookingIndex_perPage', 30)->toInt(),
             /* เรียงลำดับ */
@@ -62,6 +88,8 @@ class View extends \Gcms\View
             /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
             'action' => 'index.php/booking/model/index/action',
             'actionCallback' => 'dataTableActionCallback',
+            /* ตัวเลือกด้านบนของตาราง ใช้จำกัดผลลัพท์การ query */
+            'filters' => $filters,
             /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
             'headers' => array(
                 'topic' => array(
@@ -153,6 +181,11 @@ class View extends \Gcms\View
         $item['begin'] = Date::format($item['begin']);
         $item['end'] = Date::format($item['end']);
         $item['name'] = '<span class="term" style="background-color:'.$item['color'].'">'.$item['name'].'</span>';
+        foreach ($this->category->items() as $k => $v) {
+            if (isset($item[$v])) {
+                $item[$v] = $this->category->get($k, $item[$v]);
+            }
+        }
 
         return $item;
     }

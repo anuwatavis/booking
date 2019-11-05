@@ -38,7 +38,7 @@ class Model extends \Kotchasan\Model
         $query = static::createQuery()
             ->from('rooms R');
         $n = 1;
-        foreach (Language::get('ROOM_CUSTOM_TEXT') as $type => $text) {
+        foreach (Language::get('ROOM_CUSTOM_TEXT', array()) as $type => $text) {
             $query->join('rooms_meta M'.$n, 'LEFT', array(array('M'.$n.'.room_id', 'R.id'), array('M'.$n.'.name', $type)));
             $select[] = 'M'.$n.'.value '.$type;
             ++$n;

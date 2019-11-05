@@ -10,77 +10,23 @@
 
 namespace Booking\Category;
 
+use Kotchasan\Language;
+
 /**
- * คลาสสำหรับอ่านข้อมูลหมวดหมู่.
+ * คลาสสำหรับอ่านข้อมูลหมวดหมู่
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
  * @since 1.0
  */
-class Model extends \Kotchasan\Model
+class Model extends \Gcms\Category
 {
     /**
-     * @var array
+     * init Class
      */
-    private $datas = array();
-
-    /**
-     * อ่านรายชื่อหมวดหมู่จากฐานข้อมูลตามภาษาปัจจุบัน
-     * สำหรับการแสดงผล
-     *
-     * @param string $type
-     *
-     * @return static
-     */
-    public static function init($type)
+    public function __construct()
     {
-        // Model
-        $model = new static();
-        // Query
-        $query = $model->db()->createQuery()
-            ->select('id', 'category_id', 'topic')
-            ->from('category')
-            ->where(array('type', $type))
-            ->order('category_id')
-            ->toArray()
-            ->cacheOn();
-        foreach ($query->execute() as $item) {
-            $model->datas[$item['category_id']] = array(
-                'id' => $item['id'],
-                'category_id' => $item['category_id'],
-                'topic' => $item['topic'],
-            );
-        }
-
-        return $model;
-    }
-
-    /**
-     * ลิสต์รายการหมวดหมู่
-     * สำหรับใส่ลงใน select.
-     *
-     * @return array
-     */
-    public function toSelect()
-    {
-        $result = array();
-        foreach ($this->datas as $category_id => $item) {
-            $result[$category_id] = $item['topic'];
-        }
-
-        return $result;
-    }
-
-    /**
-     * อ่านหมวดหมู่จาก $category_id
-     * ไม่พบ คืนค่าว่าง.
-     *
-     * @param int $category_id
-     *
-     * @return string
-     */
-    public function get($category_id)
-    {
-        return isset($this->datas[$category_id]) ? $this->datas[$category_id]['topic'] : '';
+        // ชื่อหมวดหมู่
+        $this->categories = Language::get('BOOKING_SELECT', array()) + Language::get('BOOKING_OPTIONS', array());
     }
 }

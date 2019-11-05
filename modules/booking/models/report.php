@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * โมเดลสำหรับ (report.php).
+ * โมเดลสำหรับ (report.php)
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -27,26 +27,41 @@ class Model extends \Kotchasan\Model
     /**
      * Query ข้อมูลสำหรับส่งให้กับ DataTable.
      *
-     * @param array $index
+     * @param array $params
      *
      * @return \Kotchasan\Database\QueryBuilder
      */
-    public static function toDataTable($index)
+    public static function toDataTable($params)
     {
-        $where = array(
-            array('V.status', $index['status']),
-        );
-        if ($index['room_id'] > 0) {
-            $where[] = array('V.room_id', $index['room_id']);
+        $where = array();
+        if ($params['status'] > -1) {
+            $where[] = array('V.status', $params['status']);
+        }
+        if ($params['room_id'] > 0) {
+            $where[] = array('V.room_id', $params['room_id']);
         }
         $sql = Sql::create('(CASE WHEN NOW() BETWEEN V.`begin` AND V.`end` THEN 1 WHEN NOW() > V.`end` THEN 2 ELSE 0 END) AS `today`');
-
-        return static::createQuery()
-            ->select('V.id', 'V.topic', 'V.room_id', 'R.name', 'U.name contact', 'U.phone', 'V.begin', 'V.end', 'V.create_date', 'V.reason', $sql)
+        $select = array('V.id', 'V.topic', 'V.room_id', 'R.name');
+        $query = static::createQuery()
             ->from('reservation V')
             ->join('rooms R', 'INNER', array('R.id', 'V.room_id'))
-            ->join('user U', 'LEFT', array('U.id', 'V.member_id'))
-            ->where($where);
+            ->join('user U', 'LEFT', array('U.id', 'V.member_id'));
+        $n = 1;
+        foreach (Language::get('BOOKING_SELECT', array()) as $key => $label) {
+            $on = array(
+                array('M'.$n.'.reservation_id', 'V.id'),
+                array('M'.$n.'.name', $key),
+            );
+            if (!empty($params[$key])) {
+                $where[] = array('M'.$n.'.value', $params[$key]);
+            }
+            $query->join('reservation_data M'.$n, 'LEFT', $on);
+            $select[] = 'M'.$n.'.value '.$label;
+            ++$n;
+        }
+        $select = array_merge($select, array('U.name contact', 'U.phone', 'V.begin', 'V.end', 'V.create_date', 'V.reason', $sql, 'V.status'));
+
+        return $query->select($select)->where($where);
     }
 
     /**

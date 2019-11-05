@@ -37,7 +37,7 @@ class Controller extends \Gcms\Controller
             // ประเภทที่ต้องการ
             'type' => $request->request('type')->topic(),
             // ชื่อหมวดหมู่ที่สามารถใช้งานได้
-            'categories' => Language::get('BOOKING_OPTIONS') + Language::get('BOOKING_SELECT'),
+            'categories' => Language::get('BOOKING_OPTIONS', array()) + Language::get('BOOKING_SELECT', array()),
         );
         if (!isset($index->categories[$index->type])) {
             $index->type = \Kotchasan\ArrayTool::getFirstKey($index->categories);

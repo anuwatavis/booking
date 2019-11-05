@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * โมเดลสำหรับ (index.php).
+ * โมเดลสำหรับ (index.php)
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,21 +25,41 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\Model
 {
     /**
-     * Query ข้อมูลสำหรับส่งให้กับ DataTable.
+     * Query ข้อมูลสำหรับส่งให้กับ DataTable
      *
-     * @param int $member_id
+     * @param array $params
      *
      * @return \Kotchasan\Database\QueryBuilder
      */
-    public static function toDataTable($member_id)
+    public static function toDataTable($params)
     {
+        $where = array(
+            array('V.member_id', $params['member_id']),
+        );
+        if ($params['status'] > -1) {
+            $where[] = array('V.status', $params['status']);
+        }
         $sql = Sql::create('(CASE WHEN NOW() BETWEEN V.`begin` AND V.`end` THEN 1 WHEN NOW() > V.`end` THEN 2 ELSE 0 END) AS `today`');
-
-        return static::createQuery()
-            ->select('V.id', 'V.topic', 'V.room_id', 'R.name', 'V.begin', 'V.end', 'V.status', 'V.reason', $sql, 'R.color')
+        $select = array('V.id', 'V.topic', 'V.room_id', 'R.name');
+        $query = static::createQuery()
             ->from('reservation V')
-            ->join('rooms R', 'INNER', array('R.id', 'V.room_id'))
-            ->where(array('V.member_id', $member_id));
+            ->join('rooms R', 'INNER', array('R.id', 'V.room_id'));
+        $n = 1;
+        foreach (Language::get('BOOKING_SELECT', array()) as $key => $label) {
+            $on = array(
+                array('M'.$n.'.reservation_id', 'V.id'),
+                array('M'.$n.'.name', $key),
+            );
+            if (!empty($params[$key])) {
+                $where[] = array('M'.$n.'.value', $params[$key]);
+            }
+            $query->join('reservation_data M'.$n, 'LEFT', $on);
+            $select[] = 'M'.$n.'.value '.$label;
+            ++$n;
+        }
+        $select = array_merge($select, array('V.begin', 'V.end', 'V.status', 'V.reason', $sql, 'R.color'));
+
+        return $query->select($select)->where($where);
     }
 
     /**
@@ -97,12 +117,12 @@ class Model extends \Kotchasan\Model
             ->where(array('V.id', $id));
         $select = array('V.*', 'R.name', 'U.name contact', 'U.phone', 'R.color');
         $n = 1;
-        foreach (Language::get('ROOM_CUSTOM_TEXT') as $key => $label) {
+        foreach (Language::get('ROOM_CUSTOM_TEXT', array()) as $key => $label) {
             $query->join('rooms_meta M'.$n, 'LEFT', array(array('M'.$n.'.room_id', 'R.id'), array('M'.$n.'.name', $key)));
             $select[] = 'M'.$n.'.value '.$key;
             ++$n;
         }
-        foreach (Language::get('BOOKING_SELECT') + Language::get('BOOKING_OPTIONS') as $key => $label) {
+        foreach (Language::get('BOOKING_SELECT', array()) + Language::get('BOOKING_OPTIONS', array()) + Language::get('BOOKING_TEXT', array()) as $key => $label) {
             $query->join('reservation_data M'.$n, 'LEFT', array(array('M'.$n.'.reservation_id', 'V.id'), array('M'.$n.'.name', $key)));
             $select[] = 'M'.$n.'.value '.$key;
             ++$n;

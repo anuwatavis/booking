@@ -15,7 +15,7 @@ use Kotchasan\Html;
 use Kotchasan\Language;
 
 /**
- * module=booking-booking.
+ * module=booking-booking
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -24,7 +24,7 @@ use Kotchasan\Language;
 class View extends \Gcms\View
 {
     /**
-     * ฟอร์มสร้าง/แก้ไข การจอง.
+     * ฟอร์มสร้าง/แก้ไข การจอง
      *
      * @param object $index
      * @param array  $login
@@ -97,14 +97,26 @@ class View extends \Gcms\View
             'value' => $index->phone,
         ));
         // ตัวเลือก select
-        foreach (Language::get('BOOKING_SELECT') as $key => $label) {
+        $category = \Booking\Category\Model::init();
+        foreach (Language::get('BOOKING_SELECT', array()) as $key => $label) {
             $fieldset->add('select', array(
                 'id' => $key,
                 'labelClass' => 'g-input icon-category',
                 'itemClass' => 'item',
                 'label' => $label,
-                'options' => \Booking\Category\Model::init($key)->toSelect(),
-                'value' => isset($index->{$key}) ? $index->{$key} : array(),
+                'options' => $category->toSelect($key),
+                'value' => isset($index->{$key}) ? $index->{$key} : 0,
+            ));
+        }
+        // textbox
+        foreach (Language::get('BOOKING_TEXT', array()) as $key => $label) {
+            $fieldset->add('text', array(
+                'id' => $key,
+                'labelClass' => 'g-input icon-edit',
+                'itemClass' => 'item',
+                'label' => $label,
+                'maxlength' => 250,
+                'value' => isset($index->{$key}) ? $index->{$key} : '',
             ));
         }
         // begin
@@ -174,7 +186,7 @@ class View extends \Gcms\View
                 'labelClass' => 'g-input icon-category',
                 'itemClass' => 'item',
                 'label' => $label,
-                'options' => \Booking\Category\Model::init($key)->toSelect(),
+                'options' => $category->toSelect($key),
                 'value' => isset($index->{$key}) ? explode(',', $index->{$key}) : array(),
             ));
         }

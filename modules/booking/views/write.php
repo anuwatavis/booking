@@ -70,7 +70,7 @@ class View extends \Gcms\View
             'rows' => 3,
             'value' => isset($index->detail) ? $index->detail : '',
         ));
-        foreach (Language::get('ROOM_CUSTOM_TEXT') as $key => $label) {
+        foreach (Language::get('ROOM_CUSTOM_TEXT', array()) as $key => $label) {
             $fieldset->add('text', array(
                 'id' => $key,
                 'labelClass' => 'g-input icon-edit',
