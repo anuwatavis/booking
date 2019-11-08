@@ -183,7 +183,9 @@ Calendar.prototype = {
       }
       if (prop.title) {
         a.title = prop.title;
-        if (c == 'sub' || c == 'last') {
+        if (c == 'sub' && d == self.first_day_of_calendar) {
+          a.innerHTML = "<span>" + prop.title + "</span>";
+        } else if (c == 'sub' || c == 'last') {
           a.innerHTML = "<span>&nbsp;</span>";
         } else {
           a.innerHTML = "<span>" + prop.title + "</span>";
@@ -209,7 +211,9 @@ Calendar.prototype = {
   _drawEvents: function() {
     var a,
       diff,
-      diff_start,
+      diff_start_first,
+      diff_start_next,
+      diff_end_next,
       elems,
       top,
       start,
@@ -222,49 +226,54 @@ Calendar.prototype = {
       if (this.start) {
         start_date = this.start.split('T')[0].replace(/-/g, '/');
         a = new Date(start_date);
-        diff_next = a.compare(self.next_day_of_calendar);
+        diff_start_first = a.compare(self.first_day_of_calendar);
+        diff_start_next = a.compare(self.next_day_of_calendar);
         if (this.end) {
           end_date = new Date(this.end.split('T')[0].replace(/-/g, '/'));
-          diff = end_date.compare(new Date(start_date));
-          c = diff.days == 0 ? 'first last' : 'first';
+          diff = a.compare(end_date);
+          diff_end_next = end_date.compare(self.next_day_of_calendar);
         } else {
-          c = 'first last';
+          diff_end_next = { year: null, days: null };
+          diff = { year: null, days: 0 };
         }
-        if (diff_next.days >= -42 || this.end) {
-          diff_start = a.compare(self.first_day_of_calendar);
-          if (diff_next.days >= -42) {
-            if (diff_start.days < 0) {
-              a = self._addLabel(self.first_day_of_calendar, this, c);
-              start_date = self.first_day_of_calendar.format("y/m/d H:i:s");
-            } else {
-              a = self._addLabel(a, this, c);
-            }
+        if (
+          diff_start_first.days < 42 &&
+          diff_start_first.year < 1 &&
+          (
+            (diff_start_next.days <= 43 && diff_start_next.year == -1) ||
+            (diff_end_next.days < 42 && diff_end_next.year == -1)
+          )
+        ) {
+          if (diff.days == 0) {
+            c = 'first last';
+          } else if (diff_start_first.year == -1) {
+            c = 'sub';
+            a = self.first_day_of_calendar;
+            start = Date.parse(a);
+            diff = a.compare(end_date);
+          } else {
+            c = 'first';
+            start = Date.parse(start_date);
           }
-          if (a && this.end) {
-            diff = end_date.compare(new Date(start_date));
-            if (diff_start.days < 0) {
-              diff.days--;
-            }
-            if (diff.days > 0) {
-              elems = [a];
-              top = a.offsetTop;
-              start = Date.parse(start_date);
-              for (var i = 1; i <= diff.days; i++) {
-                d = new Date(start + i * 86400000);
-                a = self._addLabel(d, this, i == diff.days ? 'last' : 'sub');
-                if (a) {
-                  if (d.getDay() == 0) {
-                    self._align(elems, top);
-                    top = a.offsetTop;
-                    elems = [a];
-                  } else {
-                    top = Math.max(top, a.offsetTop);
-                    elems.push(a);
-                  }
+          l = self._addLabel(a, this, c);
+          if (diff.days > 0) {
+            elems = [l];
+            top = l.offsetTop;
+            for (var i = 1; i <= diff.days; i++) {
+              d = new Date(start + i * 86400000);
+              l = self._addLabel(d, this, i == diff.days ? 'last' : 'sub');
+              if (l) {
+                if (d.getDay() == 0) {
+                  self._align(elems, top);
+                  top = l.offsetTop;
+                  elems = [l];
+                } else {
+                  top = Math.max(top, l.offsetTop);
+                  elems.push(l);
                 }
               }
-              self._align(elems, top);
             }
+            self._align(elems, top);
           }
         }
       }

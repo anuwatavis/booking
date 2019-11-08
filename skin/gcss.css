@@ -3924,12 +3924,24 @@ td.buttons .button:last-child {
   margin-top: 0;
   margin-bottom: 0;
 }
+.document-list h3,
 .document-list h6,
 .document-list .icon {
   display: inline;
 }
-.listview [class*=" col"] *,
-.listview [class^="col"] * {
+.listview .col *,
+.listview .col1 *,
+.listview .col2 *,
+.listview .col3 *,
+.listview .col4 *,
+.listview .col5 *,
+.listview .col6 *,
+.listview .col7 *,
+.listview .col8 *,
+.listview .col9 *,
+.listview .col10 *,
+.listview .col11 *,
+.listview .col12 * {
   margin: 0;
   display: inline;
 }
