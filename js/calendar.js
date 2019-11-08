@@ -212,42 +212,38 @@ Calendar.prototype = {
     var a,
       diff,
       diff_start_first,
-      diff_start_next,
-      diff_end_next,
-      elems,
-      top,
+      diff_end_first,
+      elems = [],
+      top = 0,
       start,
       start_date,
       end_date,
       c,
       d,
+      e,
       self = this;
     forEach(this.events, function() {
       if (this.start) {
         start_date = this.start.split('T')[0].replace(/-/g, '/');
         a = new Date(start_date);
+        end_date = this.end ? new Date(this.end.split('T')[0].replace(/-/g, '/')) : a;
+        diff_end_first = end_date.compare(self.first_day_of_calendar);
+        diff_end_first = diff_end_first.year < 0 ? 0 - diff_end_first.days : diff_end_first.days;
         diff_start_first = a.compare(self.first_day_of_calendar);
-        diff_start_next = a.compare(self.next_day_of_calendar);
-        if (this.end) {
-          end_date = new Date(this.end.split('T')[0].replace(/-/g, '/'));
-          diff = a.compare(end_date);
-          diff_end_next = end_date.compare(self.next_day_of_calendar);
-        } else {
-          diff_end_next = { year: null, days: null };
-          diff = { year: null, days: 0 };
-        }
+        diff_start_first = diff_start_first.year < 0 ? 0 - diff_start_first.days : diff_start_first.days;
+        diff = a.compare(end_date);
         if (
-          diff_start_first.days < 42 &&
-          diff_start_first.year < 1 &&
-          (
-            (diff_start_next.days <= 43 && diff_start_next.year == -1) ||
-            (diff_end_next.days < 42 && diff_end_next.year == -1)
-          )
+          (diff_start_first >= 0) ||
+          (diff_start_first < 0 && diff_end_first > 0 && diff_end_first < 42) ||
+          (diff_start_first <= 0 && diff_end_first >= 41)
         ) {
           if (diff.days == 0) {
             c = 'first last';
-          } else if (diff_start_first.year == -1) {
-            c = 'sub';
+          } else if (
+            (diff_start_first < 0 && diff_end_first > 0 && diff_end_first < 42) ||
+            (diff_start_first <= 0 && diff_end_first >= 41)
+          ) {
+            c = diff_start_first == 0 && diff_end_first == diff.days ? 'first' : 'sub';
             a = self.first_day_of_calendar;
             start = Date.parse(a);
             diff = a.compare(end_date);
@@ -255,21 +251,21 @@ Calendar.prototype = {
             c = 'first';
             start = Date.parse(start_date);
           }
-          l = self._addLabel(a, this, c);
-          if (diff.days > 0) {
-            elems = [l];
-            top = l.offsetTop;
+          e = self._addLabel(a, this, c);
+          if (e) {
+            elems = [e];
+            top = e.offsetTop;
             for (var i = 1; i <= diff.days; i++) {
               d = new Date(start + i * 86400000);
-              l = self._addLabel(d, this, i == diff.days ? 'last' : 'sub');
-              if (l) {
+              e = self._addLabel(d, this, i == diff.days ? 'last' : 'sub');
+              if (e) {
                 if (d.getDay() == 0) {
                   self._align(elems, top);
-                  top = l.offsetTop;
-                  elems = [l];
+                  elems = [e];
+                  top = e.offsetTop;
                 } else {
-                  top = Math.max(top, l.offsetTop);
-                  elems.push(l);
+                  elems.push(e);
+                  top = Math.max(top, e.offsetTop);
                 }
               }
             }
