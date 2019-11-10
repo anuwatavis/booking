@@ -1228,6 +1228,7 @@ html .button:before,
 .button.preview {
   background-color: #ffc400;
 }
+.event-calendar-buttons .button.select,
 .button:not(.light):hover,
 .button:not(.light):focus,
 .button:not(.light):active {
@@ -2870,9 +2871,12 @@ div.gcalendar td.month {
   font-weight: bold;
   color: #f00;
 }
+.event-calendar-buttons .button,
 .event-calendar td a {
   background-color: #2196f3;
   color: #fff;
+}
+.event-calendar td a {
   display: block;
   position: relative;
   margin-bottom: 1px;
@@ -2880,6 +2884,7 @@ div.gcalendar td.month {
   padding: 0 2px;
   cursor: pointer;
 }
+.event-calendar-buttons .button:first-child,
 .event-calendar td a.first {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -2888,6 +2893,7 @@ div.gcalendar td.month {
   -webkit-border-top-left-radius: 5px;
   -webkit-border-bottom-left-radius: 5px;
 }
+.event-calendar-buttons .button:last-child,
 .event-calendar td a.last {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -4700,6 +4706,7 @@ td.buttons .button:last-child {
   /* responsive table.responsive-v */
   body.responsive table.responsive-v {
     border-style: none none none solid;
+    border-width: 1px 1px 1px 2px;
   }
   body.responsive table.responsive-v>thead {
     display: none;
@@ -4720,42 +4727,30 @@ td.buttons .button:last-child {
     display: table-row;
   }
   body.responsive table.responsive-v>tbody>tr>*>* {
-    text-align: left;
     display: table-cell;
     border-color: inherit;
-    border-style: solid none none;
+    border-style: none none solid;
     border-width: 1px;
+    padding: 5px;
   }
   body.responsive table.responsive-v>tbody>tr>td.icons>* {
     padding: 5px 10px;
-  }
-  body.responsive table.responsive-v>tbody>tr>*:last-child>* {
-    border-bottom-style: solid;
   }
   body.responsive table.responsive-v>tbody>tr> :before {
     content: attr(data-text);
     text-align: left;
     display: table-cell;
-    padding: 5px 10px;
-    background-color: #eee;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.1);
     border-color: inherit;
-    border-style: solid solid none;
+    border-style: none solid solid;
     border-width: 1px;
     white-space: nowrap;
-  }
-  body.responsive table.responsive-v>tbody>tr>th,
-  body.responsive table.responsive-v>tbody>tr>th:before {
-    background-color: #ddd;
-    border-style: solid none;
-    border-color: inherit;
   }
   body.responsive table.data.responsive-v>tbody>tr> :before {
     background-color: #f4f9fe;
     color: #66a3d3;
     border-color: inherit;
-  }
-  body.responsive table.responsive-v>tbody>tr:first-child {
-    border-style: none;
   }
   body.responsive .document-list>.col4,
   body.responsive .document-list>.row>.col4 {

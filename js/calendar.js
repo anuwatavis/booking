@@ -17,10 +17,14 @@ Calendar.prototype = {
     this.events = {};
     this.cdate = new Date();
     this.calendar = $G(document.createElement("div"));
-    this.calendar.className = "event-calendar";
+    this.buttons = $G(document.createElement("div"));
+    this.calendar.className = 'event-calendar';
+    this.buttons.className = 'event-calendar-buttons';
+    this.buttonFormat = 'M';
     this.showToday = false;
     this.first_day_of_calendar = null;
     this.next_day_of_calendar = null;
+    this.showButton = false;
     for (var property in o) {
       if (property == "month") {
         this.cdate.setMonth(floatval(o[property]) - 1);
@@ -32,12 +36,23 @@ Calendar.prototype = {
         this[property] = o[property];
       }
     }
+    $E(id).appendChild(this.buttons);
     $E(id).appendChild(this.calendar);
     self = this;
     $G(window).addEvent("resize", function() {
       self._resize();
     });
     this.setDate(this.cdate);
+  },
+  moveTo: function(y, m) {
+    var d = new Date();
+    if (m) {
+      d.setMonth(floatval(m) - 1);
+    }
+    if (y) {
+      d.setFullYear(floatval(y));
+    }
+    this.setDate(d);
   },
   _resize: function() {
     var cw = this.calendar.getClientWidth(),
@@ -292,6 +307,8 @@ Calendar.prototype = {
       self.events = ds || {};
       self._drawMonth();
       self._drawEvents();
+      self._drawButtons();
+      self._setButton();
     });
   },
   _move: function(value) {
@@ -300,9 +317,49 @@ Calendar.prototype = {
     d.setMonth(d.getMonth() + value);
     this.setDate(d);
   },
+  _setButton: function() {
+    var y = this.cdate.getFullYear(),
+      m = this.cdate.getMonth(),
+      id = this.id + '-' + this.cdate.format('y-m');
+    forEach(this.buttons.querySelectorAll('.button'), function() {
+      if (this.id == id) {
+        this.className = 'button select';
+      } else {
+        this.className = 'button';
+      }
+    });
+  },
+  _drawButtons: function() {
+    var self = this;
+
+    function doClick() {
+      var ds = this.id.replace(self.id + '-', '').split('-');
+      self.moveTo(ds[0], ds[1]);
+    }
+    if (this.showButton) {
+      var d, ds = {};
+      self.buttons.innerHTML = '';
+      forEach(this.events, function() {
+        if (this.start) {
+          d = new Date(this.start.split('T')[0].replace(/-/g, '/'));
+          ds[d.format('y-m')] = d;
+        }
+      });
+      Object.keys(ds).sort().forEach(function(key) {
+        var a = document.createElement('a');
+        a.className = 'button';
+        a.innerHTML = ds[key].format(self.buttonFormat);
+        a.id = self.id + '-' + key;
+        self.buttons.appendChild(a);
+        a.onclick = doClick;
+      });
+    }
+  },
   setEvents: function(events) {
     this.events = events;
     this._drawEvents();
+    this._drawButtons();
+    this._setButton();
   },
   setDate: function(date) {
     if (this.url !== null) {
@@ -311,6 +368,8 @@ Calendar.prototype = {
       this.cdate = date;
       this._drawMonth();
       this._drawEvents();
+      this._drawButtons();
+      this._setButton();
     }
   }
 };
