@@ -2142,7 +2142,7 @@ window.$K = (function() {
           self.div.style.height = h + "px";
         }
         self.div.center();
-      }, 1000);
+      }, 500);
       return this;
     },
     hide: function() {
