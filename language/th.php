@@ -29,7 +29,8 @@ return array(
     0 => 'รอตรวจสอบ',
     1 => 'อนุมัติ',
     2 => 'ไม่อนุมัติ',
-    3 => 'ยกเลิก'
+    3 => 'ยกเลิกโดยผู้จอง',
+    4 => 'ยกเลิกโดยเจ้าหน้าที่'
   ),
   'BOOLEANS' => array(
     0 => 'ปิดใช้งาน',
@@ -108,6 +109,7 @@ return array(
   'Image size is in pixels' => 'ขนาดของรูปภาพเป็นพิกเซล',
   'Import' => 'นำเข้า',
   'Incorrect :name' => ':name ไม่ถูกต้อง',
+  'Initial booking status' => 'สถานะการจองเริ่มต้น',
   'Key' => 'คีย์',
   'Language' => 'ภาษา',
   'Last login' => 'เข้าระบบล่าสุด',
@@ -167,6 +169,8 @@ return array(
   'Name' => 'ชื่อ นามสกุล',
   'No need to fill in English text. If the English text matches the Key' => 'ไม่จำเป็นต้องกรอกข้อความในภาษาอังกฤษ หากข้อความในภาษาอังกฤษตรงกับคีย์',
   'not a registered user' => 'ไม่พบสมาชิกนี้ลงทะเบียนไว้',
+  'Notifications' => 'การแจ้งเตือน',
+  'Notify relevant parties when booking details are modified by customers' => 'แจ้งเตือนไปยังผู้ที่เกี่ยวข้องเมื่อมีการแก้ไขรายละเอียดการจองโดยผู้จอง',
   'Other' => 'อื่นๆ',
   'Password' => 'รหัสผ่าน',
   'Password of the mail server. (To change the fill.)' => 'รหัสผ่านของเมล์เซิร์ฟเวอร์ (ต้องการเปลี่ยน ให้กรอก)',

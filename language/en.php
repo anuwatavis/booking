@@ -12,7 +12,8 @@ return array(
     0 => 'Pending',
     1 => 'Approve',
     2 => 'Not allowed',
-    3 => 'Cancle'
+    3 => 'Canceled by customer',
+    4 => 'Canceled by the officer'
   ),
   'BOOLEANS' => array(
     0 => 'Disable',

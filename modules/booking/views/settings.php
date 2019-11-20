@@ -11,6 +11,7 @@
 namespace Booking\Settings;
 
 use Kotchasan\Html;
+use Kotchasan\Language;
 
 /**
  * module=booking-settings
@@ -49,6 +50,25 @@ class View extends \Gcms\View
             'label' => '{LNG_Width}',
             'comment' => '{LNG_Image size is in pixels} ({LNG_resized automatically})',
             'value' => isset(self::$cfg->booking_w) ? self::$cfg->booking_w : 500,
+        ));
+        // booking_status
+        $fieldset->add('select', array(
+            'id' => 'booking_status',
+            'labelClass' => 'g-input icon-valid',
+            'itemClass' => 'item',
+            'label' => '{LNG_Initial booking status}',
+            'options' => Language::get('BOOKING_STATUS'),
+            'value' => isset(self::$cfg->booking_status) ? self::$cfg->booking_status : 0,
+        ));
+        // booking_notifications
+        $fieldset->add('select', array(
+            'id' => 'booking_notifications',
+            'labelClass' => 'g-input icon-email',
+            'itemClass' => 'item',
+            'label' => '{LNG_Notifications}',
+            'comment' => '{LNG_Notify relevant parties when booking details are modified by customers}',
+            'options' => Language::get('BOOLEANS'),
+            'value' => isset(self::$cfg->booking_notifications) ? self::$cfg->booking_notifications : 0,
         ));
         $fieldset = $form->add('fieldset', array(
             'class' => 'submit',

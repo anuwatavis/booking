@@ -29,7 +29,8 @@ return array(
     0 => 'ລໍຖ້າສໍາລັບການກວດກາ',
     1 => 'ອະນຸມັດ',
     2 => 'ບໍ່ອະນຸຍາດ',
-    3 => 'ຍົກເລີກ'
+    3 => 'ຍົກເລີກໂດຍບຸກຄົນທີ່ຈອງ',
+    4 => 'ຍົກເລີກໂດຍເຈົ້າໜ້າທີ່'
   ),
   'BOOLEANS' => array(
     0 => 'ປິດໃຊ້ວຽກ',
@@ -108,6 +109,7 @@ return array(
   'Image size is in pixels' => 'ຂະໜາດຂອງຮູບພາບເປັນພິກເຊວ',
   'Import' => 'ນຳເຂົ້າ',
   'Incorrect :name' => ':name ບໍ່ຖືກຕ້ອງ',
+  'Initial booking status' => 'ສະຖານະການຈອງເບື້ອງຕົ້ນ',
   'Key' => 'ແປ້ນພີມ',
   'Language' => 'ພາສາ',
   'Last login' => 'ເຂົ້າລະບົບລ້າສຸດ',
@@ -167,6 +169,8 @@ return array(
   'Name' => 'ຊື່ ນາມສະກຸນ',
   'No need to fill in English text. If the English text matches the Key' => 'ບໍ່ຈຳເປັນເພີ່ມຂໍ້ຄວາມໃນພາສາອັງກິດຫາກຂໍ້ຄວາມໃນພາສານອັງກົງກັບແປ້ນພີມ',
   'not a registered user' => 'ບໍ່ພົບສະມາຊິກນີ້ລົງທະບຽນໄວ້',
+  'Notifications' => 'ຄໍາປະກາດ',
+  'Notify relevant parties when booking details are modified by customers' => 'ແຈ້ງໃຫ້ພາກສ່ວນທີ່ກ່ຽວຂ້ອງຊາບໃນເວລາທີ່ລາຍລະອຽດການຈອງຖືກດັດແກ້ໂດຍລູກຄ້າ',
   'Other' => 'ອື່ນໆ',
   'Password' => 'ລະຫັດຜ່ານ',
   'Password of the mail server. (To change the fill.)' => 'ລະຫັດຜ່ານຂອງເມວເຊີບເວີ (ຕ້ອງການປ່ຽນ ໃຫ້ເພີ່ມ)',
@@ -234,6 +238,7 @@ return array(
   'Status' => 'ສະຖານະ',
   'Status for general members' => 'ສະຖານະສຳລັບສະມາຊິກທົ່ວໄປ',
   'Style' => 'ຮູບແບບ',
+  'successfully copied to clipboard' => 'ສຳເນົາໄປຍັງຄິບບອດຮຽບຮ້ອຍແລ້ວ',
   'The members status of the site' => 'ສະຖານະຂອງສະມາຂິກຂອງເວັບໄຊ',
   'The name of the mail server as localhost or smtp.gmail.com (To change the settings of your email is the default. To remove this box entirely.)' => 'ຊື່ຂອງເມວເຊີບເວີເຊັ່ນ localhost หรือ chitdpt@gmail.com (ຕ້ອງປ່ຽນຄ່າກຳນົດຂອງອີເມວທັງໝົດເປັນຄ່າເລີ່ມຕົ້ນ ໃຫ້ລຶບຂໍ້ຄວາມໃນຊ່ອງນີ້ອອກທັງໝົດ)',
   'This :name already exist' => 'ມີ :name ນີ້ຢູ່ກ່ອນແລ້ວ',

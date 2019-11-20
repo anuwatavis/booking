@@ -169,18 +169,18 @@ CREATE TABLE `{prefix}_user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Indexes for table `{prefix}_language`
---
-ALTER TABLE `{prefix}_language`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `{prefix}_category`
 --
 ALTER TABLE `{prefix}_category`
   ADD PRIMARY KEY (`id`),
   ADD KEY `type` (`type`),
   ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `{prefix}_language`
+--
+ALTER TABLE `{prefix}_language`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `{prefix}_user`

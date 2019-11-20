@@ -78,12 +78,14 @@ class Model extends \Kotchasan\Model
                 $reservation_table = $this->getTableName('reservation');
                 $search = $this->db()->first($reservation_table, $request->post('id')->toInt());
                 if ($search && $search->status == 0 && $login['id'] == $search->member_id) {
-                    // ลบ
-                    $this->db()->delete($reservation_table, $search->id);
-                    $this->db()->delete($this->getTableName('reservation_data'), array('reservation_id', $search->id), 0);
-                    // คืนค่า
-                    $ret['alert'] = Language::get('Canceled successfully');
-                    $ret['remove'] = 'datatable_'.$search->id;
+                    // ยกเลิกการจองโดยผู้จอง
+                    $search->status = 3;
+                    // อัปเดท
+                    $this->db()->update($reservation_table, $search->id, array('status' => $search->status));
+                    // ส่งอีเมลไปยังผู้ที่เกี่ยวข้อง
+                    $ret['alert'] = \Booking\Email\Model::send($login['username'], $login['name'], (array) $search);
+                    // reload
+                    $ret['location'] = 'reload';
                 }
             } elseif ($action === 'detail') {
                 // แสดงรายละเอียดการจอง

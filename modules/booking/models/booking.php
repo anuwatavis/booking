@@ -98,19 +98,24 @@ class Model extends \Kotchasan\Model
                     'phone' => $request->post('phone')->topic(),
                 );
                 $datas = array();
+                // ตัวแปรสำหรับตรวจสอบการแก้ไข
+                $options_check = array();
                 foreach (Language::get('BOOKING_SELECT', array()) as $key => $label) {
+                    $options_check[] = $key;
                     $value = $request->post($key)->toInt();
                     if ($value > 0) {
                         $datas[$key] = $value;
                     }
                 }
                 foreach (Language::get('BOOKING_TEXT', array()) as $key => $label) {
+                    $options_check[] = $key;
                     $value = $request->post($key)->topic();
                     if ($value != '') {
                         $datas[$key] = $value;
                     }
                 }
                 foreach (Language::get('BOOKING_OPTIONS', array()) as $key => $label) {
+                    $options_check[] = $key;
                     $values = $request->post($key, array())->toInt();
                     if (!empty($values)) {
                         $datas[$key] = implode(',', $values);
@@ -155,38 +160,70 @@ class Model extends \Kotchasan\Model
                         // วันที่ ไม่ถูกต้อง
                         $ret['ret_end_date'] = Language::get('End date must be greater than begin date');
                     }
+                    // ตาราง
+                    $reservation_table = $this->getTableName('reservation');
+                    // Database
+                    $db = $this->db();
                     if (empty($ret)) {
                         if ($index->id == 0) {
                             // ใหม่
-                            $save['status'] = 0;
+                            $save['status'] = self::$cfg->booking_status;
                             $save['member_id'] = $login['id'];
                             $save['create_date'] = date('Y-m-d H:i:s');
-                            $index->id = $this->db()->insert($this->getTableName('reservation'), $save);
+                            $index->id = $db->insert($reservation_table, $save);
+                            // ใหม่ ส่งอีเมลเสมอ
+                            $changed = true;
                         } else {
                             // แก้ไข
-                            $this->db()->update($this->getTableName('reservation'), $index->id, $save);
-                            // คืนค่า
-                            $ret['alert'] = Language::get('Saved successfully');
+                            $db->update($reservation_table, $index->id, $save);
+                            // สถานะปัจจุบัน
+                            $save['status'] = $index->status;
+                            // ตรวจสอบการแก้ไข
+                            $changed = false;
+                            if (self::$cfg->booking_notifications == 1) {
+                                if (!$changed) {
+                                    foreach ($save as $key => $value) {
+                                        if ($value != $index->{$key}) {
+                                            $changed = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (!$changed) {
+                                    foreach ($options_check as $key) {
+                                        if ($datas[$key] != $index->{$key}) {
+                                            $changed = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
                         }
                         if ($index->phone != $user['phone']) {
+                            if (self::$cfg->booking_notifications) {
+                                $changed = true;
+                            }
                             // อัปเดตเบอร์โทรสมาชิก
-                            $this->db()->update($this->getTableName('user'), $login['id'], $user);
+                            $db->update($this->getTableName('user'), $login['id'], $user);
                         }
                         // รายละเอียดการจอง
                         $reservation_data = $this->getTableName('reservation_data');
-                        $this->db()->delete($reservation_data, array('reservation_id', $index->id), 0);
+                        $db->delete($reservation_data, array('reservation_id', $index->id), 0);
                         foreach ($datas as $key => $value) {
                             if ($value != '') {
-                                $this->db()->insert($reservation_data, array(
+                                $db->insert($reservation_data, array(
                                     'reservation_id' => $index->id,
                                     'name' => $key,
                                     'value' => $value,
                                 ));
                             }
                         }
-                        if (empty($ret)) {
+                        if (empty($ret) && $changed) {
                             // ใหม่ ส่งอีเมลไปยังผู้ที่เกี่ยวข้อง
                             $ret['alert'] = \Booking\Email\Model::send($login['username'], $login['name'], $save);
+                        } else {
+                            // คืนค่า
+                            $ret['alert'] = Language::get('Saved successfully');
                         }
                         $ret['location'] = $request->getUri()->postBack('index.php', array('module' => 'booking'));
                         // เคลียร์

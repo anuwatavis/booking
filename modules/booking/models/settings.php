@@ -32,12 +32,14 @@ class Model extends \Kotchasan\KBase
     public function submit(Request $request)
     {
         $ret = array();
-        // session, token, can_config
+        // session, token, can_config, ไม่ใช่สมาชิกตัวอย่าง
         if ($request->initSession() && $request->isSafe() && $login = Login::isMember()) {
             if (Login::notDemoMode($login) && Login::checkPermission($login, 'can_config')) {
                 // โหลด config
                 $config = Config::load(ROOT_PATH.'settings/config.php');
                 $config->booking_w = max(100, $request->post('booking_w')->toInt());
+                $config->booking_status = $request->post('booking_status')->toInt();
+                $config->booking_notifications = $request->post('booking_notifications')->toInt();
                 // save config
                 if (Config::save($config, ROOT_PATH.'settings/config.php')) {
                     // คืนค่า

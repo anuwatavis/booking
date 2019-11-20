@@ -32,13 +32,16 @@ class Model extends \Kotchasan\KBase
     public static function send($mailto, $name, $order)
     {
         if (self::$cfg->noreply_email != '') {
+            // สถานะการจอง
+            $status = Language::find('BOOKING_STATUS', '', $order['status']);
             // ข้อความ
             $msg = array(
                 '{LNG_Book a meeting}',
                 '{LNG_Contact name}: '.$name,
                 '{LNG_Topic}: '.$order['topic'],
                 '{LNG_Date}: '.Date::format($order['begin']).' - '.Date::format($order['end']),
-                '{LNG_Status}: '.Language::find('BOOKING_STATUS', '', $order['status']),
+                '{LNG_Status}: '.$status,
+                '{LNG_Reason}: '.$order['reason'],
                 'URL: '.WEB_URL,
             );
             $msg = Language::trans(implode("\n", $msg));
@@ -61,7 +64,7 @@ class Model extends \Kotchasan\KBase
                 $emails[$item->username] = $item->username.'<'.$item->name.'>';
             }
             // ส่งอีเมล
-            $subject = '['.self::$cfg->web_title.'] '.Language::get('Book a meeting');
+            $subject = '['.self::$cfg->web_title.'] '.Language::get('Book a meeting').' '.$status;
             $err = \Kotchasan\Email::send(implode(',', $emails), self::$cfg->noreply_email, $subject, nl2br($msg));
             if ($err->error()) {
                 // คืนค่า error

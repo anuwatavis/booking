@@ -22,4 +22,6 @@ return array(
     'user_register' => 0,
     'welcome_email' => 0,
     'booking_w' => 600,
+    'booking_status' => 0,
+    'booking_notifications' => 0,
 );
