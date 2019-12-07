@@ -70,6 +70,7 @@ class View extends \Gcms\View
         $content .= '<tr><th>{LNG_Contact name}</th><td>'.$index->contact.'</td></tr>';
         $content .= '<tr><th>{LNG_Phone}</th><td><a href="tel:'.$index->phone.'">'.$index->phone.'</a></td></tr>';
         $content .= '<tr><th>{LNG_Date}</th><td>'.Date::format($index->begin).' - '.Date::format($index->end).'</td></tr>';
+        // หมวดหมู่
         $category = \Booking\Category\Model::init();
         foreach (Language::get('BOOKING_SELECT', array()) as $key => $label) {
             if (!empty($index->{$key})) {

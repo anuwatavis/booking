@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{LANGUAGE}" dir=ltr>
+<html lang="{LANGUAGE}" dir="ltr" class="smooth">
 
 <head>
   <meta charset=utf-8>
@@ -13,7 +13,7 @@
 <body class="responsive" style="background-image:url({BGIMAGE})">
   <div id=slidemenu_content>
     <div class="wrapper" id="toTop">
-      <header class="header">
+      <header class="header" id="scroll-to">
         <div class="table fullwidth">
           <h2 class="td"><a href="{WEBURL}index.php" id=logo title="{WEBTITLE}">{LOGO}</a></h2>
           <div class="td right">
@@ -40,7 +40,7 @@
       </p>
     </footer>
   </div>
-  <a href=#slidemenu_content class=scroller title="{LNG_scroll to top}">^</a>
+  <a href=#scroll-to class=scroller title="{LNG_scroll to top}">^</a>
   <link href='https://fonts.googleapis.com/css?family=Athiti&subset=thai,latin' rel='stylesheet' type='text/css'>
   <script>
     $G(window).Ready(function() {
