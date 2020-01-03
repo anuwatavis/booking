@@ -26,6 +26,7 @@ CREATE TABLE `{prefix}_language` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
+
 --
 -- Table structure for table `{prefix}_category`
 --

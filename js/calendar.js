@@ -247,7 +247,6 @@ Calendar.prototype = {
         diff_start_first = a.compare(self.first_day_of_calendar);
         diff_start_first = diff_start_first.year < 0 ? 0 - diff_start_first.days : diff_start_first.days;
         diff = a.compare(end_date);
-        console.log(start_date, end_date, diff);
         if (
           (diff_start_first >= 0) ||
           (diff_start_first < 0 && diff_end_first > 0 && diff_end_first < 42) ||
