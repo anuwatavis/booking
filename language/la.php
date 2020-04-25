@@ -183,6 +183,7 @@ return array(
   'Phone' => 'ໂທລະສັບ',
   'Please fill in' => 'ກະລຸນາຕື່ມຂໍ້ມູນໃສ່',
   'Please log in. To continue.' => 'ກະລຸນາເຂົ້າລະບົບ ກ່ອນທີ່ຈະດຳເນີນການ',
+  'Please login' => 'ກະລຸນາເຂົ້າລະບົບ.',
   'Please select :name at least one item' => 'ກະລຸນາເລືອກ :name ຢ່າງໜ້ອຍ 1 ລາຍການ',
   'Port' => 'ພອດ',
   'Profile' => 'ຂໍ້ມູນສ່ວນຕົວ',

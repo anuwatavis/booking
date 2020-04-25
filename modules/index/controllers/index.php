@@ -52,6 +52,7 @@ class Controller extends \Gcms\Controller
         // Javascript
         self::$view->addScript('var FIRST_MODULE="'.self::$menus->home().'";');
         // โหลดค่าติดตั้งโมดูล
+        $modules = array();
         $dir = ROOT_PATH.'modules/';
         $f = @opendir($dir);
         if ($f) {
@@ -59,20 +60,23 @@ class Controller extends \Gcms\Controller
                 if ($text != '.' && $text != '..' && $text != 'index' && $text != 'css' && $text != 'js' && is_dir($dir.$text)) {
                     if (is_file($dir.$text.'/controllers/init.php')) {
                         require_once $dir.$text.'/controllers/init.php';
-                        $className = '\\'.ucfirst($text).'\Init\Controller';
-                        if (method_exists($className, 'execute')) {
-                            $className::execute($request, self::$menus, $login);
-                        }
+                        $modules[] = '\\'.ucfirst($text).'\Init\Controller';
                     }
                 }
             }
             closedir($f);
+            foreach ($modules as $className) {
+                if (method_exists($className, 'execute')) {
+                    $className::execute($request, self::$menus, $login);
+                }
+            }
         }
         // Controller หลัก
         $page = createClass('Index\Main\Controller')->execute($request);
         $languages = '';
         foreach (Language::installedLanguage() as $item) {
-            $languages .= '<li><a id=lang_'.$item.' href="'.$page->canonical()->withParams(array('lang' => $item), true).'" title="{LNG_Language} '.strtoupper($item).'" style="background-image:url('.WEB_URL.'language/'.$item.'.gif)" tabindex=1>&nbsp;</a></li>';
+            $t = '{LNG_Language} '.strtoupper($item);
+            $languages .= '<li><a id=lang_'.$item.' href="'.$page->canonical()->withParams(array('lang' => $item), true).'" aria-label="'.$t.'"  style="background-image:url('.WEB_URL.'language/'.$item.'.gif)" tabindex=1>&nbsp;</a></li>';
         }
         if (is_file(ROOT_PATH.DATA_FOLDER.'images/bg_image.png')) {
             $bg_image = WEB_URL.DATA_FOLDER.'images/bg_image.png';
@@ -80,14 +84,16 @@ class Controller extends \Gcms\Controller
             $bg_image = '';
         }
         if (is_file(ROOT_PATH.DATA_FOLDER.'images/logo.png')) {
-            $logo = '<img src="'.WEB_URL.DATA_FOLDER.'images/logo.png" alt="{WEBTITLE}">&nbsp;{WEBTITLE}';
+            $logo_image = '<img src="'.WEB_URL.DATA_FOLDER.'images/logo.png" alt="{WEBTITLE}">';
+            $logo = $logo_image.'<span class=mobile>&nbsp;{WEBTITLE}</span>';
         } else {
+            $logo_image = '';
             $logo = '<span class="'.self::$cfg->default_icon.'">{WEBTITLE}</span>';
         }
         if ($login) {
             $loginname = '{LNG_Welcome} <a href="index.php?module=editprofile" title="{LNG_Editing your account}">'.(empty($login['name']) ? $login['username'] : $login['name']).'</a>';
         } else {
-            $loginname = '<a href="index.php?module=welcome&amp;action=login">{LNG_Please log in}</a>';
+            $loginname = '<a href="index.php?module=welcome&amp;action=login">{LNG_Please login}</a>';
         }
         // เนื้อหา
         self::$view->setContents(array(
@@ -95,6 +101,7 @@ class Controller extends \Gcms\Controller
             '/{MAIN}/' => $page->detail(),
             // โลโก
             '/{LOGO}/' => $logo,
+            '/{LOGOIMAGE}/' => $logo_image,
             // language menu
             '/{LANGUAGES}/' => $languages,
             // title
