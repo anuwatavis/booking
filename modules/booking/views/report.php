@@ -231,7 +231,7 @@ class View extends \Gcms\View
         if ($btn == 'edit') {
             if (empty(self::$cfg->booking_approving) && $item['today'] == 2) {
                 return false;
-            } elseif (self::$cfg->booking_approving == 1 && $item['remain'] > 0) {
+            } elseif (self::$cfg->booking_approving == 1 && $item['remain'] < 0) {
                 return false;
             } else {
                 return $attributes;
