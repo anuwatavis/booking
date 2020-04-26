@@ -38,6 +38,7 @@ class Model extends \Kotchasan\KBase
                 // โหลด config
                 $config = Config::load(ROOT_PATH.'settings/config.php');
                 $config->booking_w = max(100, $request->post('booking_w')->toInt());
+                $config->booking_approving = $request->post('booking_approving')->toInt();
                 $config->booking_status = $request->post('booking_status')->toInt();
                 $config->booking_notifications = $request->post('booking_notifications')->toInt();
                 // save config

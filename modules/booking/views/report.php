@@ -90,7 +90,7 @@ class View extends \Gcms\View
             /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
-            'hideColumns' => array('id', 'today', 'end'),
+            'hideColumns' => array('id', 'today', 'end', 'remain'),
             /* คอลัมน์ที่สามารถค้นหาได้ */
             'searchColumns' => array('name', 'contact', 'phone'),
             /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
@@ -228,8 +228,14 @@ class View extends \Gcms\View
      */
     public function onCreateButton($btn, $attributes, $item)
     {
-        if ($btn == 'edit' && in_array($item['today'], array(1, 2))) {
-            return false;
+        if ($btn == 'edit') {
+            if (empty(self::$cfg->booking_approving) && $item['today'] == 2) {
+                return false;
+            } elseif (self::$cfg->booking_approving == 1 && $item['remain'] > 0) {
+                return false;
+            } else {
+                return $attributes;
+            }
         } else {
             return $attributes;
         }

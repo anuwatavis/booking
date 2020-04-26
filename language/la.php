@@ -8,6 +8,12 @@ return array(
   'All :count entries, displayed :start to :end, page :page of :total pages' => 'ທັງໝົດ :count ລາຍການ, ສະແດງ :start ເຖິງ :end, ໜ້າທີ່ :page ຈາກທັງໝົດ:total ໜ້າ',
   'all items' => 'ທັງໝົດ',
   'All meeting rooms' => 'ຫ້ອງປະຊຸມທັງຫມົດ',
+  'APPROVING_RESERVATIONS' => array(
+    0 => 'ສິ້ນສຸດການຈອງ',
+    1 => 'ກ່ອນທີ່ຈະຈອງເວລາ',
+    2 => 'ຕະຫຼອດເວລາ'
+  ),
+  'Approving/editing reservations' => 'ການອະນຸມັດ/ແກ້ໄຂການຈອງ',
   'Attendees number' => 'ຈໍານວນຜູ້ເຂົ້າຮ່ວມ',
   'Authentication require' => 'ການກວດກາຄວາມຖືກຕ້ອງ',
   'Background color' => 'ສີພື້ນຫລັງ',

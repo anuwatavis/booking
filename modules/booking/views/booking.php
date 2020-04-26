@@ -180,7 +180,7 @@ class View extends \Gcms\View
             'value' => $end_time,
         ));
         // ตัวเลือก checkbox
-        foreach (Language::get('BOOKING_OPTIONS') as $key => $label) {
+        foreach (Language::get('BOOKING_OPTIONS', array()) as $key => $label) {
             $fieldset->add('checkboxgroups', array(
                 'id' => $key,
                 'labelClass' => 'g-input icon-category',

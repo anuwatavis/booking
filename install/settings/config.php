@@ -24,4 +24,5 @@ return array(
     'booking_w' => 600,
     'booking_status' => 0,
     'booking_notifications' => 0,
+    'booking_approving' => 0,
 );

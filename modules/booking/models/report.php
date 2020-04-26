@@ -40,7 +40,7 @@ class Model extends \Kotchasan\Model
         if ($params['room_id'] > 0) {
             $where[] = array('V.room_id', $params['room_id']);
         }
-        $sql = Sql::create('(CASE WHEN NOW() BETWEEN V.`begin` AND V.`end` THEN 1 WHEN NOW() > V.`end` THEN 2 ELSE 0 END) AS `today`');
+
         $select = array('V.id', 'V.topic', 'V.room_id', 'R.name');
         $query = static::createQuery()
             ->from('reservation V')
@@ -59,7 +59,18 @@ class Model extends \Kotchasan\Model
             $select[] = 'M'.$n.'.value '.$label;
             ++$n;
         }
-        $select = array_merge($select, array('U.name contact', 'U.phone', 'V.begin', 'V.end', 'V.create_date', 'V.reason', $sql, 'V.status'));
+        $today = date('Y-m-d H:i:s');
+        $select = array_merge($select, array(
+            'U.name contact',
+            'U.phone',
+            'V.begin',
+            'V.end',
+            'V.create_date',
+            'V.reason',
+            Sql::create('(CASE WHEN "'.$today.'" BETWEEN V.`begin` AND V.`end` THEN 1 WHEN "'.$today.'" > V.`end` THEN 2 ELSE 0 END) AS `today`'),
+            Sql::create('TIMESTAMPDIFF(MINUTE,"'.$today.'",V.`begin`) AS `remain`'),
+            'V.status',
+        ));
 
         return $query->select($select)->where($where);
     }

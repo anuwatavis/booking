@@ -60,6 +60,15 @@ class View extends \Gcms\View
             'options' => Language::get('BOOKING_STATUS'),
             'value' => isset(self::$cfg->booking_status) ? self::$cfg->booking_status : 0,
         ));
+        // booking_approving
+        $fieldset->add('select', array(
+            'id' => 'booking_approving',
+            'labelClass' => 'g-input icon-write',
+            'itemClass' => 'item',
+            'label' => '{LNG_Approving/editing reservations}',
+            'options' => Language::get('APPROVING_RESERVATIONS'),
+            'value' => isset(self::$cfg->booking_approving) ? self::$cfg->booking_approving : 0,
+        ));
         // booking_notifications
         $fieldset->add('select', array(
             'id' => 'booking_notifications',
