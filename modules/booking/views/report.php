@@ -69,12 +69,6 @@ class View extends \Gcms\View
                 'value' => $params[$key],
             );
         }
-        $filters[] = array(
-            'name' => 'status',
-            'text' => '{LNG_Status}',
-            'options' => $this->status,
-            'value' => $params['status'],
-        );
         // URL สำหรับส่งให้ตาราง
         $uri = $request->createUriWithGlobals(WEB_URL.'index.php');
         // ตาราง

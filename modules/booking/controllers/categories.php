@@ -25,7 +25,7 @@ use Kotchasan\Language;
 class Controller extends \Gcms\Controller
 {
     /**
-     * หมวดหมู่ของระบบโรงเรียน.
+     * หมวดหมู่
      *
      * @param Request $request
      *
@@ -64,6 +64,8 @@ class Controller extends \Gcms\Controller
             $section->add('header', array(
                 'innerHTML' => '<h2 class="icon-category">'.$this->title.'</h2>',
             ));
+            // menu
+            $section->appendChild(\Index\Tabmenus\View::render($request, 'settings', 'booking'));
             // แสดงฟอร์ม
             $section->appendChild(createClass('Booking\Categories\View')->render($index));
             // คืนค่า HTML

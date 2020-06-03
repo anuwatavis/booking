@@ -164,6 +164,7 @@ class Model extends \Kotchasan\Model
                     }
                     // ตาราง
                     $reservation_table = $this->getTableName('reservation');
+                    $reservation_data = $this->getTableName('reservation_data');
                     // Database
                     $db = $this->db();
                     if (empty($ret)) {
@@ -209,7 +210,6 @@ class Model extends \Kotchasan\Model
                             $db->update($this->getTableName('user'), $login['id'], $user);
                         }
                         // รายละเอียดการจอง
-                        $reservation_data = $this->getTableName('reservation_data');
                         $db->delete($reservation_data, array('reservation_id', $index->id), 0);
                         foreach ($datas as $key => $value) {
                             if ($value != '') {

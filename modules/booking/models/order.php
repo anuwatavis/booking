@@ -106,7 +106,9 @@ class Model extends \Kotchasan\Model
                         // ไม่ได้กรอก begin_date
                         $ret['ret_begin_date'] = 'Please fill in';
                     }
-                    if (empty($begin_time)) {
+                    if (preg_match('/^([0-9]{2,2}:[0-9]{2,2}):[0-9]{2,2}$/', $begin_time, $match)) {
+                        $begin_time = $match[1].':01';
+                    } else {
                         // ไม่ได้กรอก begin_time
                         $ret['ret_begin_time'] = 'Please fill in';
                     }
@@ -129,15 +131,19 @@ class Model extends \Kotchasan\Model
                         // วันที่ ไม่ถูกต้อง
                         $ret['ret_end_date'] = Language::get('End date must be greater than begin date');
                     }
+                    // ตาราง
+                    $reservation_table = $this->getTableName('reservation');
+                    $reservation_data = $this->getTableName('reservation_data');
+                    // Database
+                    $db = $this->db();
                     if (empty($ret)) {
                         // save
-                        $this->db()->update($this->getTableName('reservation'), $index->id, $save);
+                        $db->update($reservation_table, $index->id, $save);
                         // อัปเดต datas
-                        $reservation_data = $this->getTableName('reservation_data');
-                        $this->db()->delete($reservation_data, array('reservation_id', $index->id), 0);
+                        $db->delete($reservation_data, array('reservation_id', $index->id), 0);
                         foreach ($datas as $key => $value) {
                             if ($value != '') {
-                                $this->db()->insert($reservation_data, array(
+                                $db->insert($reservation_data, array(
                                     'reservation_id' => $index->id,
                                     'name' => $key,
                                     'value' => $value,

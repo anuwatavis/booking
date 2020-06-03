@@ -55,6 +55,8 @@ class Controller extends \Gcms\Controller
             $section->add('header', array(
                 'innerHTML' => '<h2 class="icon-list">'.$this->title.'</h2>',
             ));
+            // menu
+            $section->appendChild(\Index\Tabmenus\View::render($request, 'settings', 'booking'));
             // แสดงตาราง
             $section->appendChild(createClass('Booking\Setup\View')->render($request, $login));
             // คืนค่า HTML

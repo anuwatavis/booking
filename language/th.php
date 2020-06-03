@@ -114,8 +114,8 @@ return array(
   'Image' => 'รูปภาพ',
   'Image size is in pixels' => 'ขนาดของรูปภาพเป็นพิกเซล',
   'Import' => 'นำเข้า',
-  'Incorrect :name' => ':name ไม่ถูกต้อง',
   'Initial booking status' => 'สถานะการจองเริ่มต้น',
+  'Invalid :name' => ':name ไม่ถูกต้อง',
   'Key' => 'คีย์',
   'Language' => 'ภาษา',
   'Last login' => 'เข้าระบบล่าสุด',
@@ -134,7 +134,8 @@ return array(
   'Mail server settings' => 'ค่ากำหนดของเมล์เซิร์ฟเวอร์',
   'MAIL_PROGRAMS' => array(
     0 => 'ส่งจดหมายด้วย PHP',
-    1 => 'ส่งจดหมายด้วย PHPMailer (แนะนำ)'
+    1 => 'ส่งจดหมายด้วย PHPMailer+SMTP (แนะนำ)',
+    2 => 'ส่งจดหมายด้วย PHPMailer+PHP Mail'
   ),
   'Manage languages' => 'จัดการภาษา',
   'Meeting room are not available at select time' => 'ห้องประชุมไม่สามารถใช้งานได้ในเวลาที่เลือก',
@@ -188,7 +189,7 @@ return array(
   ),
   'Phone' => 'โทรศัพท์',
   'Please fill in' => 'กรุณากรอก',
-  'Please log in. To continue.' => 'กรุณาเข้าระบบ ก่อนดำเนินการต่อ',
+  'Please log in to continue' => 'กรุณาเข้าระบบ ก่อนดำเนินการต่อ',
   'Please login' => 'กรุณาเข้าสู่ระบบ',
   'Please select :name at least one item' => 'กรุณาเลือก :name อย่างน้อย 1 รายการ',
   'Port' => 'พอร์ต',

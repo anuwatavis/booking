@@ -3,7 +3,7 @@
 /* config.php */
 
 return array(
-    'version' => '2.2.0',
+    'version' => '2.2.1',
     'web_title' => 'E-Booking',
     'web_description' => 'ระบบจองห้องประชุม',
     'timezone' => 'Asia/Bangkok',

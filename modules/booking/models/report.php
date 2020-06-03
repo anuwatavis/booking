@@ -40,7 +40,6 @@ class Model extends \Kotchasan\Model
         if ($params['room_id'] > 0) {
             $where[] = array('V.room_id', $params['room_id']);
         }
-
         $select = array('V.id', 'V.topic', 'V.room_id', 'R.name');
         $query = static::createQuery()
             ->from('reservation V')
