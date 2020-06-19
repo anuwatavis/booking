@@ -34,8 +34,8 @@ class Controller extends \Gcms\Controller
     public function render(Request $request)
     {
         $index = (object) array(
-            'status' => $request->request('status', -1)->toInt(),
-            'booking_status' => array(-1 => Language::get('all items')) + Language::get('BOOKING_STATUS'),
+            'status' => $request->request('status')->toInt(),
+            'booking_status' => Language::get('BOOKING_STATUS'),
         );
         $index->status = isset($index->booking_status[$index->status]) ? $index->status : 1;
         // ข้อความ title bar

@@ -43,7 +43,7 @@ class Model extends \Kotchasan\Model
         $select = array('V.id', 'V.topic', 'V.room_id', 'R.name');
         $query = static::createQuery()
             ->from('reservation V')
-            ->join('rooms R', 'INNER', array('R.id', 'V.room_id'));
+            ->join('rooms R', 'LEFT', array('R.id', 'V.room_id'));
         $n = 1;
         foreach (Language::get('BOOKING_SELECT', array()) as $key => $label) {
             $on = array(

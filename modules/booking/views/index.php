@@ -64,7 +64,7 @@ class View extends \Gcms\View
         $filters[] = array(
             'name' => 'status',
             'text' => '{LNG_Status}',
-            'options' => $this->status,
+            'options' => array(-1 => '{LNG_all items}') + $this->status,
             'value' => $params['status'],
         );
         // URL สำหรับส่งให้ตาราง
