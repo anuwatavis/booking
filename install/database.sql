@@ -31,7 +31,6 @@ CREATE TABLE `{prefix}_language` (
 --
 
 CREATE TABLE `{prefix}_category` (
-  `id` int(11) NOT NULL,
   `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(11) DEFAULT 0,
   `topic` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
@@ -43,17 +42,17 @@ CREATE TABLE `{prefix}_category` (
 -- Dumping data for table `{prefix}_category`
 --
 
-INSERT INTO `{prefix}_category` (`id`, `type`, `category_id`, `topic`, `color`, `published`) VALUES
-(46, 'department', 1, 'บริหาร', '', 1),
-(47, 'department', 2, 'จัดซื้อจัดจ้าง', '', 1),
-(48, 'department', 3, 'บุคคล', '', 1),
-(53, 'use', 1, 'ประชุม', '', 1),
-(54, 'use', 2, 'สัมนา', '', 1),
-(55, 'use', 3, 'จัดเลี้ยง', '', 1),
-(42, 'accessories', 4, 'ของว่าง', '', 1),
-(41, 'accessories', 3, 'เครื่องฉายแผ่นใส', '', 1),
-(40, 'accessories', 2, 'จอโปรเจ็คเตอร์', '', 1),
-(39, 'accessories', 1, 'เครื่องคอมพิวเตอร์', '', 1);
+INSERT INTO `{prefix}_category` (`type`, `category_id`, `topic`, `color`, `published`) VALUES
+('department', 1, 'บริหาร', '', 1),
+('department', 2, 'จัดซื้อจัดจ้าง', '', 1),
+('department', 3, 'บุคคล', '', 1),
+('use', 1, 'ประชุม', '', 1),
+('use', 2, 'สัมนา', '', 1),
+('use', 3, 'จัดเลี้ยง', '', 1),
+('accessories', 4, 'ของว่าง', '', 1),
+('accessories', 3, 'เครื่องฉายแผ่นใส', '', 1),
+('accessories', 2, 'จอโปรเจ็คเตอร์', '', 1),
+('accessories', 1, 'เครื่องคอมพิวเตอร์', '', 1);
 
 -- --------------------------------------------------------
 
@@ -172,7 +171,6 @@ CREATE TABLE `{prefix}_user` (
 -- Indexes for table `{prefix}_category`
 --
 ALTER TABLE `{prefix}_category`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `type` (`type`),
   ADD KEY `category_id` (`category_id`);
 
@@ -212,16 +210,6 @@ ALTER TABLE `{prefix}_rooms_meta`
 --
 ALTER TABLE `{prefix}_reservation_data`
   ADD KEY `reservation_id` (`reservation_id`) USING BTREE;
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `{prefix}_category`
---
-ALTER TABLE `{prefix}_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `{prefix}_language`

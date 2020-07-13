@@ -48,10 +48,10 @@ class Controller extends \Gcms\Controller
                 'class' => 'breadcrumbs',
             ));
             $ul = $breadcrumbs->add('ul');
-            $ul->appendChild('<li><span class="icon-settings">{LNG_Settings}</span></li>');
+            $ul->appendChild('<li><span class="icon-calendar">{LNG_Settings}</span></li>');
             $ul->appendChild('<li><span>{LNG_Book a meeting}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-calendar">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-settings">'.$this->title.'</h2>',
             ));
             // menu
             $section->appendChild(\Index\Tabmenus\View::render($request, 'settings', 'booking'));

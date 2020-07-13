@@ -44,10 +44,10 @@ class Controller extends \Gcms\Controller
         }
         // ข้อความ title bar
         $title = $index->categories[$index->type];
-        $this->title = Language::trans('{LNG_List of} ').$title;
+        $this->title = Language::trans('{LNG_List of} '.$title);
         // เลือกเมนู
         $this->menu = 'settings';
-        // สามารถจัดการห้องประชุมได้
+        // สามารถบริหารจัดการได้
         if (Login::checkPermission(Login::isMember(), 'can_manage_room')) {
             // แสดงผล
             $section = Html::create('section', array(
