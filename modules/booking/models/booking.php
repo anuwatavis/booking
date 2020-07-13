@@ -222,6 +222,7 @@ class Model extends \Kotchasan\Model
                         }
                         if (empty($ret) && $changed) {
                             // ใหม่ ส่งอีเมลไปยังผู้ที่เกี่ยวข้อง
+                            $save['id'] = $index->id;
                             $ret['alert'] = \Booking\Email\Model::send($login['username'], $login['name'], $save);
                         } else {
                             // คืนค่า

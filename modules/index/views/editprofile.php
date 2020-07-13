@@ -128,6 +128,7 @@ class View extends \Gcms\View
             'label' => '{LNG_Identification No.}',
             'maxlength' => 13,
             'value' => $user['id_card'],
+            'validator' => array('keyup,change', 'checkIdcard'),
         ));
         // address
         $fieldset->add('text', array(

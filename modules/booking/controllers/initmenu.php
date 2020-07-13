@@ -46,21 +46,23 @@ class Controller extends \Kotchasan\KBase
                 ),
             ), 'member');
         }
+        $submenus = array();
+        // สามารถตั้งค่าระบบได้
+        if (Login::checkPermission($login, 'can_config')) {
+            $submenus['settings'] = array(
+                'text' => '{LNG_Settings}',
+                'url' => 'index.php?module=booking-settings',
+            );
+        }
+        // สามารถจัดการห้องประชุมได้
         if (Login::checkPermission($login, 'can_manage_room')) {
-            // เมนูตั้งค่า
-            $submenus = array(
-                'settings' => array(
-                    'text' => '{LNG_Settings}',
-                    'url' => 'index.php?module=booking-settings',
-                ),
-                'setup' => array(
-                    'text' => '{LNG_List of} {LNG_Room}',
-                    'url' => 'index.php?module=booking-setup',
-                ),
-                'write' => array(
-                    'text' => '{LNG_Add New} {LNG_Room}',
-                    'url' => 'index.php?module=booking-write',
-                ),
+            $submenus['setup'] = array(
+                'text' => '{LNG_List of} {LNG_Room}',
+                'url' => 'index.php?module=booking-setup',
+            );
+            $submenus['write'] = array(
+                'text' => '{LNG_Add New} {LNG_Room}',
+                'url' => 'index.php?module=booking-write',
             );
             foreach (Language::get('BOOKING_OPTIONS', array()) as $type => $text) {
                 $submenus[] = array(
@@ -74,6 +76,8 @@ class Controller extends \Kotchasan\KBase
                     'url' => 'index.php?module=booking-categories&amp;type='.$type,
                 );
             }
+        }
+        if (!empty($submenus)) {
             $menu->add('settings', '{LNG_Room}', null, $submenus, 'booking');
         }
         if (Login::checkPermission($login, 'can_approve_room')) {

@@ -105,6 +105,9 @@ window.$K = (function() {
               if (elem.readOnly) {
                 text.readOnly = true;
               }
+              if (obj.type == "currency") {
+                text.digit = floatval(obj.dataset['digit'] ? obj.dataset['digit'] : 2);
+              }
               text.className = elem.className;
               text.initObj = true;
               elem.replace(text);
@@ -148,7 +151,7 @@ window.$K = (function() {
                         this.value = Math.min(obj.max, floatval(this.value));
                       }
                       if (obj.type == "currency") {
-                        this.value = toCurrency(this.value);
+                        this.value = toCurrency(this.value, this.digit);
                       }
                     });
                   } else {
@@ -286,8 +289,8 @@ window.$K = (function() {
     var n = parseFloat(typeof val == 'string' ? val.replace(/[^0-9\-\.]/g, '') : val);
     return isNaN(n) ? 0 : n;
   };
-  window.toCurrency = function(val) {
-    return floatval(val).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  window.toCurrency = function(val, digit) {
+    return floatval(val).toFixed(Object.isNull(digit) ? 2 : digit).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   };
   window.round = function(val, digit) {
     var value = Math.round(val * Math.pow(10, digit)) / Math.pow(10, digit);
