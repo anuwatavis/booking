@@ -45,7 +45,7 @@ class Model extends \Kotchasan\KBase
         );
         $msg = Language::trans(implode("\n", $msg));
         // ข้อความของแอดมิน
-        $admin_msg = $msg."\nURL: ".WEB_URL."index.php?module=booking-order&id=".$order['id'];
+        $admin_msg = nl2br($msg."\nURL: ".WEB_URL."index.php?module=booking-order&id=".$order['id']);
         // ส่ง Line
         Line::send($admin_msg);
         if (self::$cfg->noreply_email != '') {
