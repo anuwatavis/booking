@@ -342,6 +342,22 @@ window.$K = (function() {
     div.appendChild(p);
     div.scrollTop = div.scrollHeight;
   };
+  window.timeToMinute = function(time) {
+    var sp = time.split(':');
+    if (sp.length == 1) {
+      return 0;
+    } else {
+      return (floatval(sp[0]) * 60) + floatval(sp[1]);
+    }
+  };
+  window.timeToSecond = function(time) {
+    var sp = time.split(':');
+    if (sp.length == 1) {
+      return 0;
+    } else {
+      return (floatval(sp[0]) * 60) + (floatval(sp[1] * 60) + floatval(sp[2]));
+    }
+  };
   Function.prototype.bind = function(o) {
     var __method = this;
     return function() {

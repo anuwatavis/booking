@@ -86,7 +86,7 @@ class View extends \Gcms\View
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
             'hideColumns' => array('id', 'today', 'end', 'remain'),
             /* คอลัมน์ที่สามารถค้นหาได้ */
-            'searchColumns' => array('name', 'contact', 'phone'),
+            'searchColumns' => array('topic', 'name', 'contact', 'phone'),
             /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
             'action' => 'index.php/booking/model/report/action',
             'actionCallback' => 'dataTableActionCallback',
