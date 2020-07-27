@@ -50,8 +50,9 @@ class Controller extends \Gcms\Controller
                 'class' => 'breadcrumbs',
             ));
             $ul = $breadcrumbs->add('ul');
-            $ul->appendChild('<li><span class="icon-calendar">{LNG_Module}</span></li>');
+            $ul->appendChild('<li><span class="icon-calendar">{LNG_Settings}</span></li>');
             $ul->appendChild('<li><span>{LNG_Book a meeting}</span></li>');
+            $ul->appendChild('<li><span>{LNG_List of}</span></li>');
             $section->add('header', array(
                 'innerHTML' => '<h2 class="icon-list">'.$this->title.'</h2>',
             ));

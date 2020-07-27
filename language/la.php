@@ -176,7 +176,7 @@ return array(
   'Name' => 'ຊື່ ນາມສະກຸນ',
   'No need to fill in English text. If the English text matches the Key' => 'ບໍ່ຈຳເປັນເພີ່ມຂໍ້ຄວາມໃນພາສາອັງກິດຫາກຂໍ້ຄວາມໃນພາສານອັງກົງກັບແປ້ນພີມ',
   'not a registered user' => 'ບໍ່ພົບສະມາຊິກນີ້ລົງທະບຽນໄວ້',
-  'Notifications' => 'ຄໍາປະກາດ',
+  'Notification' => 'ຄໍາປະກາດ',
   'Notify relevant parties when booking details are modified by customers' => 'ແຈ້ງໃຫ້ພາກສ່ວນທີ່ກ່ຽວຂ້ອງຊາບໃນເວລາທີ່ລາຍລະອຽດການຈອງຖືກດັດແກ້ໂດຍລູກຄ້າ',
   'Other' => 'ອື່ນໆ',
   'Password' => 'ລະຫັດຜ່ານ',

@@ -32,7 +32,7 @@ class Line extends \Kotchasan\KBase
      */
     public static function send($message, $line_api_key = null)
     {
-        if ($line_api_key == '') {
+        if (empty($line_api_key)) {
             $line_api_key = empty(self::$cfg->line_api_key) ? '' : self::$cfg->line_api_key;
         }
         if ($line_api_key == '') {

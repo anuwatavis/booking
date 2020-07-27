@@ -4226,12 +4226,6 @@ td.buttons .button:last-child {
     box-shadow: none;
     border-style: none;
   }
-  body.responsive .sidemenu.responsive>ul ul {
-    height: 0;
-  }
-  body.responsive .sidemenu.responsive li:hover>ul {
-    height: auto;
-  }
   body.responsive .topmenu.responsive>ul>li>a {
     display: block;
     position: relative;

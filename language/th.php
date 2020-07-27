@@ -176,7 +176,7 @@ return array(
   'Name' => 'ชื่อ นามสกุล',
   'No need to fill in English text. If the English text matches the Key' => 'ไม่จำเป็นต้องกรอกข้อความในภาษาอังกฤษ หากข้อความในภาษาอังกฤษตรงกับคีย์',
   'not a registered user' => 'ไม่พบสมาชิกนี้ลงทะเบียนไว้',
-  'Notifications' => 'การแจ้งเตือน',
+  'Notification' => 'การแจ้งเตือน',
   'Notify relevant parties when booking details are modified by customers' => 'แจ้งเตือนไปยังผู้ที่เกี่ยวข้องเมื่อมีการแก้ไขรายละเอียดการจองโดยผู้จอง',
   'Other' => 'อื่นๆ',
   'Password' => 'รหัสผ่าน',

@@ -50,6 +50,7 @@ class Controller extends \Gcms\Controller
             $ul = $breadcrumbs->add('ul');
             $ul->appendChild('<li><span class="icon-calendar">{LNG_Settings}</span></li>');
             $ul->appendChild('<li><span>{LNG_Book a meeting}</span></li>');
+            $ul->appendChild('<li><span>{LNG_Module settings}</span></li>');
             $section->add('header', array(
                 'innerHTML' => '<h2 class="icon-settings">'.$this->title.'</h2>',
             ));

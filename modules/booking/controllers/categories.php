@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * module=booking-categories.
+ * module=booking-categories
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

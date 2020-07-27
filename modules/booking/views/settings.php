@@ -74,7 +74,7 @@ class View extends \Gcms\View
             'id' => 'booking_notifications',
             'labelClass' => 'g-input icon-email',
             'itemClass' => 'item',
-            'label' => '{LNG_Notifications}',
+            'label' => '{LNG_Notification}',
             'comment' => '{LNG_Notify relevant parties when booking details are modified by customers}',
             'options' => Language::get('BOOLEANS'),
             'value' => isset(self::$cfg->booking_notifications) ? self::$cfg->booking_notifications : 0,

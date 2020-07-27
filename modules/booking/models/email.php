@@ -10,7 +10,6 @@
 
 namespace Booking\Email;
 
-use Gcms\Line;
 use Kotchasan\Date;
 use Kotchasan\Language;
 
@@ -32,6 +31,7 @@ class Model extends \Kotchasan\KBase
      */
     public static function send($mailto, $name, $order)
     {
+        $ret = array();
         // สถานะการจอง
         $status = Language::find('BOOKING_STATUS', '', $order['status']);
         // ข้อความ
@@ -41,21 +41,25 @@ class Model extends \Kotchasan\KBase
             '{LNG_Topic}: '.$order['topic'],
             '{LNG_Date}: '.Date::format($order['begin']).' - '.Date::format($order['end']),
             '{LNG_Status}: '.$status,
-            '{LNG_Reason}: '.$order['reason'],
         );
+        if (!empty($order['reason'])) {
+            $msg[] = '{LNG_Reason}: '.$order['reason'];
+        }
+        $msg[] = 'URL: '.WEB_URL.'index.php?module=booking';
+        // ข้อความของ user
         $msg = Language::trans(implode("\n", $msg));
         // ข้อความของแอดมิน
-        $admin_msg = nl2br($msg."\nURL: ".WEB_URL."index.php?module=booking-order&id=".$order['id']);
-        // ส่ง Line
-        Line::send($admin_msg);
+        $admin_msg = $msg.'-order&id='.$order['id'];
         if (self::$cfg->noreply_email != '') {
-            // ส่งอีเมล
+            // email subject
             $subject = '['.self::$cfg->web_title.'] '.Language::get('Book a meeting').' '.$status;
-            // ข้อความของสมาชิก
-            $msg = nl2br($msg."\nURL: ".WEB_URL."index.php?module=booking");
             // ส่งอีเมลไปยังผู้ทำรายการเสมอ
-            \Kotchasan\Email::send($mailto.'<'.$name.'>', self::$cfg->noreply_email, $subject, $msg);
-            // อีเมลของมาชิกที่สามารถอนุมัติได้ทั้งหมด
+            $err = \Kotchasan\Email::send($mailto.'<'.$name.'>', self::$cfg->noreply_email, $subject, nl2br($msg));
+            if ($err->error()) {
+                // คืนค่า error
+                $ret[] = strip_tags($err->getErrorMessage());
+            }
+            // ส่งอีเมลไปยังผู้ที่เกี่ยวข้อง
             $query = \Kotchasan\Model::createQuery()
                 ->select('username', 'name')
                 ->from('user')
@@ -70,11 +74,24 @@ class Model extends \Kotchasan\KBase
                 ), 'OR')
                 ->cacheOn();
             foreach ($query->execute() as $item) {
-                \Kotchasan\Email::send($item->username.'<'.$item->name.'>', self::$cfg->noreply_email, $subject, $admin_msg);
+                $emails[$item->username] = $item->username.'<'.$item->name.'>';
+            }
+            // ส่งอีเมล
+            $err = \Kotchasan\Email::send(implode(',', $emails), self::$cfg->noreply_email, $subject, nl2br($admin_msg));
+            if ($err->error()) {
+                // คืนค่า error
+                $ret[] = strip_tags($err->getErrorMessage());
+            }
+        }
+        if (!empty(self::$cfg->line_api_key)) {
+            // ส่ง Line
+            $err = \Gcms\Line::send($admin_msg, self::$cfg->line_api_key);
+            if ($err != '') {
+                $ret[] = $err;
             }
         }
         // คืนค่า
 
-        return Language::get('Your message was sent successfully');
+        return empty($ret) ? Language::get('Your message was sent successfully') : implode("\n", $ret);
     }
 }

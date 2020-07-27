@@ -105,6 +105,9 @@ class Model extends \Kotchasan\Model
                     $request->removeToken();
                 }
             }
+            if (empty($ret)) {
+                $ret['alert'] = Language::get('Unable to complete the transaction');
+            }
             // คืนค่า JSON
             echo json_encode($ret);
         }
