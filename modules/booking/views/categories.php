@@ -24,7 +24,7 @@ use Kotchasan\Html;
 class View extends \Gcms\View
 {
     /**
-     * รายการหมวดหมู่.
+     * รายการหมวดหมู่
      *
      * @param object $index
      *

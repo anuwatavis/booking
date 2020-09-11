@@ -403,7 +403,7 @@
           if (check_patt.test(this.id)) {
             this.className = chk ? "icon-uncheck" : "icon-check";
             this.title = chk ? trans("check") : trans("uncheck");
-          } else if (this.hasClass("checkall")) {
+          } else if ($G(this).hasClass("checkall")) {
             this.className = chk ? "checkall icon-uncheck" : "checkall icon-check";
             this.title = chk ? trans("select all") : trans("select none");
           }

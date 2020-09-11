@@ -16,7 +16,7 @@ use Kotchasan\Language;
 use Kotchasan\Text;
 
 /**
- * module=language.
+ * module=language
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,7 +25,7 @@ use Kotchasan\Text;
 class View extends \Gcms\View
 {
     /**
-     * ข้อมูลโมดูล.
+     * array
      */
     private $languages;
 
@@ -73,9 +73,9 @@ class View extends \Gcms\View
                     ),
                 ),
                 array(
-                    'class' => 'button add icon-plus',
+                    'class' => 'float_button icon-write',
                     'href' => $uri->createBackUri(array('module' => 'languageedit', 'id' => null, 'js' => $js)),
-                    'text' => '{LNG_Add New}',
+                    'title' => '{LNG_Add New}',
                 ),
                 'import' => array(
                     'class' => 'button pink icon-import',

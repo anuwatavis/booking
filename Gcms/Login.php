@@ -14,7 +14,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * คลาสสำหรับตรวจสอบการ Login.
+ * คลาสสำหรับตรวจสอบการ Login
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -24,7 +24,7 @@ class Login extends \Kotchasan\Login
 {
     /**
      * ฟังก์ชั่นตรวจสอบการ login และบันทึกการเข้าระบบ
-     * เข้าระบบสำเร็จคืนค่าแอเรย์ข้อมูลสมาชิก, ไม่สำเร็จ คืนค่าข้อความผิดพลาด.
+     * เข้าระบบสำเร็จคืนค่าแอเรย์ข้อมูลสมาชิก, ไม่สำเร็จ คืนค่าข้อความผิดพลาด
      *
      * @param array $params ข้อมูลการ login ที่ส่งมา $params = array('username' => '', 'password' => '');
      *
@@ -74,7 +74,7 @@ class Login extends \Kotchasan\Login
 
     /**
      * ฟังก์ชั่นตรวจสอบสมาชิกกับฐานข้อมูล
-     * คืนค่าข้อมูลสมาชิก (array) ไม่พบคืนค่าข้อความผิดพลาด (string).
+     * คืนค่าข้อมูลสมาชิก (array) ไม่พบคืนค่าข้อความผิดพลาด (string)
      *
      * @param array $params
      *
@@ -113,8 +113,7 @@ class Login extends \Kotchasan\Login
         if ($login_result === null) {
             // user หรือ password ไม่ถูกต้อง
             self::$login_input = isset($item) ? 'password' : 'username';
-
-            return isset($item) ? Language::replace('Invalid :name', array(':name' => Language::get('Password'))) : Language::get('not a registered user');
+            $login_result = isset($item) ? Language::replace('Invalid :name', array(':name' => Language::get('Password'))) : Language::get('not a registered user');
         }
 
         return $login_result;
@@ -156,7 +155,11 @@ class Login extends \Kotchasan\Login
     }
 
     /**
-     * ฟังก์ชั่นส่งอีเมลลืมรหัสผ่าน.
+     * ฟังก์ชั่นส่งอีเมลลืมรหัสผ่าน
+     *
+     * @param Request $request
+     *
+     * @return void
      */
     public function forgot(Request $request)
     {
@@ -172,10 +175,13 @@ class Login extends \Kotchasan\Login
             $field = reset(self::$cfg->login_fields);
             // Model
             $model = new \Kotchasan\Model();
-            // ตาราง user
-            $table = $model->getTableName('user');
+            // Database
+            $db = $model->db();
             // ค้นหาอีเมล
-            $search = $model->db()->first($table, array(array($field, $username), array('social', 0)));
+            $search = $db->first($model->getTableName('user'), array(
+                array($field, $username),
+                array('social', 0),
+            ));
             if ($search === false) {
                 self::$login_message = Language::get('not a registered user');
             } else {

@@ -94,7 +94,7 @@ a:hover {
 .language-menu::before {
   content: attr(data-text);
   text-transform: uppercase;
-  font-family: inherit !important;
+  font-family: inherit;
 }
 .language-menu:hover ul {
   height: auto;

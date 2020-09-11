@@ -13,7 +13,7 @@ namespace Index\Forgot;
 use Kotchasan\Language;
 
 /**
- * คลาสสำหรับการขอรหัสผ่านใหม่.
+ * module=forgot
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -22,7 +22,7 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\KBase
 {
     /**
-     * ฟังก์ชั่นส่งอีเมลขอรหัสผ่านใหม่.
+     * ฟังก์ชั่นส่งอีเมลขอรหัสผ่านใหม่
      *
      * @param int    $id
      * @param string $username

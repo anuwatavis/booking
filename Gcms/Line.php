@@ -13,7 +13,7 @@ namespace Gcms;
 use Kotchasan\Curl;
 
 /**
- *  LINE Notify Class.
+ *  LINE Notify Class
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -23,7 +23,7 @@ class Line extends \Kotchasan\KBase
 {
     /**
      * เมธอดส่งข้อความไปยังไลน์
-     * คืนค่าข้อความว่างถ้าสำเร็จ หรือ คืนค่าข้อความผิดพลาด.
+     * คืนค่าข้อความว่างถ้าสำเร็จ หรือ คืนค่าข้อความผิดพลาด
      *
      * @param string $message      ข้อความที่จะส่ง
      * @param string $line_api_key

@@ -13,7 +13,7 @@ namespace Index\Menu;
 use Gcms\Login;
 
 /**
- * รายการเมนู.
+ * รายการเมนู
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -22,7 +22,7 @@ use Gcms\Login;
 class Model
 {
     /**
-     * รายการเมนู.
+     * รายการเมนู
      *
      * @param array $login
      *

@@ -15,7 +15,7 @@ use Kotchasan\Date;
 use Kotchasan\Http\Request;
 
 /**
- * module=member.
+ * module=member
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -75,9 +75,9 @@ class View extends \Gcms\View
                     ),
                 ),
                 array(
-                    'class' => 'button pink icon-plus',
+                    'class' => 'float_button icon-register',
                     'href' => $uri->createBackUri(array('module' => 'register', 'id' => 0)),
-                    'text' => '{LNG_Register}',
+                    'title' => '{LNG_Register}',
                 ),
             ),
             /* ตัวเลือกด้านบนของตาราง ใช้จำกัดผลลัพท์การ query */

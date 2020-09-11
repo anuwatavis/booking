@@ -63,7 +63,7 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * รับค่าจาก action.
+     * รับค่าจาก action
      *
      * @param Request $request
      */
@@ -80,7 +80,7 @@ class Model extends \Kotchasan\Model
                 if ($search && $search->status == 0 && $login['id'] == $search->member_id) {
                     // ยกเลิกการจองโดยผู้จอง
                     $search->status = 3;
-                    // อัปเดท
+                    // อัปเดต
                     $this->db()->update($reservation_table, $search->id, array('status' => $search->status));
                     // ส่งอีเมลไปยังผู้ที่เกี่ยวข้อง
                     $ret['alert'] = \Booking\Email\Model::send($login['username'], $login['name'], (array) $search);

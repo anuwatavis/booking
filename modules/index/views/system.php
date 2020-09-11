@@ -137,6 +137,16 @@ class View extends \Gcms\View
             'label' => '{LNG_Facebook App ID} <a class=icon-help href="https://gcms.in.th/index.php?module=howto&id=350" target="_blank"></a>',
             'value' => $notDemoMode && isset($config->facebook_appId) ? $config->facebook_appId : '',
         ));
+        // demo_mode
+        $fieldset->add('select', array(
+            'id' => 'demo_mode',
+            'labelClass' => 'g-input icon-design',
+            'itemClass' => 'item',
+            'label' => '{LNG_Demo Mode}',
+            'comment' => '{LNG_When enabled Social accounts can be logged in as an administrator. (Some abilities will not be available)}',
+            'options' => Language::get('BOOLEANS'),
+            'value' => $notDemoMode && isset($config->demo_mode) ? $config->demo_mode : false,
+        ));
         $fieldset = $form->add('fieldset', array(
             'titleClass' => 'icon-line',
             'title' => '{LNG_LINE Notify}',

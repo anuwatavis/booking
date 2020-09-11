@@ -49,7 +49,7 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * รับค่าจาก action.
+     * รับค่าจาก action
      *
      * @param Request $request
      */

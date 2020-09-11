@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Text;
 
 /**
- * คืนค่าข้อมูลปฏิทิน.
+ * คืนค่าข้อมูลปฏิทิน
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

@@ -15,7 +15,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * module=member.
+ * module=member
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -59,7 +59,7 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * ตารางสมาชิก (member.php).
+     * ตารางสมาชิก (member.php)
      *
      * @param Request $request
      */

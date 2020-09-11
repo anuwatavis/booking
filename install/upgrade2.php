@@ -38,13 +38,13 @@ if (defined('ROOT_PATH')) {
                 // ตาราง user
                 $table = $db_config['prefix'].'_user';
                 if (empty($config['password_key'])) {
-                    // อัปเดทข้อมูลผู้ดูแลระบบ
+                    // อัปเดตข้อมูลผู้ดูแลระบบ
                     $config['password_key'] = uniqid();
                 }
                 // ตรวจสอบการ login
                 updateAdmin($conn, $table, $_POST['username'], $_POST['password'], $config['password_key']);
                 if (!fieldExists($conn, $table, 'social')) {
-                    $conn->query("ALTER TABLE `$table` CHANGE `fb` `social` TINYINT(1) NOT NULL DEFAULT '0'");
+                    $conn->query("ALTER TABLE `$table` CHANGE `fb` `social` TINYINT(1) NOT NULL DEFAULT 0");
                 }
                 if (!fieldExists($conn, $table, 'country')) {
                     $conn->query("ALTER TABLE `$table` ADD `country` VARCHAR(2)");
@@ -55,8 +55,8 @@ if (defined('ROOT_PATH')) {
                 if (!fieldExists($conn, $table, 'token')) {
                     $conn->query("ALTER TABLE `$table` ADD `token` VARCHAR(50) NULL AFTER `password`");
                 }
-                $conn->query("ALTER TABLE `$table` CHANGE `address` `address` VARCHAR(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL");
-                $conn->query("ALTER TABLE `$table` CHANGE `password` `password` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL");
+                $conn->query("ALTER TABLE `$table` CHANGE `address` `address` VARCHAR(150) DEFAULT NULL");
+                $conn->query("ALTER TABLE `$table` CHANGE `password` `password` VARCHAR(50) NOT NULL");
                 $content[] = '<li class="correct">ปรับปรุงตาราง `'.$table.'` สำเร็จ</li>';
                 // บันทึก settings/config.php
                 $config['version'] = $new_config['version'];
@@ -108,11 +108,11 @@ function updateAdmin($conn, $table_name, $username, $password, $password_key)
 }
 
 /**
- * ตรวจสอบฟิลด์.
+ * ตรวจสอบฟิลด์
  *
- * @param resource $conn
- * @param string   $table_name
- * @param string   $field
+ * @param Database $conn
+ * @param string $table_name
+ * @param string $field
  *
  * @return bool
  */
@@ -125,11 +125,11 @@ function fieldExists($conn, $table_name, $field)
 }
 
 /**
- * ตรวจสอบ index ซ้ำ.
+ * ตรวจสอบ index ซ้ำ
  *
- * @param $conn
- * @param $table_name
- * @param $index
+ * @param Database $conn
+ * @param string $table_name
+ * @param string $index
  */
 function indexExists($conn, $table_name, $index)
 {
@@ -140,8 +140,8 @@ function indexExists($conn, $table_name, $index)
 }
 
 /**
- * @param $config
- * @param $file
+ * @param array $config
+ * @param string $file
  */
 function save($config, $file)
 {

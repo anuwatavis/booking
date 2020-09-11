@@ -250,6 +250,13 @@ class DataTable extends \Kotchasan\KBase
      */
     public $sort = null;
     /**
+     * ชื่อคอลัมน์ที่ใช้เรียงลำดับเริ่มต้น
+     * ถ้ามีการกำหนดค่าจะเรียงลำดับตามรายการนี้ก่อนเสมอ
+     *
+     * @var string|null
+     */
+    public $defaultSort = null;
+    /**
      * ข้อมูลการเรียงลำดับที่กำลังใช้งานอยู่.
      *
      * @var array
@@ -616,6 +623,16 @@ class DataTable extends \Kotchasan\KBase
             $caption = str_replace(array(':search', ':count', ':start', ':end', ':page', ':total'), array($this->search, number_format($count), number_format($s), number_format($e), number_format($this->page), number_format($totalpage)), $caption);
         }
         // เรียงลำดับ
+        $orders = array();
+        if (!empty($this->defaultSort)) {
+            foreach (explode(',', $this->defaultSort) as $sort) {
+                if (preg_match('/^([a-z0-9_\-]+)([\s]+(desc|asc))?$/i', trim($sort), $match)) {
+                    $sortType = isset($match[3]) && strtolower($match[3]) == 'desc' ? 'desc' : 'asc';
+                    $orders[] = $match[1].' '.$sortType;
+                    $this->sorts[$match[1]] = $sortType;
+                }
+            }
+        }
         if (!empty($this->sort)) {
             $sorts = array();
             foreach (explode(',', $this->sort) as $sort) {
@@ -637,15 +654,17 @@ class DataTable extends \Kotchasan\KBase
                 }
             }
             $this->sort = implode(',', $sorts);
-            if (isset($this->model)) {
-                if (!empty($sorts)) {
-                    $this->model->order($sorts);
-                }
-            } elseif (!empty($this->sorts)) {
-                reset($this->sorts);
-                $sort = key($this->sorts);
-                $this->datas = ArrayTool::sort($this->datas, $sort, $this->sorts[$sort]);
+            $orders = array_merge($orders, $sorts);
+        }
+
+        if (isset($this->model)) {
+            if (!empty($orders)) {
+                $this->model->order($orders);
             }
+        } elseif (!empty($this->sorts)) {
+            reset($this->sorts);
+            $sort = key($this->sorts);
+            $this->datas = ArrayTool::sort($this->datas, $sort, $this->sorts[$sort]);
         }
         if (isset($this->model)) {
             if ($this->explain) {

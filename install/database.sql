@@ -1,31 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 16, 2019 at 01:54 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.0.32
+-- Generation Time: Aug 17, 2020 at 03:14 AM
+-- Server version: 10.1.44-MariaDB
+-- PHP Version: 7.2.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
---
--- Table structure for table `{prefix}_language`
---
 
-CREATE TABLE `{prefix}_language` (
-  `id` int(11) NOT NULL,
-  `key` text COLLATE utf8_unicode_ci NOT NULL,
-  `type` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `owner` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `js` tinyint(1) NOT NULL,
-  `th` text COLLATE utf8_unicode_ci,
-  `en` text COLLATE utf8_unicode_ci
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
 --
 -- Table structure for table `{prefix}_category`
 --
@@ -33,7 +19,7 @@ CREATE TABLE `{prefix}_language` (
 CREATE TABLE `{prefix}_category` (
   `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(11) DEFAULT 0,
-  `topic` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `topic` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `color` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
   `published` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -53,6 +39,21 @@ INSERT INTO `{prefix}_category` (`type`, `category_id`, `topic`, `color`, `publi
 ('accessories', 3, 'เครื่องฉายแผ่นใส', '', 1),
 ('accessories', 2, 'จอโปรเจ็คเตอร์', '', 1),
 ('accessories', 1, 'เครื่องคอมพิวเตอร์', '', 1);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `{prefix}_language`
+--
+
+CREATE TABLE `{prefix}_language` (
+  `id` int(11) NOT NULL,
+  `key` text COLLATE utf8_unicode_ci NOT NULL,
+  `type` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `owner` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `js` tinyint(1) NOT NULL,
+  `th` text COLLATE utf8_unicode_ci,
+  `en` text COLLATE utf8_unicode_ci
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -167,6 +168,8 @@ CREATE TABLE `{prefix}_user` (
   `social` tinyint(1) DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
 -- Indexes for table `{prefix}_category`
 --
@@ -179,13 +182,6 @@ ALTER TABLE `{prefix}_category`
 --
 ALTER TABLE `{prefix}_language`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `{prefix}_user`
---
-ALTER TABLE `{prefix}_user`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `username` (`username`);
 
 --
 -- Indexes for table `{prefix}_reservation`
@@ -212,16 +208,19 @@ ALTER TABLE `{prefix}_reservation_data`
   ADD KEY `reservation_id` (`reservation_id`) USING BTREE;
 
 --
+-- Indexes for table `{prefix}_user`
+--
+ALTER TABLE `{prefix}_user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`),
+  ADD KEY `id_card` (`id_card`);
+
+--
 -- AUTO_INCREMENT for table `{prefix}_language`
 --
 ALTER TABLE `{prefix}_language`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `{prefix}_user`
---
-ALTER TABLE `{prefix}_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `{prefix}_reservation`
@@ -233,4 +232,10 @@ ALTER TABLE `{prefix}_reservation`
 -- AUTO_INCREMENT for table `{prefix}_rooms`
 --
 ALTER TABLE `{prefix}_rooms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `{prefix}_user`
+--
+ALTER TABLE `{prefix}_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;

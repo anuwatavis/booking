@@ -26,7 +26,7 @@ class Field extends \Kotchasan\Database\Db
      */
     public $table_alias;
     /**
-     * ชื่อตาราง.
+     * ชื่อตาราง
      *
      * @var string
      */
@@ -50,7 +50,7 @@ class Field extends \Kotchasan\Database\Db
      */
     protected $primaryKey = 'id';
     /**
-     * ชื่อตาราง.
+     * ชื่อตาราง
      *
      * @var string
      */
@@ -132,7 +132,7 @@ class Field extends \Kotchasan\Database\Db
     }
 
     /**
-     * อ่านชื่อตาราง.
+     * อ่านชื่อตาราง
      *
      * @return string
      */

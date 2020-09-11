@@ -15,7 +15,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * โมเดลสำหรับภาษา (language.php).
+ * module=language
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -24,14 +24,14 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\Orm\Field
 {
     /**
-     * ชื่อตาราง.
+     * ชื่อตาราง
      *
      * @var string
      */
     protected $table = 'language';
 
     /**
-     * รับค่าจาก action.
+     * รับค่าจาก action
      *
      * @param Request $request
      */
@@ -70,7 +70,7 @@ class Model extends \Kotchasan\Orm\Field
     }
 
     /**
-     * อัปเดตไฟล์ ภาษา.
+     * อัปเดตไฟล์ ภาษา
      */
     public static function updateLanguageFile()
     {
@@ -109,7 +109,7 @@ class Model extends \Kotchasan\Orm\Field
     }
 
     /**
-     * นำเข้าข้อมูลไฟล์ภาษา.
+     * นำเข้าข้อมูลไฟล์ภาษา
      */
     public static function import()
     {
@@ -139,7 +139,7 @@ class Model extends \Kotchasan\Orm\Field
     }
 
     /**
-     * นำเข้าข้อมูลไฟล์ภาษา PHP.
+     * นำเข้าข้อมูลไฟล์ภาษา PHP
      *
      * @param Database $db             Database Object
      * @param string   $language_table ชื่อตาราง language
@@ -180,7 +180,7 @@ class Model extends \Kotchasan\Orm\Field
     }
 
     /**
-     * นำเข้าข้อมูลไฟล์ภาษา Javascript.
+     * นำเข้าข้อมูลไฟล์ภาษา Javascript
      *
      * @param Database $db             Database Object
      * @param string   $language_table ชื่อตาราง language
